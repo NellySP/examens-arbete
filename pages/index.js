@@ -1,14 +1,40 @@
 import styles from "../styles/Home.module.css";
+import { supabase } from "../utils/supabaseClient";
+import { useEffect, useState } from "react";
 
-export async function getData() {
-  const { data, error } = await supabase.from("test").select("titel");
-  console.log(data);
-}
+const Home = () => {
+  const [fetchError, setFetchError] = useState(null);
+  const [tests, setTest] = useState(null);
 
-export default function Home({ data }) {
+  useEffect(() => {
+    const fetchTest = async () => {
+      const { data, error } = await supabase.from("test").select();
+
+      if (error) {
+        setFetchError("Something went wrong");
+        setTest(null);
+        console.log(error);
+      }
+
+      if (data) {
+        setTest(data);
+        setFetchError(null);
+      }
+    };
+    fetchTest();
+  }, []);
   return (
     <div className={styles.container}>
-      <h1>{data}</h1>
+      {fetchError && <p>{fetchError}</p>}
+      {tests && (
+        <div>
+          {tests.map((test) => (
+            <p>{test.titel}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default Home;
