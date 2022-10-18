@@ -1,4 +1,5 @@
 import { supabase } from "../../utils/supabaseClient";
+import * as S from "./index.styled";
 
 const SignUp = () => {
   async function testSignUp(event) {
@@ -17,42 +18,46 @@ const SignUp = () => {
   }
 
   return (
-    <div>
-      <div>
-        <h1>Sign Up!</h1>
-        <form onSubmit={testSignUp}>
-          <label htmlFor="email">Email</label>
-          <input
+    <S.signUpDiv>
+      <S.signUpSection>
+        <S.signUpHeading>Sign Up</S.signUpHeading>
+        <S.signUpText>
+          Fill in the form below to sign up to our awesome site that doesn't
+          work!
+        </S.signUpText>
+        <S.signUpForm onSubmit={testSignUp}>
+          <S.signUpLabel htmlFor="email">Email</S.signUpLabel>
+          <S.signUpInput
             type="email"
             id="email"
             name="email"
             placeholder="Write your email here please"
-          ></input>
-          <label htmlFor="email">Username</label>
-          <input
+          ></S.signUpInput>
+          <S.signUpLabel htmlFor="email">Username</S.signUpLabel>
+          <S.signUpInput
             type="text"
             id="username"
             name="username"
             placeholder="Come up with an awesome username and write it here"
-          ></input>
-          <label htmlFor="name">Name</label>
-          <input
+          ></S.signUpInput>
+          <S.signUpLabel htmlFor="name">Name</S.signUpLabel>
+          <S.signUpInput
             type="text"
             id="name"
             name="name"
             placeholder="Write your name here"
-          ></input>
-          <label htmlFor="password">Password</label>
-          <input
+          ></S.signUpInput>
+          <S.signUpLabel htmlFor="password">Password</S.signUpLabel>
+          <S.signUpInput
             type="password"
             id="password"
             name="password"
             placeholder="Dont put 123 here"
-          ></input>
-          <button type="submit">SIGN UP HERE</button>
-        </form>
-      </div>
-    </div>
+          ></S.signUpInput>
+          <S.signUpButton type="submit">Sign up here</S.signUpButton>
+        </S.signUpForm>
+      </S.signUpSection>
+    </S.signUpDiv>
   );
 };
 
