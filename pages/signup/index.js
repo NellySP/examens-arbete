@@ -1,12 +1,20 @@
-import styles from "../styles/Home.module.css";
-import { supabase } from "../utils/supabaseClient";
-import { useEffect, useState } from "react";
+import { supabase } from "../../utils/supabaseClient";
 
 const SignUp = () => {
+  async function testSignUp() {
+    const { data, error } = await supabase.from("users_nelly").insert({
+      username: "Denmark",
+      name: "Denmark",
+      password: "Denmark",
+      email: "Denmark",
+    });
+  }
+
   return (
-    <div className={styles.container}>
+    <div>
       <div>
         <h1>Sign Up!</h1>
+        <button onClick={() => testSignUp()}>SIGN UP HERE</button>
       </div>
     </div>
   );
