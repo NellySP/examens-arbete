@@ -9,6 +9,7 @@ const SignUp = () => {
     async function signInWithEmail() {
       const { data, error } = await supabase.auth.signInWithOtp({
         email: email,
+        redirectTo: "http://localhost:3000/signupprofile",
       });
     }
     signInWithEmail();

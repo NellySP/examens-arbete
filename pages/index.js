@@ -1,6 +1,8 @@
 import styles from "../styles/Home.module.css";
 import { supabase } from "../utils/supabaseClient";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import * as S from "./index.styled";
 
 const Home = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -24,7 +26,10 @@ const Home = () => {
     fetchTest();
   }, []);
   return (
-    <div className={styles.container}>
+    <S.wrapperDiv>
+      <Link href="/signup">Sign up, step one</Link>
+      <Link href="/signupprofile">Sign up, step two</Link>
+      <Link href="/login">Startsida</Link>
       {fetchError && <p>{fetchError}</p>}
       {tests && (
         <div>
@@ -33,7 +38,7 @@ const Home = () => {
           ))}
         </div>
       )}
-    </div>
+    </S.wrapperDiv>
   );
 };
 
