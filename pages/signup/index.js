@@ -1,4 +1,3 @@
-// import passwordHash from "../../utils/passwordHash";
 import { supabase } from "../../utils/supabaseClient";
 import * as S from "./index.styled";
 
@@ -10,14 +9,25 @@ const SignUp = () => {
     const name = event.target.name.value;
     const password = event.target.password.value;
 
-    // passwordHash(password);
+    // const { data, error } = await supabase.from("users_nelly").insert({
+    //   username: username,
+    //   name: name,
+    //   password: password,
+    //   email: email,
+    // });
 
-    const { data, error } = await supabase.from("users_nelly").insert({
-      username: username,
-      name: name,
-      password: password,
-      email: email,
-    });
+    const { users, session, error } = await supabase.auth.signUp(
+      {
+        email: email,
+        password: password,
+      },
+      {
+        data: {
+          username: username,
+          name: name,
+        },
+      }
+    );
   }
 
   return (
