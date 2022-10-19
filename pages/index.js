@@ -8,7 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchTest = async () => {
-      const { data, error } = await supabase.from("test").select();
+      const { data, error } = await supabase.from("profiles").select();
 
       if (error) {
         setFetchError("Something went wrong");
@@ -29,7 +29,7 @@ const Home = () => {
       {tests && (
         <div>
           {tests.map((test) => (
-            <p>{test.titel}</p>
+            <p>{test.name}</p>
           ))}
         </div>
       )}

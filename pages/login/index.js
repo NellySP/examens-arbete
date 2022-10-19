@@ -7,10 +7,12 @@ const Login = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    const { user, session, error } = await supabase.auth.signIn({
-      email: email,
-      password: password,
-    });
+    async function signInWithEmail() {
+      const { data, error } = await supabase.auth.signInWithOtp({
+        email: email,
+      });
+    }
+    signInWithEmail();
   }
 
   return (
