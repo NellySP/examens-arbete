@@ -18,7 +18,7 @@ const SignUpProfile = () => {
   return (
     <S.signUpDiv>
       <S.signUpSection>
-        <S.signUpHeading>Sign Up</S.signUpHeading>
+        <S.signUpHeading>Step two</S.signUpHeading>
         <S.signUpText>
           Fill in the form below to sign up to our awesome site that doesn't
           work!

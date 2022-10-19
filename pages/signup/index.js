@@ -5,39 +5,20 @@ const SignUp = () => {
   async function testSignUp(event) {
     event.preventDefault();
     const email = event.target.email.value;
-    const username = event.target.username.value;
-    const name = event.target.name.value;
-    const password = event.target.password.value;
 
-    // const { data, error } = await supabase.from("users_nelly").insert({
-    //   username: username,
-    //   name: name,
-    //   password: password,
-    //   email: email,
-    // });
-
-    const { users, session, error } = await supabase.auth.signUp(
-      {
+    async function signInWithEmail() {
+      const { data, error } = await supabase.auth.signInWithOtp({
         email: email,
-        password: password,
-      },
-      {
-        data: {
-          username: username,
-          name: name,
-        },
-      }
-    );
+      });
+    }
+    signInWithEmail();
   }
 
   return (
     <S.signUpDiv>
       <S.signUpSection>
-        <S.signUpHeading>Sign Up</S.signUpHeading>
-        <S.signUpText>
-          Fill in the form below to sign up to our awesome site that doesn't
-          work!
-        </S.signUpText>
+        <S.signUpHeading>Sign Up, step one</S.signUpHeading>
+        <S.signUpText>Fill in your email to receive a magic link.</S.signUpText>
         <S.signUpForm onSubmit={testSignUp}>
           <S.signUpLabel htmlFor="email">Email</S.signUpLabel>
           <S.signUpInput
@@ -46,28 +27,7 @@ const SignUp = () => {
             name="email"
             placeholder="Write your email here please"
           ></S.signUpInput>
-          <S.signUpLabel htmlFor="email">Username</S.signUpLabel>
-          <S.signUpInput
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Come up with an awesome username and write it here"
-          ></S.signUpInput>
-          <S.signUpLabel htmlFor="name">Name</S.signUpLabel>
-          <S.signUpInput
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Write your name here"
-          ></S.signUpInput>
-          <S.signUpLabel htmlFor="password">Password</S.signUpLabel>
-          <S.signUpInput
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Dont put 123 here"
-          ></S.signUpInput>
-          <S.signUpButton type="submit">Sign up here</S.signUpButton>
+          <S.signUpButton type="submit">Go to next step</S.signUpButton>
         </S.signUpForm>
       </S.signUpSection>
     </S.signUpDiv>
