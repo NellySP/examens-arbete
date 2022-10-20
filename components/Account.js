@@ -8,8 +8,21 @@ export default function Account({ session }) {
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
+    // connectTables();
     getProfile();
   }, [session]);
+
+  //   async function connectTables() {
+  //     const { data, error } = await supabase
+  //       .from("profiles")
+  //       .insert({ user_id: user.id });
+  //   }
+  async function connectTables() {
+    const { data, error } = await supabase
+      .from("profiles")
+      .insert({ username: "kalle", name: "kollee", user_id: user.id });
+    console.log(data);
+  }
 
   async function getProfile() {
     try {
@@ -76,6 +89,7 @@ export default function Account({ session }) {
       </div>
 
       <div>
+        <button onClick={() => connectTables()}>connect</button>
         <button
           className="button primary block"
           onClick={() => updateProfile({ username })}

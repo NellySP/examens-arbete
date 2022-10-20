@@ -17,7 +17,7 @@ const Home = () => {
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
-          theme="dark"
+          // theme="dark"
         />
       ) : (
         <Account session={session} />
