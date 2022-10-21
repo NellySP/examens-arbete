@@ -10,11 +10,12 @@ const SearchUser = ({ session }) => {
   useEffect(() => {}, [session]);
   const fetchUser = async (event) => {
     event.preventDefault();
-    const searchTerm = `${event.target.searchTerm.value}`;
+    const searchTerm = `%${event.target.searchTerm.value}%`;
     const { data, error } = await supabase
       .from("profiles")
       .select()
-      .or(`name.eq.${searchTerm},username.eq.${searchTerm}`);
+      // .or(`name.eq.${searchTerm},username.eq.${searchTerm}`);
+      .or(`name.ilike.${searchTerm},username.ilike.${searchTerm}`);
 
     // alt
     // .ilike('name', searchTerm);
