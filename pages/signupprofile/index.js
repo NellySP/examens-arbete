@@ -19,10 +19,7 @@ const SignUpProfile = () => {
     <S.signUpDiv>
       <S.signUpSection>
         <S.signUpHeading>Step two</S.signUpHeading>
-        <S.signUpText>
-          Fill in the form below to sign up to our awesome site that doesn't
-          work!
-        </S.signUpText>
+        <S.signUpText>Welcome</S.signUpText>
         <S.signUpForm onSubmit={testSignUp}>
           <S.signUpLabel htmlFor="email">Username</S.signUpLabel>
           <S.signUpInput
