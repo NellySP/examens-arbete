@@ -5,14 +5,14 @@ import Link from "next/link";
 import * as S from "./index.styled";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Account from "../components/Account";
+import Account from "../components/Account/Account";
 
 const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
 
   return (
-    <div className="container" style={{ padding: "50px 0 100px 0" }}>
+    <S.wrapperDiv>
       {!session ? (
         <Auth
           supabaseClient={supabase}
@@ -22,7 +22,7 @@ const Home = () => {
       ) : (
         <Account session={session} />
       )}
-    </div>
+    </S.wrapperDiv>
   );
 };
 

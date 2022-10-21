@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import * as S from "../pages/signup/index.styled";
+import * as S from "../../pages/signup/index.styled";
 import { useRouter } from "next/router";
 
 export default function Account({ session }) {
@@ -20,18 +20,26 @@ export default function Account({ session }) {
     router.push("/test");
   }
 
+  function signOut() {
+    supabase.auth.signOut();
+    router.push("/");
+  }
+
   return (
     <S.signUpDiv>
       <S.signUpSection>
         <S.signUpHeading>Step two construncting</S.signUpHeading>
-        <S.signUpText>Welcome</S.signUpText>
+        <S.signUpText>
+          Come up with a cool username and fill in your name so your friends can
+          find you easier!
+        </S.signUpText>
         <S.signUpForm onSubmit={connectTables}>
           <S.signUpLabel htmlFor="email">Username</S.signUpLabel>
           <S.signUpInput
             type="text"
             id="username"
             name="username"
-            placeholder="Come up with an awesome username and write it here"
+            placeholder="Write your username here"
           ></S.signUpInput>
           <S.signUpLabel htmlFor="name">Name</S.signUpLabel>
           <S.signUpInput
@@ -42,10 +50,7 @@ export default function Account({ session }) {
           ></S.signUpInput>
           <S.signUpButton type="submit">Complete signup</S.signUpButton>
           <div>
-            <S.signUpButton
-              className="button block"
-              onClick={() => supabase.auth.signOut()}
-            >
+            <S.signUpButton className="button block" onClick={signOut}>
               Sign Out
             </S.signUpButton>
           </div>
