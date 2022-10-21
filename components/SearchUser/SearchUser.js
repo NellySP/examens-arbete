@@ -3,41 +3,59 @@ import { supabase } from "../../utils/supabaseClient";
 import { useUser } from "@supabase/auth-helpers-react";
 
 const SearchUser = ({ session }) => {
-  useEffect({}, [session]);
+  const [fetchError, setFetchError] = useState(null);
+  const [users, setUser] = useState(null);
+  const user = useUser();
 
-  const [searchResults, setSearchResults] = useState([]);
-  const [formInput, setFormInput] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleInput = (event) => {
-    let { name, value } = event.target;
-    setFormInput({ ...formInput, [name]: value });
-    setSearchTerm(event.target.value);
-  };
-
-  const search = async (event) => {
+  useEffect(() => {}, [session]);
+  const fetchUser = async (event) => {
     event.preventDefault();
-    let users = await fetch(
-      supabase.from("profiles").select("name").eq({ searchTerm })
-    );
-    users = await users.json;
-    setSearchResults(users.results);
+    const searchTerm = `%${event.target.searchTerm.value}%`;
+    const { data, error } = await supabase
+      .from("profiles")
+      .select()
+      .ilike("username", searchTerm)
+      .ilike("name", searchTerm);
+
+    // .or("name", searchTerm);
+    console.log(data);
+
+    if (error) {
+      setFetchError("Something went wrong");
+      setUser(null);
+      console.log(error);
+    }
+
+    if (data) {
+      setUser(data);
+      setFetchError(null);
+    }
   };
+
   return (
     <div>
-      <form onSubmit={search}>
+      <form onSubmit={fetchUser}>
         <input
           className="search"
           name="searchTerm"
-          value={searchTerm}
-          onChange={handleInput()}
+          id="searchTerm"
           type="text"
         ></input>
         <button classname="search-button">search</button>
       </form>
-      <div>
-        <p>{searchResults}</p>
-      </div>
+      {fetchError && <p>{fetchError}</p>}
+      {users && (
+        <div>
+          {users.map((user) => (
+            <div>
+              <p>
+                {user.username},{user.name}{" "}
+              </p>
+              <p>{user.id}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

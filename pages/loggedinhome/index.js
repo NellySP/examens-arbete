@@ -2,8 +2,11 @@ import { supabase } from "../../utils/supabaseClient";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import * as S from "./index.styled";
+import Menu from "../../components/Menu/Menu";
+import SearchUser from "../../components/SearchUser/SearchUser";
 
-const Test = ({ session }) => {
+const Loggedinhome = ({ session }) => {
   const [fetchError, setFetchError] = useState(null);
   const [tests, setTest] = useState(null);
   const user = useUser();
@@ -26,20 +29,22 @@ const Test = ({ session }) => {
     fetchTest();
   }, [session]);
   return (
-    <div>
-      <Link href="/signup">Sign up, step one</Link>
-      <Link href="/signupprofile">Sign up, step two</Link>
-      <Link href="/login">Startsida</Link>
-      {fetchError && <p>{fetchError}</p>}
+    <S.Wrapper>
+      <Menu session={session} />
+      {/* {fetchError && <p>{fetchError}</p>}
       {tests && (
         <div>
           {tests.map((test) => (
-            <p>{test.name}</p>
+            <p>
+              {test.name}
+              {user.id}
+            </p>
           ))}
         </div>
-      )}
-    </div>
+      )} */}
+      <SearchUser session={session} />
+    </S.Wrapper>
   );
 };
 
-export default Test;
+export default Loggedinhome;

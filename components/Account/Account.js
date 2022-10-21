@@ -17,12 +17,11 @@ export default function Account({ session }) {
     const { data, error } = await supabase
       .from("profiles")
       .upsert({ username: username, name: name, id: user.id });
-    router.push("/test");
+    router.push("/loggedinhome");
   }
 
-  function signOut() {
-    supabase.auth.signOut();
-    router.push("/");
+  function reRoute() {
+    router.push("/home");
   }
 
   return (
@@ -50,7 +49,13 @@ export default function Account({ session }) {
           ></S.signUpInput>
           <S.signUpButton type="submit">Complete signup</S.signUpButton>
           <div>
-            <S.signUpButton className="button block" onClick={signOut}>
+            <S.signUpButton
+              className="button block"
+              onClick={() => {
+                supabase.auth.signOut();
+                reRoute;
+              }}
+            >
               Sign Out
             </S.signUpButton>
           </div>
