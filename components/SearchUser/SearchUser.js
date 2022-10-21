@@ -47,9 +47,12 @@ const SearchUser = ({ session }) => {
         <div>
           {users.map((user) => (
             <div>
-              <p>Användarnamn: {user.username} </p>
-              <p>Namn: {user.name}</p>
-              <p>Användarid: {user.id}</p>
+              <h4>Användarnamn:</h4>
+              <p> {user.username} </p>
+              <h4>Namn</h4>
+              <p>{user.name}</p>
+              <h4>Id</h4>
+              <p>{user.id}</p>
             </div>
           ))}
         </div>
