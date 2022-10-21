@@ -10,18 +10,17 @@ const SearchUser = ({ session }) => {
   useEffect(() => {}, [session]);
   const fetchUser = async (event) => {
     event.preventDefault();
-    const searchTerm = `%${event.target.searchTerm.value}%`;
+    const searchTerm = `${event.target.searchTerm.value}`;
     const { data, error } = await supabase
       .from("profiles")
       .select()
-      .ilike("username", searchTerm)
-      .ilike("name", searchTerm);
+      .or(`name.eq.${searchTerm},username.eq.${searchTerm}`);
 
-    // .or("name", searchTerm);
-    console.log(data);
+    // alt
+    // .ilike('name', searchTerm);
 
     if (error) {
-      setFetchError("Something went wrong");
+      setFetchError(error.message);
       setUser(null);
       console.log(error);
     }
@@ -48,10 +47,9 @@ const SearchUser = ({ session }) => {
         <div>
           {users.map((user) => (
             <div>
-              <p>
-                {user.username},{user.name}{" "}
-              </p>
-              <p>{user.id}</p>
+              <p>Användarnamn: {user.username} </p>
+              <p>Namn: {user.name}</p>
+              <p>Användarid: {user.id}</p>
             </div>
           ))}
         </div>
