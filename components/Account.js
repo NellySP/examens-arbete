@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "../pages/signup/index.styled";
+import { useRouter } from "next/router";
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient();
   const user = useUser();
+  const router = useRouter();
 
   useEffect(() => {}, [session]);
 
@@ -15,6 +17,7 @@ export default function Account({ session }) {
     const { data, error } = await supabase
       .from("profiles")
       .upsert({ username: username, name: name, id: user.id });
+    router.push("/test");
   }
 
   return (
@@ -39,12 +42,12 @@ export default function Account({ session }) {
           ></S.signUpInput>
           <S.signUpButton type="submit">Complete signup</S.signUpButton>
           <div>
-            <button
+            <S.signUpButton
               className="button block"
               onClick={() => supabase.auth.signOut()}
             >
               Sign Out
-            </button>
+            </S.signUpButton>
           </div>
         </S.signUpForm>
       </S.signUpSection>
