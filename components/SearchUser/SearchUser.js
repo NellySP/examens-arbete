@@ -33,6 +33,17 @@ const SearchUser = ({ session }) => {
     });
   };
 
+  // Test att knapparna verkligen fungerar. Svar ja.
+
+  // const checkIfAlreadyFriends = () => {
+  //   const age = 20;
+  //   if (age > 15) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
+
   // fetch searched users from profile table
 
   const fetchUser = async (event) => {
