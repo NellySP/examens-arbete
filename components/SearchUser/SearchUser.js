@@ -54,7 +54,7 @@ const SearchUser = ({ session }) => {
     console.log(user.id);
     const { data, error } = await supabase
       .from("friends")
-      .insert({ user_one: user.id, user_two: userTwoId });
+      .insert({ user_one: user.id, user_two: userTwoId, is_friends: true });
   };
 
   return (
