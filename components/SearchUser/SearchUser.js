@@ -8,6 +8,7 @@ const SearchUser = ({ session }) => {
   const user = useUser();
 
   useEffect(() => {}, [session]);
+
   const fetchUser = async (event) => {
     event.preventDefault();
     const searchTerm = `%${event.target.searchTerm.value}%`;
@@ -32,6 +33,10 @@ const SearchUser = ({ session }) => {
     }
   };
 
+  const addFriend = async (event) => {
+    console.log("You added a friend");
+  };
+
   return (
     <div>
       <form onSubmit={fetchUser}>
@@ -41,20 +46,20 @@ const SearchUser = ({ session }) => {
           id="searchTerm"
           type="text"
         ></input>
-        <button classname="search-button">search</button>
+        <button className="search-button">search</button>
       </form>
       {fetchError && <p>{fetchError}</p>}
       {users && (
         <div>
           {users.map((user) => (
-            <div>
+            <div key={user.id}>
               <h4>Användarnamn:</h4>
               <p> {user.username} </p>
               <h4>Namn</h4>
               <p>{user.name}</p>
               <h4>Id</h4>
               <p>{user.id}</p>
-              <button>Add friend</button>
+              <button onClick={addFriend}>Add friend</button>
             </div>
           ))}
         </div>
