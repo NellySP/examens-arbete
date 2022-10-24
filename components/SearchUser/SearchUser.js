@@ -6,12 +6,23 @@ const SearchUser = ({ session }) => {
   const [fetchError, setFetchError] = useState(null);
   // other users
   const [searchResults, setSearchResults] = useState(null);
-  // if friends
-  const [isFriend, setIsFriend] = useState(null);
+  // friends from databse
+  const [checkIfFriends, setIfFriends] = useState(null);
   // logged in user
   const user = useUser();
 
-  useEffect(() => {}, [session]);
+  useEffect(() => {
+    // check if users already exist in friend table
+
+    const checkIfAlreadyFriends = async () => {
+      const { data, error } = await supabase.from("friends").select();
+      console.log(data);
+      if (data) {
+        setIfFriends(data);
+      }
+    };
+    checkIfAlreadyFriends();
+  }, [session]);
 
   // fetch searched users from profile table
 
@@ -23,8 +34,6 @@ const SearchUser = ({ session }) => {
       .select()
       .or(`name.ilike.${searchTerm},username.ilike.${searchTerm}`);
 
-    const { friends } = await supabase.from("friends").select();
-
     if (error) {
       setFetchError(error.message);
       setSearchResults(null);
@@ -33,17 +42,8 @@ const SearchUser = ({ session }) => {
 
     if (data) {
       setSearchResults(data);
-      setIsFriend(friends);
       setFetchError(null);
     }
-  };
-
-  // check if users already exist in friend table
-
-  const checkIfAlreadyFriends = async (event) => {
-    event.preventDefault();
-    const searchTerm = `%${event.target.searchTerm.value}%`;
-    const { data, error } = await supabase.from("friends").select();
   };
 
   // add user and friend to friend table
@@ -80,6 +80,13 @@ const SearchUser = ({ session }) => {
               <h4>Id</h4>
               <p>{searchResult.id}</p>
               {console.log(searchResult.id)}
+              {checkIfFriends.map(
+                (checkfriend) =>
+                  console.log(checkfriend.user_two, checkfriend.user_one),
+
+                console.log("bajskorv")
+              )}
+
               <button onClick={() => addFriend(searchResult.id)}>
                 Add friend
               </button>
