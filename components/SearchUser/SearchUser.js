@@ -6,23 +6,28 @@ const SearchUser = ({ session }) => {
   const [fetchError, setFetchError] = useState(null);
   // other users
   const [searchResults, setSearchResults] = useState(null);
-  // friends from databse
-  const [checkIfFriends, setIfFriends] = useState(null);
   // logged in user
   const user = useUser();
 
   useEffect(() => {
     // check if users already exist in friend table
-
-    const checkIfAlreadyFriends = async () => {
-      const { data, error } = await supabase.from("friends").select();
-      console.log(data);
-      if (data) {
-        setIfFriends(data);
-      }
-    };
-    checkIfAlreadyFriends();
   }, [session]);
+
+  // Check if users are friends
+
+  const checkIfAlreadyFriends = async (searchedFriend) => {
+    const { data, error } = await supabase
+      .from("friends")
+      .select("is_friends")
+      .or(`user_one.eq.${user.id},user_one.eq.${searchedFriend}`)
+      .or(`user_two.eq.${user.id},user_two.eq.${searchedFriend}`);
+
+    if (data[0]) {
+      return true;
+    } else {
+      false;
+    }
+  };
 
   // fetch searched users from profile table
 
@@ -49,7 +54,6 @@ const SearchUser = ({ session }) => {
   // add user and friend to friend table
 
   const addFriend = async (userTwoId) => {
-    event.preventDefault();
     console.log("You added a friend");
     console.log(user.id);
     const { data, error } = await supabase
@@ -69,31 +73,24 @@ const SearchUser = ({ session }) => {
         <button className="search-button">search</button>
       </form>
       {fetchError && <p>{fetchError}</p>}
-      {searchResults && (
-        <div>
-          {searchResults.map((searchResult) => (
-            <div key={searchResult.id}>
-              <h4>Användarnamn:</h4>
-              <p> {searchResult.username} </p>
-              <h4>Namn</h4>
-              <p>{searchResult.name}</p>
-              <h4>Id</h4>
-              <p>{searchResult.id}</p>
-              {console.log(searchResult.id)}
-              {checkIfFriends.map(
-                (checkfriend) =>
-                  console.log(checkfriend.user_two, checkfriend.user_one),
-
-                console.log("bajskorv")
-              )}
-
-              <button onClick={() => addFriend(searchResult.id)}>
-                Add friend
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+      <div>
+        {searchResults.map((searchResult) => {
+          if (checkIfAlreadyFriends(searchResult.id)) {
+            console.log("Vi är bästa kompisar");
+          }
+          <div key={searchResult.id}>
+            <h4>Användarnamn:</h4>
+            <p> {searchResult.username} </p>
+            <h4>Namn</h4>
+            <p>{searchResult.name}</p>
+            <h4>Id</h4>
+            <p>{searchResult.id}</p>
+            <button onClick={() => addFriend(searchResult.id)}>
+              Add friend
+            </button>
+          </div>;
+        })}
+      </div>
     </div>
   );
 };
