@@ -54,6 +54,7 @@ const SearchUser = ({ session }) => {
               <p>{user.name}</p>
               <h4>Id</h4>
               <p>{user.id}</p>
+              <button>Add friend</button>
             </div>
           ))}
         </div>
