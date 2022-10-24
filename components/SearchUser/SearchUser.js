@@ -22,11 +22,15 @@ const SearchUser = ({ session }) => {
       .or(`user_one.eq.${user.id},user_one.eq.${searchedFriend}`)
       .or(`user_two.eq.${user.id},user_two.eq.${searchedFriend}`);
 
-    if (data[0]) {
-      return true;
-    } else {
-      false;
-    }
+    data.map((friend) => {
+      if (friend.is_friends === true) {
+        console.log("Ni är vänner!");
+        return true;
+      } else {
+        console.log("Ni är inte vänner");
+        false;
+      }
+    });
   };
 
   // fetch searched users from profile table
@@ -83,9 +87,17 @@ const SearchUser = ({ session }) => {
               <p>{searchResult.name}</p>
               <h4>Id</h4>
               <p>{searchResult.id}</p>
-              <button onClick={() => addFriend(searchResult.id)}>
-                Add friend
-              </button>
+
+              {checkIfAlreadyFriends(searchResult.id) && (
+                <button onClick={() => addFriend(searchResult.id)}>
+                  Add friend
+                </button>
+              )}
+              {!checkIfAlreadyFriends(searchResult.id) && (
+                <button onClick={() => addFriend(searchResult.id)}>
+                  Remove friend
+                </button>
+              )}
             </div>
           ))}
         </div>
