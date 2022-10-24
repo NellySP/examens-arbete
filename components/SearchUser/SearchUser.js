@@ -73,24 +73,23 @@ const SearchUser = ({ session }) => {
         <button className="search-button">search</button>
       </form>
       {fetchError && <p>{fetchError}</p>}
-      <div>
-        {searchResults.map((searchResult) => {
-          if (checkIfAlreadyFriends(searchResult.id)) {
-            console.log("Vi är bästa kompisar");
-          }
-          <div key={searchResult.id}>
-            <h4>Användarnamn:</h4>
-            <p> {searchResult.username} </p>
-            <h4>Namn</h4>
-            <p>{searchResult.name}</p>
-            <h4>Id</h4>
-            <p>{searchResult.id}</p>
-            <button onClick={() => addFriend(searchResult.id)}>
-              Add friend
-            </button>
-          </div>;
-        })}
-      </div>
+      {searchResults && (
+        <div>
+          {searchResults.map((searchResult) => (
+            <div key={searchResult.id}>
+              <h4>Användarnamn:</h4>
+              <p> {searchResult.username} </p>
+              <h4>Namn</h4>
+              <p>{searchResult.name}</p>
+              <h4>Id</h4>
+              <p>{searchResult.id}</p>
+              <button onClick={() => addFriend(searchResult.id)}>
+                Add friend
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
