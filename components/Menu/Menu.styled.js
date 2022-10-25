@@ -13,8 +13,4 @@ export const MenuWrapper = styled.div`
   margin-top: 30px;
   padding: 50px;
   font-size: 20px;
-
-  Link {
-    color: "red";
-  }
 `;
