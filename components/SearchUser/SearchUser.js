@@ -22,22 +22,21 @@ const SearchUser = ({ session }) => {
       .or(`user_one.eq.${user.id},user_one.eq.${searchedFriend}`)
       .or(`user_two.eq.${user.id},user_two.eq.${searchedFriend}`);
 
-    data.map((friend) => {
-      if (friend.is_friends === true) {
-        console.log("Ni är vänner!");
-        return true;
-      } else {
-        console.log("Ni är inte vänner");
-        false;
-      }
-    });
+    if (typeof data[0] !== "undefined") {
+      console.log("DEFINED BEATCH");
+      // console.log(data[0].is_friends);
+      return true;
+    } else {
+      console.log("UNDEFINED BEATCH");
+      return false;
+    }
   };
 
   // Test att knapparna verkligen fungerar. Svar ja.
 
   // const checkIfAlreadyFriends = () => {
   //   const age = 20;
-  //   if (age > 15) {
+  //   if (age > 30) {
   //     return true;
   //   } else {
   //     return false;
