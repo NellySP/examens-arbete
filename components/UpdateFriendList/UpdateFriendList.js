@@ -45,7 +45,7 @@ const UpdateFriendList = ({ session, searchResult }) => {
 
   // Remove friend from friendlist
 
-  const RemoveFriend = async (userTwoId) => {
+  const RemoveFriend = async () => {
     const { data, error } = await supabase
       .from("friends")
       .delete()
@@ -57,12 +57,23 @@ const UpdateFriendList = ({ session, searchResult }) => {
       {isFriend ? (
         <div>
           <p>Ni är redan vänner</p>
-          <button onClick={() => RemoveFriend(searchResult.id)}>
+          <button
+            onClick={() => {
+              RemoveFriend(searchResult.id);
+            }}
+          >
             Ta bort {searchResult.name} som vän
           </button>
         </div>
       ) : (
-        <button onClick={() => addFriend(searchResult.id)}>Add friend</button>
+        <button
+          onClick={() => {
+            addFriend(searchResult.id);
+            useEffect;
+          }}
+        >
+          Add friend
+        </button>
       )}
     </div>
   );
