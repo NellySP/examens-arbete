@@ -18,25 +18,33 @@ const Calender = ({ session }) => {
 
   console.log(tomorrow);
 
+  // Check if date and user already exist in database. If not. Add new row.
+
   async function addAvailableDate(event) {
     event.preventDefault();
     const date = event.target.date.value;
 
     const { data, error } = await supabase
-      // .from("available_dates")
-      // .select()
-      // .not("date", "eq", date)
-      // .not("user_id", "eq", user.id);
-      // .or(`name.ilike.${searchTerm},username.ilike.${searchTerm}`);
       .from("available_dates")
-      .select(`date.eq.${date}.and.user_id.eq.${user.id}`);
-    // .or(`and(date.eq.${date},user_id.eq.${user.id})`);
+      .select()
+      .or(`and(date.eq.${date},user_id.eq.${user.id})`);
 
     if (error) {
-      setFetchError("Du måste välja ett datum");
+      setFetchError("Välj ett datum");
     }
 
-    console.log(data);
+    // if data is returned, check length
+
+    if (data) {
+      data.length;
+    }
+    // if length of returned array = 0, insert submitted data
+
+    if (data == 0) {
+      const { data, error } = await supabase
+        .from("available_dates")
+        .insert({ date: date, user_id: user.id });
+    }
 
     error;
   }
