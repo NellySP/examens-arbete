@@ -3,6 +3,7 @@ import { supabase } from "../../utils/supabaseClient";
 import { useUser } from "@supabase/auth-helpers-react";
 import * as S from "./SearchUser.styled";
 import UpdateFriendList from "../UpdateFriendList/UpdateFriendList";
+import Image from "next/image";
 
 const SearchUser = ({ session }) => {
   const [fetchError, setFetchError] = useState(null);
@@ -38,7 +39,7 @@ const SearchUser = ({ session }) => {
   // add user and friend to friend table
 
   return (
-    <div>
+    <S.SearchFriendWrapper>
       <form onSubmit={fetchUser}>
         <input
           className="search"
@@ -53,18 +54,19 @@ const SearchUser = ({ session }) => {
         <div>
           {searchResults.map((searchResult) => (
             <S.FriendDiv key={searchResult.id}>
-              <h4>Användarnamn:</h4>
-              <p> {searchResult.username} </p>
-              <h4>Namn</h4>
-              <p>{searchResult.name}</p>
-              <h4>Id</h4>
-              <p>{searchResult.id}</p>
+              <Image src="/blanprofile.webp" width={100} height={100}></Image>
+              <S.textWrapper>
+                <h4>Användarnamn:</h4>
+                <p> {searchResult.username} </p>
+                <h4>Namn</h4>
+                <p>{searchResult.name}</p>
+              </S.textWrapper>
               <UpdateFriendList searchResult={searchResult}></UpdateFriendList>
             </S.FriendDiv>
           ))}
         </div>
       )}
-    </div>
+    </S.SearchFriendWrapper>
   );
 };
 
