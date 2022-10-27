@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const loginDiv = styled.div`
+export const calenderDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@ export const loginDiv = styled.div`
   height: 100vh;
 `;
 
-export const loginSection = styled.section`
+export const calenderSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,11 +18,11 @@ export const loginSection = styled.section`
   border-radius: 20px;
 `;
 
-export const loginHeading = styled.h1`
+export const calenderHeading = styled.h1`
   margin: 0px;
 `;
 
-export const loginText = styled.p`
+export const calenderText = styled.p`
   margin-top: 30px;
   width: 200px;
 
@@ -31,29 +31,19 @@ export const loginText = styled.p`
   }
 `;
 
-export const loginForm = styled.form`
+export const calenderForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
 `;
 
-export const loginInput = styled.input`
-  margin-top: 10px;
-  height: 30px;
-  width: 200px;
-
-  @media (min-width: 500px) {
-    width: 300px;
-  }
-`;
-
-export const loginLabel = styled.label`
+export const calenderLabel = styled.label`
   font-weight: 600;
   padding-top: 20px;
 `;
 
-export const loginButton = styled.button`
+export const calenderButton = styled.button`
   background-color: black;
   color: white;
   padding: 20px;

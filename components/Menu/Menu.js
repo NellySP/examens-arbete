@@ -11,14 +11,24 @@ const Menu = ({ session }) => {
 
   return (
     <S.MenuDiv>
-      {!session ? (
+      {session ? (
         <S.MenuWrapper>
-          <Link href="/signup">Sign up, step one</Link>
+          <Link href="/signup">Kalender</Link>
           <Link href="/signupprofile">Sign up, step two</Link>
           <Link href="/login">Startsida</Link>
+          <S.LogOutButton
+            className="button block"
+            onClick={() => {
+              supabase.auth.signOut();
+            }}
+          >
+            Sign Out
+          </S.LogOutButton>
         </S.MenuWrapper>
       ) : (
-        <div>Du är inte inloggad</div>
+        <S.MenuWrapper>
+          <p>Du är inte inloggad</p>
+        </S.MenuWrapper>
       )}
     </S.MenuDiv>
   );
