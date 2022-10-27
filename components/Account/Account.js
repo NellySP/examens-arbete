@@ -23,8 +23,7 @@ export default function Account({ session }) {
       // .select(`id.eq.${user.id}`);
       .select("id")
       .eq("id", user.id);
-    console.log(data);
-    data.length;
+
     if ((data.lenght = 0)) {
       return setProfile(false);
     } else {

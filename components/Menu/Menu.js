@@ -7,8 +7,6 @@ const Menu = ({ session }) => {
   const supabase = useSupabaseClient();
   useEffect(() => {}, [session]);
 
-  console.log(session);
-
   return (
     <S.MenuDiv>
       {session ? (

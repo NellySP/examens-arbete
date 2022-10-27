@@ -10,16 +10,17 @@ const FriendList = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
 
-  //   Fetch users friends here
-  const fetchFriends = async (event) => {
+  //   Fetch available dates here
+  const fetchAvailableDates = async (event) => {
     event.preventDefault();
-    const { data, error } = await supabase.from("friends").select();
+    const { data, error } = await supabase.from("available_dates").select();
   };
+  console.log("dont fail me now or now");
 
   return (
-    <S.friendListWrapperDiv>
-      <p>Display users friends</p>
-    </S.friendListWrapperDiv>
+    <S.dateDisplayDiv>
+      <p>DET HÄR SKA FUNKA ANNARS HOPPAS JAG FRÅN BRON</p>
+    </S.dateDisplayDiv>
   );
 };
 
