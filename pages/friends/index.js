@@ -8,7 +8,9 @@ const Friends = () => {
   return (
     <S.Wrapper>
       <Menu session={session} />
-      <h1>Friends! :D</h1>
+      <S.Div>
+        <h1>This is friends (and an ugly color)</h1>
+      </S.Div>
     </S.Wrapper>
   );
 };
