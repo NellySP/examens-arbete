@@ -1,18 +1,18 @@
 import Calender from "../../components/Calender/Calender";
 import Menu from "../../components/Menu/Menu";
-import * as S from "./index.styled";
+import * as GS from "../index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
 
 const Calenderpage = () => {
   const session = useSession();
 
   return (
-    <S.Wrapper>
+    <GS.Wrapper>
       <Menu session={session} />
-      <S.Div>
+      <GS.Div>
         <Calender session={session} />
-      </S.Div>
-    </S.Wrapper>
+      </GS.Div>
+    </GS.Wrapper>
   );
 };
 

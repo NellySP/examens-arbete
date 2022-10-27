@@ -1,26 +1,34 @@
-import * as S from "./index.styled";
+import * as GS from "./index.styled";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Account from "../components/Account/Account";
+import Menu from "../components/Menu/Menu";
 
 const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
 
   return (
-    <S.wrapperDiv>
+    <div>
       {!session ? (
-        <S.Div>
-          <Auth
-            supabaseClient={supabase}
-            appearance={{ theme: ThemeSupa }}
-            // theme="dark"
-          />
-        </S.Div>
+        <GS.LoginWrapper>
+          <GS.LoginDiv>
+            <Auth
+              supabaseClient={supabase}
+              appearance={{ theme: ThemeSupa }}
+              // theme="dark"
+            />
+          </GS.LoginDiv>
+        </GS.LoginWrapper>
       ) : (
-        <Account session={session} />
+        <GS.Wrapper>
+          <Menu session={session} />
+          <GS.Div>
+            <Account session={session} />
+          </GS.Div>
+        </GS.Wrapper>
       )}
-    </S.wrapperDiv>
+    </div>
   );
 };
 

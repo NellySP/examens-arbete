@@ -4,6 +4,8 @@ import * as S from "../../pages/signup/index.styled";
 import { useRouter } from "next/router";
 import UpdateProfileForm from "../UpdateProfileForm/UpdateProfileForm";
 import LoggedInHome from "../LoggedInHome/LoggedInHome";
+import Menu from "../Menu/Menu";
+import SignUpProfile from "../../pages/signupprofile";
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient();
@@ -32,12 +34,16 @@ export default function Account({ session }) {
   }
 
   return (
-    <S.signUpDiv>
+    <div>
       {profile ? (
-        <LoggedInHome session={session} />
+        <div>
+          <LoggedInHome session={session} />
+        </div>
       ) : (
-        <UpdateProfileForm session={session} />
+        <S.signUpDiv>
+          <UpdateProfileForm session={session} />
+        </S.signUpDiv>
       )}
-    </S.signUpDiv>
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import { supabase } from "../../utils/supabaseClient";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useUser, useSession } from "@supabase/auth-helpers-react";
-import * as S from "./index.styled";
+import * as GS from "../index.styled";
 import Menu from "../../components/Menu/Menu";
 import SearchUser from "../../components/SearchUser/SearchUser";
 
@@ -30,12 +30,12 @@ const SearchFriend = () => {
     fetchTest();
   }, [session]);
   return (
-    <S.Wrapper>
+    <GS.Wrapper>
       <Menu session={session} />
-      <S.Div>
+      <GS.Div>
         <SearchUser session={session} />
-      </S.Div>
-    </S.Wrapper>
+      </GS.Div>
+    </GS.Wrapper>
   );
 };
 
