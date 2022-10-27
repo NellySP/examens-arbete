@@ -2,18 +2,25 @@ import styled from "styled-components";
 
 export const MenuDiv = styled.div`
   background-color: white;
-  margin: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 50px;
   border-radius: 10px;
-  position: fixed;
+  position: sticky;
 `;
 
 export const MenuWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
-  margin-top: 30px;
-  padding: 50px;
+  height: 550px;
+  padding: 80px;
   font-size: 20px;
+`;
+
+export const LinkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const LogOutButton = styled.button`
@@ -29,5 +36,6 @@ export const LogOutButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   margin-top: 20px;
+  width: 100px;
   cursor: pointer;
 `;

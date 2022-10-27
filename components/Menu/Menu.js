@@ -13,17 +13,21 @@ const Menu = ({ session }) => {
     <S.MenuDiv>
       {session ? (
         <S.MenuWrapper>
-          <Link href="/signup">Kalender</Link>
-          <Link href="/signupprofile">Sign up, step two</Link>
-          <Link href="/login">Startsida</Link>
-          <S.LogOutButton
-            className="button block"
-            onClick={() => {
-              supabase.auth.signOut();
-            }}
-          >
-            Sign Out
-          </S.LogOutButton>
+          <S.LinkWrapper>
+            <Link href="/actualhome">Startsida</Link>
+            <Link href="/calenderpage">Kalender</Link>
+            <Link href="/friends">Vänlista</Link>
+          </S.LinkWrapper>
+          <div>
+            <S.LogOutButton
+              className="button block"
+              onClick={() => {
+                supabase.auth.signOut();
+              }}
+            >
+              Sign Out
+            </S.LogOutButton>
+          </div>
         </S.MenuWrapper>
       ) : (
         <S.MenuWrapper>
