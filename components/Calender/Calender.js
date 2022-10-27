@@ -1,11 +1,8 @@
-import { supabase } from "../../utils/supabaseClient";
-import * as S from "./index.styled";
-import { formatDistance, subDays } from "date-fns";
+import * as S from "./Calender.styled";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { addDays } from "date-fns";
 import { useState, useEffect } from "react";
-
-formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true });
+import Link from "next/link";
 
 const Calender = ({ session }) => {
   const [fetchError, setFetchError] = useState(null);
@@ -46,21 +43,27 @@ const Calender = ({ session }) => {
         .from("available_dates")
         .insert({ date: date, user_id: user.id });
     }
-
     error;
   }
 
   return (
-    <S.loginDiv>
-      <S.loginSection>
-        <S.loginHeading>Calender</S.loginHeading>
-        <S.loginForm onSubmit={addAvailableDate}>
-          <input type="date" id="date" name="date"></input>
-          <S.loginButton type="submit">Add date</S.loginButton>
-          {fetchError}
-        </S.loginForm>
-      </S.loginSection>
-    </S.loginDiv>
+    <S.calenderDiv>
+      {session ? (
+        <S.calenderSection>
+          <S.calenderHeading>Kalender</S.calenderHeading>
+          <S.calenderForm onSubmit={addAvailableDate}>
+            <input type="date" id="date" name="date"></input>
+            <S.calenderButton type="submit">Add date</S.calenderButton>
+            {fetchError}
+          </S.calenderForm>
+        </S.calenderSection>
+      ) : (
+        <S.calenderSection>
+          <p>Du är inte inloggad. </p>
+          <Link href="/">Logga in här</Link>
+        </S.calenderSection>
+      )}
+    </S.calenderDiv>
   );
 };
 
