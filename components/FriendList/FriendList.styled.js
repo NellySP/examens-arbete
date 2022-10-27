@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const dateDisplayDiv = styled.div`
+export const friendListWrapperDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
