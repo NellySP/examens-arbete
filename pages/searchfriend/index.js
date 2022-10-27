@@ -6,7 +6,7 @@ import * as S from "./index.styled";
 import Menu from "../../components/Menu/Menu";
 import SearchUser from "../../components/SearchUser/SearchUser";
 
-const Loggedinhome = () => {
+const SearchFriend = () => {
   const [fetchError, setFetchError] = useState(null);
   const [tests, setTest] = useState(null);
   const user = useUser();
@@ -32,9 +32,11 @@ const Loggedinhome = () => {
   return (
     <S.Wrapper>
       <Menu session={session} />
-      <SearchUser session={session} />
+      <S.Div>
+        <SearchUser session={session} />
+      </S.Div>
     </S.Wrapper>
   );
 };
 
-export default Loggedinhome;
+export default SearchFriend;

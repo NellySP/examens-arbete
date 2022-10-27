@@ -10,11 +10,13 @@ const Home = () => {
   return (
     <S.wrapperDiv>
       {!session ? (
-        <Auth
-          supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
-          // theme="dark"
-        />
+        <S.Div>
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            // theme="dark"
+          />
+        </S.Div>
       ) : (
         <Account session={session} />
       )}

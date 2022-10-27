@@ -9,3 +9,12 @@ export const Wrapper = styled.div`
   padding: 0px;
   margin: 0px;
 `;
+
+export const Div = styled.div`
+  background-color: white;
+  display: flex;
+  padding: 0px;
+  margin: 50px;
+  width: 100%;
+  border-radius: 10px;
+`;

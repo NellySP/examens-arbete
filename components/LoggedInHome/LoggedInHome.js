@@ -1,12 +1,10 @@
-import * as S from "./index.styled";
+import * as S from "./LoggedInHome.styled";
 import { useEffect } from "react";
-import { useSession } from "@supabase/auth-helpers-react";
 import FriendList from "../../components/FriendList/friendList";
 import DisplayDates from "../../components/DisplayDates/DisplayDates";
 import Menu from "../../components/Menu/Menu";
 
-const actualHome = () => {
-  const session = useSession();
+const LoggedInHome = ({ session }) => {
   useEffect(() => {}, [session]);
 
   return (
@@ -20,4 +18,4 @@ const actualHome = () => {
   );
 };
 
-export default actualHome;
+export default LoggedInHome;
