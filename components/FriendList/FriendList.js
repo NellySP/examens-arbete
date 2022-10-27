@@ -5,21 +5,38 @@ import * as S from "./FriendList.styled";
 import { supabase } from "../../utils/supabaseClient";
 
 const FriendList = ({ session }) => {
-  useEffect(() => {}, [session]);
-  //   Vilken variant kör vi? Denna?
   const supabase = useSupabaseClient();
   const user = useUser();
+  const [friends, setFriends] = useState(null);
 
-  //   Fetch available dates here
-  const fetchAvailableDates = async (event) => {
-    event.preventDefault();
-    const { data, error } = await supabase.from("available_dates").select();
+  useEffect(() => {
+    fetchFriends();
+  }, [session]);
+
+  //   Fetch users friends here
+  const fetchFriends = async () => {
+    const { data, error } = await supabase
+      .from("friends")
+      .select()
+      .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
+    setFriends(data);
   };
-  console.log("dont fail me now or now");
+  console.log(friends);
 
   return (
     <S.dateDisplayDiv>
-      <p>DET HÄR SKA FUNKA ANNARS HOPPAS JAG FRÅN BRON</p>
+      <h4>Dina vänner:</h4>
+      <div>
+        {friends && (
+          <div>
+            {friends.map((friend) => (
+              <div key={friend.id}>
+                <p>{friend.id}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </S.dateDisplayDiv>
   );
 };
