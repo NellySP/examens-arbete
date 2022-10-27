@@ -16,7 +16,7 @@ const actualHome = () => {
   return (
     <S.actualHomeWrapper>
       <h1>Actual Home</h1>
-      <Menu></Menu>
+      <Menu session={session}></Menu>
       <FriendList session={session} />
       <DisplayDates session={session} />
     </S.actualHomeWrapper>
