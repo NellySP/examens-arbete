@@ -1,7 +1,3 @@
-import styles from "../styles/Home.module.css";
-import { supabase } from "../utils/supabaseClient";
-import { useEffect, useState } from "react";
-import Link from "next/link";
 import * as S from "./index.styled";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
