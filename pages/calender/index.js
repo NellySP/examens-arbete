@@ -37,6 +37,7 @@ const Calender = ({ session }) => {
 
     if (data) {
       data.length;
+      setFetchError(null);
     }
     // if length of returned array = 0, insert submitted data
 
