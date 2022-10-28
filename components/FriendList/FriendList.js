@@ -13,18 +13,18 @@ const FriendList = ({ session }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchFriendshipIds();
+    // fetchFriendshipIds();
     fetchFriendIds();
   }, [session]);
 
   //   Fetch users friends here
-  const fetchFriendshipIds = async () => {
-    const { data, error } = await supabase
-      .from("friends")
-      .select()
-      .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
-    setFriendshipIds(data);
-  };
+  // const fetchFriendshipIds = async () => {
+  //   const { data, error } = await supabase
+  //     .from("friends")
+  //     .select()
+  //     .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
+  //   setFriendshipIds(data);
+  // };
 
   //   Fetch friend-id here
   const fetchFriendIds = async () => {
@@ -32,33 +32,41 @@ const FriendList = ({ session }) => {
       .from("friends")
       .select()
       .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
-
     setFriendshipIds(data);
-    if (!data) {
-      return false;
-    }
+    // console.log(data);
 
-    if (data) {
-      const friend_one = data[0].user_one;
-      const friend_two = data[0].user_two;
+    // const i = 0;
 
-      if (friend_one == user.id) {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select()
-          .eq("id", friend_two);
-        console.log(data);
-        setFriendId(data);
+    const katt = data;
+
+    katt.forEach(async (element) => {
+      // i + 1;
+
+      if (!element) {
+        return false;
       }
-      if (friend_two == user.id) {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select()
-          .eq("id", friend_one);
-        setFriendId(data);
-        console.log(data);
+
+      if (element) {
+        const friend_one = element.user_one;
+        const friend_two = element.user_two;
+        // console.log(friend_one);
+        // console.log(friend_two);
+        if (friend_one == user.id) {
+          const { element, error } = await supabase
+            .from("profiles")
+            .select()
+            .eq("id", friend_two);
+          setFriendId(element);
+        }
+        if (friend_two == user.id) {
+          const { element, error } = await supabase
+            .from("profiles")
+            .select()
+            .eq("id", friend_one);
+          setFriendId(element);
+        }
       }
-    }
+    });
   };
 
   return (
