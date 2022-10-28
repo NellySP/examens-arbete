@@ -59,13 +59,13 @@ const FriendList = ({ session }) => {
         }
       }
     }
-    console.log(friends);
+    // console.log(friends);
   };
 
   return (
     <S.dateDisplayDiv>
       <h4>Dina vänner:</h4>
-      <div>
+      {/* <div>
         {friends && (
           <div>
             {console.log(friends + "hej")}
@@ -77,7 +77,7 @@ const FriendList = ({ session }) => {
             ))}
           </div>
         )}
-      </div>
+      </div> */}
     </S.dateDisplayDiv>
   );
 };
