@@ -33,18 +33,16 @@ const FriendList = ({ session }) => {
       .select()
       .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
 
-    setFriendId(data);
-
-    if (data) {
+    setFriendshipIds(data);
+    if (!data) {
       return false;
     }
 
-    // console.log(data);
     if (data) {
       const friend_one = data[0].user_one;
       const friend_two = data[0].user_two;
 
-      if (data[0].user_one == user.id) {
+      if (friend_one == user.id) {
         const { data, error } = await supabase
           .from("profiles")
           .select()
@@ -52,28 +50,16 @@ const FriendList = ({ session }) => {
         console.log(data);
         setFriendId(data);
       }
-      if (data[0].user_two == user.id) {
+      if (friend_two == user.id) {
         const { data, error } = await supabase
           .from("profiles")
           .select()
           .eq("id", friend_one);
-        console.log(data);
         setFriendId(data);
+        console.log(data);
       }
     }
   };
-
-  // console.log(friendId);
-
-  //   Fetch users friends here
-  // const fetchFriends = async () => {
-  //   const { data, error } = await supabase
-  //     .from("profiles")
-  //     .select()
-  //     .eq("id", friendId);
-  //   setFriends(data);
-  // };
-  // console.log(friends);
 
   return (
     <S.dateDisplayDiv>
@@ -83,7 +69,8 @@ const FriendList = ({ session }) => {
           <div>
             {friendId.map((friend) => (
               <div key={friend.id}>
-                <p>{friend.id}</p>
+                <p>{friend.username}</p>
+                <p>{friend.name}</p>
               </div>
             ))}
           </div>
