@@ -13,8 +13,55 @@ const FriendList = ({ session }) => {
 
   useEffect(() => {
     // fetchFriendshipIds();
-    fetchFriendIds(friends);
-  }, [session]);
+    // fetchFriendIds();
+
+    const fetchFriendIds = async () => {
+      const { data, error } = await supabase
+        .from("friends")
+        .select()
+        .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
+      setFriendshipIds(data);
+
+      console.log(data);
+      const currentFriends = friends;
+      if (!data) {
+        return false;
+      }
+
+      for (let i = 0; i < data.length; i++) {
+        if (data) {
+          const friend_one = data[i].user_one;
+          const friend_two = data[i].user_two;
+          // console.log(friend_one);
+          // console.log(friend_two);
+          if (friend_one == user.id) {
+            const { data, error } = await supabase
+              .from("profiles")
+              .select()
+              .eq("id", friend_two);
+            console.log(data);
+            currentFriends.push(data[0]);
+            // setFriends((friends) => [...friends, data]);
+          }
+          if (friend_two == user.id) {
+            const { data, error } = await supabase
+              .from("profiles")
+              .select()
+              .eq("id", friend_one);
+            console.log(data);
+            currentFriends.push(data[0]);
+            // setFriends((friends) < 7=> [...friends, data]);
+          }
+        }
+        console.log("SET FRIENDs, ", currentFriends);
+      }
+      setFriends(currentFriends);
+      // console.log(friends);
+    };
+    fetchFriendIds();
+  }, [session, setFriends]);
+
+  // useEffect(() => {}, [friends]);\
 
   //   Fetch users friends here
   // const fetchFriendshipIds = async () => {
@@ -26,49 +73,56 @@ const FriendList = ({ session }) => {
   // };
 
   //   Fetch friend-id here
-  const fetchFriendIds = async (friends) => {
-    const { data, error } = await supabase
-      .from("friends")
-      .select()
-      .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
-    setFriendshipIds(data);
+  // const fetchFriendIds = async () => {
+  //   const { data, error } = await supabase
+  //     .from("friends")
+  //     .select()
+  //     .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
+  //   setFriendshipIds(data);
 
-    if (!data) {
-      return false;
-    }
+  //   console.log(data);
+  //   const currentFriends = friends;
+  //   if (!data) {
+  //     return false;
+  //   }
 
-    for (let i = 0; i < data.length; i++) {
-      if (data) {
-        const friend_one = data[i].user_one;
-        const friend_two = data[i].user_two;
-        // console.log(friend_one);
-        // console.log(friend_two);
-        if (friend_one == user.id) {
-          const { data, error } = await supabase
-            .from("profiles")
-            .select()
-            .eq("id", friend_two);
-          setFriends((friends) => [...friends, data]);
-        }
-        if (friend_two == user.id) {
-          const { data, error } = await supabase
-            .from("profiles")
-            .select()
-            .eq("id", friend_one);
-          setFriends((friends) => [...friends, data]);
-        }
-      }
-    }
-    // console.log(friends);
-  };
+  //   for (let i = 0; i < data.length; i++) {
+  //     if (data) {
+  //       const friend_one = data[i].user_one;
+  //       const friend_two = data[i].user_two;
+  //       // console.log(friend_one);
+  //       // console.log(friend_two);
+  //       if (friend_one == user.id) {
+  //         const { data, error } = await supabase
+  //           .from("profiles")
+  //           .select()
+  //           .eq("id", friend_two);
+  //         console.log(data);
+  //         currentFriends.push(data[0]);
+  //         // setFriends((friends) => [...friends, data]);
+  //       }
+  //       if (friend_two == user.id) {
+  //         const { data, error } = await supabase
+  //           .from("profiles")
+  //           .select()
+  //           .eq("id", friend_one);
+  //         console.log(data);
+  //         currentFriends.push(data[0]);
+  //         // setFriends((friends) < 7=> [...friends, data]);
+  //       }
+  //     }
+  //     console.log("SET FRIENDs, ", currentFriends);
+  //     setFriends(currentFriends);
+  //   }
+  //   // console.log(friends);
+  // };
 
   return (
     <S.dateDisplayDiv>
       <h4>Dina vänner:</h4>
-      {/* <div>
+      <div>
         {friends && (
           <div>
-            {console.log(friends + "hej")}
             {friends.map((friend) => (
               <div key={friend.id}>
                 <p>{friend.username}</p>
@@ -77,7 +131,7 @@ const FriendList = ({ session }) => {
             ))}
           </div>
         )}
-      </div> */}
+      </div>
     </S.dateDisplayDiv>
   );
 };

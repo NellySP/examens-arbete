@@ -6,7 +6,8 @@ import { supabase } from "../../utils/supabaseClient";
 
 const DisplayDates = ({ session }) => {
   useEffect(() => {
-    fetchAvailableDates();
+    // fetchAvailableDates();
+    test_function();
   }, [session]);
   //   Vilken variant kör vi? Denna?
   const supabase = useSupabaseClient();
@@ -20,14 +21,19 @@ const DisplayDates = ({ session }) => {
   // HAVING COUNT(date) > 1;
 
   //   Fetch available dates here
-  const fetchAvailableDates = async () => {
-    const { data, error } = await await supabase
-      .from("available_dates")
-      .select()
-      // .eq("user_id", user.id);
-      .or(
-        `or(user_id.eq.${user.id},user_id.eq.6d63176d-aad5-4912-a017-a5dc4d05c21a)`
-      );
+  // const fetchAvailableDates = async () => {
+  //   const { data, error } = await supabase
+  //     .from("available_dates")
+  //     .select()
+  //     // .eq("user_id", user.id);
+  //     .or(
+  //       `or(user_id.eq.${user.id},user_id.eq.6d63176d-aad5-4912-a017-a5dc4d05c21a)`
+  //     );
+  //   console.log(data);
+  // };
+
+  const test_function = async () => {
+    const { data, error } = await supabase.rpc("get_dattsy");
     console.log(data);
   };
 
