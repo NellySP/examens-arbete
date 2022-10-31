@@ -8,114 +8,50 @@ const FriendList = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [friends, setFriends] = useState([]);
-  const [friendshipIds, setFriendshipIds] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // fetchFriendshipIds();
-    // fetchFriendIds();
-
-    const fetchFriendIds = async () => {
-      const { data, error } = await supabase
-        .from("friends")
-        .select()
-        .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
-      setFriendshipIds(data);
-
-      console.log(data);
-      const currentFriends = friends;
-      if (!data) {
-        return false;
-      }
-
-      for (let i = 0; i < data.length; i++) {
-        if (data) {
-          const friend_one = data[i].user_one;
-          const friend_two = data[i].user_two;
-          // console.log(friend_one);
-          // console.log(friend_two);
-          if (friend_one == user.id) {
-            const { data, error } = await supabase
-              .from("profiles")
-              .select()
-              .eq("id", friend_two);
-            console.log(data);
-            currentFriends.push(data[0]);
-            // setFriends((friends) => [...friends, data]);
-          }
-          if (friend_two == user.id) {
-            const { data, error } = await supabase
-              .from("profiles")
-              .select()
-              .eq("id", friend_one);
-            console.log(data);
-            currentFriends.push(data[0]);
-            // setFriends((friends) < 7=> [...friends, data]);
-          }
-        }
-        console.log("SET FRIENDs, ", currentFriends);
-      }
-      setFriends(currentFriends);
-      // console.log(friends);
-    };
     fetchFriendIds();
-  }, [session, setFriends]);
+  }, [session]);
 
-  // useEffect(() => {}, [friends]);\
+  const fetchFriendIds = async () => {
+    const { data, error } = await supabase
+      .from("friends")
+      .select()
+      .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
+    console.log("halloj");
 
-  //   Fetch users friends here
-  // const fetchFriendshipIds = async () => {
-  //   const { data, error } = await supabase
-  //     .from("friends")
-  //     .select()
-  //     .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
-  //   setFriendshipIds(data);
-  // };
+    // placeholder array to save result from loop!
+    const currentFriends = [];
 
-  //   Fetch friend-id here
-  // const fetchFriendIds = async () => {
-  //   const { data, error } = await supabase
-  //     .from("friends")
-  //     .select()
-  //     .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
-  //   setFriendshipIds(data);
+    if (!data) {
+      return false;
+    }
 
-  //   console.log(data);
-  //   const currentFriends = friends;
-  //   if (!data) {
-  //     return false;
-  //   }
+    for (let i = 0; i < data.length; i++) {
+      if (data) {
+        const friend_one = data[i].user_one;
+        const friend_two = data[i].user_two;
 
-  //   for (let i = 0; i < data.length; i++) {
-  //     if (data) {
-  //       const friend_one = data[i].user_one;
-  //       const friend_two = data[i].user_two;
-  //       // console.log(friend_one);
-  //       // console.log(friend_two);
-  //       if (friend_one == user.id) {
-  //         const { data, error } = await supabase
-  //           .from("profiles")
-  //           .select()
-  //           .eq("id", friend_two);
-  //         console.log(data);
-  //         currentFriends.push(data[0]);
-  //         // setFriends((friends) => [...friends, data]);
-  //       }
-  //       if (friend_two == user.id) {
-  //         const { data, error } = await supabase
-  //           .from("profiles")
-  //           .select()
-  //           .eq("id", friend_one);
-  //         console.log(data);
-  //         currentFriends.push(data[0]);
-  //         // setFriends((friends) < 7=> [...friends, data]);
-  //       }
-  //     }
-  //     console.log("SET FRIENDs, ", currentFriends);
-  //     setFriends(currentFriends);
-  //   }
-  //   // console.log(friends);
-  // };
+        if (friend_one == user.id) {
+          const { data, error } = await supabase
+            .from("profiles")
+            .select()
+            .eq("id", friend_two);
+          currentFriends.push(data[0]);
+        }
+        if (friend_two == user.id) {
+          const { data, error } = await supabase
+            .from("profiles")
+            .select()
+            .eq("id", friend_one);
+
+          currentFriends.push(data[0]);
+        }
+      }
+    }
+    setFriends(currentFriends);
+  };
 
   return (
     <S.dateDisplayDiv>

@@ -34,7 +34,7 @@ const DisplayDates = ({ session }) => {
 
   const test_function = async () => {
     const { data, error } = await supabase.rpc("get_dattsy");
-    console.log(data);
+    // console.log(data);
   };
 
   return (
