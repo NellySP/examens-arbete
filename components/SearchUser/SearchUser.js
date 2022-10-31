@@ -22,7 +22,8 @@ const SearchUser = ({ session }) => {
     const { data, error } = await supabase
       .from("profiles")
       .select()
-      .or(`name.ilike.${searchTerm},username.ilike.${searchTerm}`);
+      .or(`name.ilike.${searchTerm},username.ilike.${searchTerm}`)
+      .not("id", "eq", user.id);
 
     if (error) {
       setFetchError(error.message);
