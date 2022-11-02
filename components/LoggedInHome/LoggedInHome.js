@@ -9,7 +9,6 @@ const LoggedInHome = ({ session }) => {
   return (
     <div>
       <DisplayDates session={session} />
-      <FriendList session={session} />
     </div>
   );
 };

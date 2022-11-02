@@ -1,12 +1,17 @@
 import styled from "styled-components";
 
 export const MenuDiv = styled.div`
-  background-color: white;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-left: 50px;
-  border-radius: 10px;
-  position: sticky;
+  display: none;
+
+  @media (min-width: 1000px) {
+    display: block;
+    background-color: white;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    border-radius: 10px;
+    position: sticky;
+  }
 `;
 
 export const MenuWrapper = styled.div`

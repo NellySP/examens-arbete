@@ -1,6 +1,7 @@
 import Menu from "../../components/Menu/Menu";
 import * as GS from "../index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
+import FriendList from "../../components/FriendList/FriendList";
 
 const Friends = () => {
   const session = useSession();
@@ -9,7 +10,7 @@ const Friends = () => {
     <GS.Wrapper>
       <Menu session={session} />
       <GS.Div>
-        <h1>This is friends (and an ugly color)</h1>
+        <FriendList session={session} />
       </GS.Div>
     </GS.Wrapper>
   );
