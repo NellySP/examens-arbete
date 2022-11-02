@@ -3,11 +3,11 @@ import styled from "styled-components";
 // General styling for all pages
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
   background-color: #b9c9b7;
   height: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: row;
   padding: 0px;
   margin: 0px;
 `;
@@ -15,7 +15,9 @@ export const Wrapper = styled.div`
 export const Div = styled.div`
   background-color: white;
   display: flex;
-  padding: 80px;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
   margin: 50px;
   width: 100%;
   border-radius: 10px;
