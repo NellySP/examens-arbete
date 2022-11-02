@@ -14,3 +14,35 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.columns0 {
+  grid-column: 7;
+}
+
+.columns1 {
+  grid-column: 1;
+}
+
+.columns2 {
+  grid-column: 2;
+}
+.columns3 {
+  grid-column: 3;
+}
+
+.columns4 {
+  grid-column: 4;
+}
+
+.columns5 {
+  grid-column: 5;
+}
+
+.columns6 {
+  grid-column: 6;
+}
+
+.test {
+  background-color: blue;
+  text-decoration: underline;
+}

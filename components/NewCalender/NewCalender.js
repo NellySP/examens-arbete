@@ -10,7 +10,15 @@ import {
   format,
   parse,
   startOfToday,
+  getDay,
+  isEqual,
+  isToday,
+  isSameMonth,
 } from "date-fns";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const NewCalender = ({ session }) => {
   const [fetchError, setFetchError] = useState(null);
@@ -88,8 +96,33 @@ const NewCalender = ({ session }) => {
           </S.calenderMenu>
           <S.calenderGrid>
             {days.map((day, dayIdx) => (
-              <div key={day.toString()}>
-                <button type="button" onClick={() => setSelectedDay(day)}>
+              <div
+                key={day.toString()}
+                className={classNames(
+                  dayIdx === 0 && `columns${[getDay(day)]}`
+                )}
+              >
+                <button
+                  type="button"
+                  onClick={() => setSelectedDay(day)}
+                  className={classNames(
+                    isEqual(day, selectedDay) && "test",
+                    !isEqual(day, selectedDay) && isToday(day) && "test",
+                    !isEqual(day, selectedDay) &&
+                      !isToday(day) &&
+                      isSameMonth(day, firstDayCurrentMonth) &&
+                      "test",
+                    !isEqual(day, selectedDay) &&
+                      !isToday(day) &&
+                      !isSameMonth(day, firstDayCurrentMonth) &&
+                      "test",
+                    isEqual(day, selectedDay) && isToday(day) && "test",
+                    isEqual(day, selectedDay) && !isToday(day) && "test",
+                    !isEqual(day, selectedDay) && "test",
+                    (isEqual(day, selectedDay) || isToday(day)) && "test",
+                    "test"
+                  )}
+                >
                   <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
                   </time>
