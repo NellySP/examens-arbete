@@ -40,15 +40,14 @@ const NewCalender = ({ session }) => {
 
   // Check if date and user already exist in database. If not. Add new row.
 
-  async function addAvailableDate(day) {
-    const date = day;
-    format(date, "yyyy-MM-dd");
-    console.log(date + "Hej");
+  async function addAvailableDate() {
+    const date_input = format(selectedDay, "yyyy-MM-dd");
+    console.log(date_input + " Hej");
 
     const { data, error } = await supabase
       .from("available_dates")
       .select()
-      .or(`and(date.eq.${date},user_id.eq.${user.id})`);
+      .or(`and(date.eq.${date_input},user_id.eq.${user.id})`);
 
     if (error) {
       setFetchError("Välj ett datum");
@@ -65,7 +64,7 @@ const NewCalender = ({ session }) => {
     if (data == 0) {
       const { data, error } = await supabase
         .from("available_dates")
-        .insert({ date: date, user_id: user.id });
+        .insert({ date: date_input, user_id: user.id });
     }
     error;
   }
@@ -100,10 +99,10 @@ const NewCalender = ({ session }) => {
 
             {console.log(selectedDay)}
           </S.calenderGrid>
-          <S.calenderForm onSubmit={addAvailableDate(selectedDay)}>
-            <S.calenderButton type="submit">Add date</S.calenderButton>
-            {fetchError}
-          </S.calenderForm>
+          <S.calenderButton onClick={addAvailableDate}>
+            Add date
+          </S.calenderButton>
+          {fetchError}
         </S.calenderSection>
       ) : (
         <S.calenderSection>
