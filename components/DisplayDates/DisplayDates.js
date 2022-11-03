@@ -60,14 +60,13 @@ const DisplayDates = ({ session }) => {
 
   return (
     <S.dateDisplayDiv>
-      <p>Display all available dates here</p>
-      <h4>Dina vänner:</h4>
+      <h3>Lediga datum!</h3>
       <div>
         {friends && (
           <div>
             {friends.map((friend) => (
               <div key={friend.id}>
-                <p>{friend.username}</p>
+                <h4>Lediga datum med: {friend.username}</h4>
                 <p>{friend.name}</p>
                 <GetDates friendId={friend.id} />
               </div>

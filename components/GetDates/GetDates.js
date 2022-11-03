@@ -28,7 +28,6 @@ const GetDates = ({ session, friendId }) => {
     }
     setDates(currentDate);
   };
-  console.log(dates);
 
   return (
     <div>
