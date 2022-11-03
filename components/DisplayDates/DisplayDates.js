@@ -21,15 +21,19 @@ const DisplayDates = ({ session }) => {
       .or(
         `or(user_id.eq.${user.id},user_id.eq.6d63176d-aad5-4912-a017-a5dc4d05c21a)`
       );
-    console.log(data);
   };
 
   // const friendArray
   // const myArray.map(item => friendArray.includes(item.date))
 
   const testfunktion = async () => {
-    const { data, error } = await supabase.from("available_dates").select();
-    console.log(data + "Hejsan");
+    const { data, error } = await supabase.rpc("testing_six", {
+      user_id_input: user.id,
+      friend_id_input: user.id,
+    });
+
+    const result = JSON.stringify(data);
+    console.log(result + "Hejsan");
   };
   testfunktion();
 
