@@ -3,6 +3,7 @@ import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Account from "../components/Account/Account";
 import Menu from "../components/Menu/Menu";
+import Image from "next/image";
 
 const Home = () => {
   const session = useSession();
@@ -12,13 +13,32 @@ const Home = () => {
     <div>
       {!session ? (
         <GS.LoginWrapper>
-          <GS.LoginDiv>
-            <Auth
-              supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa }}
-              // theme="dark"
-            />
-          </GS.LoginDiv>
+          <GS.loginContainer>
+            <GS.header>
+              <Image src="/testingTwo.jpg" height={500} width={1000}></Image>
+            </GS.header>
+            <GS.contentWrapper>
+              <GS.infoDiv>
+                <GS.imgDiv>
+                  <Image src="/Union.png" width={100} height={100}></Image>
+                </GS.imgDiv>
+                <h1>Placeholder</h1>
+                <p>
+                  Svårt att hitta lediga dagar där alla i kompisgänget kan
+                  träffas? Lugn, vi löser det åt dig!
+                </p>
+                <br></br>
+                <p>Logga in eller bli medlem för att komma igång direkt!</p>
+              </GS.infoDiv>
+              <GS.LoginDiv>
+                <Auth
+                  supabaseClient={supabase}
+                  appearance={{ theme: ThemeSupa }}
+                  // theme="dark"
+                />
+              </GS.LoginDiv>
+            </GS.contentWrapper>
+          </GS.loginContainer>
         </GS.LoginWrapper>
       ) : (
         <GS.Wrapper>
