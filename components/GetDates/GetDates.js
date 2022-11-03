@@ -35,7 +35,7 @@ const GetDates = ({ session, friendId }) => {
       {dates && (
         <S.dateDiv>
           {dates.map((date) => (
-            <div key={date.id}>
+            <div key={date}>
               <p>{date}</p>
             </div>
           ))}
