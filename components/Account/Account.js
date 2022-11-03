@@ -26,12 +26,17 @@ export default function Account({ session }) {
       .select("id")
       .eq("id", user.id);
 
-    if ((data.lenght = 0)) {
-      return setProfile(false);
+    console.log(data.length);
+
+    if (data.length == 1) {
+      setProfile(true);
+      console.log("yay");
     } else {
-      return setProfile(true);
+      setProfile(false);
+      console.log("testett");
     }
   }
+  console.log(profile);
 
   return (
     <div>

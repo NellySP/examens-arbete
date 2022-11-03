@@ -17,7 +17,8 @@ const SignUp = () => {
 
   return (
     <S.signUpDiv>
-      <S.signUpSection>
+      {/* VI ANVÄNDER INTE DENNA JUST NU */}
+      {/* <S.signUpSection>
         <S.signUpHeading>Sign Up, step one</S.signUpHeading>
         <S.signUpText>Fill in your email to receive a magic link.</S.signUpText>
         <S.signUpForm onSubmit={testSignUp}>
@@ -30,7 +31,7 @@ const SignUp = () => {
           ></S.signUpInput>
           <S.signUpButton type="submit">Go to next step</S.signUpButton>
         </S.signUpForm>
-      </S.signUpSection>
+      </S.signUpSection> */}
     </S.signUpDiv>
   );
 };

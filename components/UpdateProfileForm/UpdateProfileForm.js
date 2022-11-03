@@ -18,7 +18,7 @@ export default function UpdateProfileForm({ session }) {
     const { data, error } = await supabase
       .from("profiles")
       .upsert({ username: username, name: name, id: user.id });
-    router.push("/loggedinhome");
+    router.push("/friends");
   }
 
   function reRoute() {

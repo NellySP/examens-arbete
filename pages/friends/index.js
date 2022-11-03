@@ -9,9 +9,13 @@ const Friends = () => {
   return (
     <GS.Wrapper>
       <Menu session={session} />
-      <GS.Div>
-        <FriendList session={session} />
-      </GS.Div>
+      {session ? (
+        <GS.Div>
+          <FriendList session={session} />
+        </GS.Div>
+      ) : (
+        <div>Du är inte inloggad placeholder</div>
+      )}
     </GS.Wrapper>
   );
 };

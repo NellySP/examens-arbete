@@ -32,9 +32,13 @@ const SearchFriend = () => {
   return (
     <GS.Wrapper>
       <Menu session={session} />
-      <GS.Div>
-        <SearchUser session={session} />
-      </GS.Div>
+      {session ? (
+        <GS.Div>
+          <SearchUser session={session} />
+        </GS.Div>
+      ) : (
+        <div>Du är inte inloggad placeholder</div>
+      )}
     </GS.Wrapper>
   );
 };
