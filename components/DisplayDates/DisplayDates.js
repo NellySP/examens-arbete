@@ -42,6 +42,9 @@ const DisplayDates = ({ session }) => {
             .select()
             .eq("id", friend_two);
           currentFriends.push(data[0]);
+          const id = data[0].id;
+          console.log(id);
+          fetchAvailableDates(id);
         }
         if (friend_two == user.id) {
           const { data, error } = await supabase
@@ -50,12 +53,13 @@ const DisplayDates = ({ session }) => {
             .eq("id", friend_one);
 
           currentFriends.push(data[0]);
+          const id = data[0].id;
+          console.log(id);
+          fetchAvailableDates(id);
         }
       }
     }
     setFriends(currentFriends);
-    console.log(currentFriends[0].id);
-    fetchAvailableDates(currentFriends[0].id);
   };
 
   // Fetch available dates here
@@ -69,10 +73,6 @@ const DisplayDates = ({ session }) => {
     });
 
     console.log(data);
-    // const result = data;
-    // const result = Object.values(data);
-    // console.log(result);
-    // setDates(result[0]);
   };
 
   return (
