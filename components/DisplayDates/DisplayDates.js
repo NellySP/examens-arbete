@@ -3,11 +3,12 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./DisplayDates.styled";
 // Vilken variant kör vi? Denna?
 import { supabase } from "../../utils/supabaseClient";
+import GetDates from "../GetDates/GetDates";
 
 const DisplayDates = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
-  const [dates, setDates] = useState(null);
+  const [dates, setDates] = useState([]);
   const [friends, setFriends] = useState([]);
   const [friendId, setFriendId] = useState([]);
 
@@ -15,8 +16,6 @@ const DisplayDates = ({ session }) => {
     // fetchAvailableDates();
     fetchFriendIds();
   }, [session]);
-
-  const test_id = "6d63176d-aad5-4912-a017-a5dc4d05c21a";
 
   const fetchFriendIds = async () => {
     const { data, error } = await supabase
@@ -41,10 +40,8 @@ const DisplayDates = ({ session }) => {
             .from("profiles")
             .select()
             .eq("id", friend_two);
-          currentFriends.push(data[0]);
           const id = data[0].id;
-          console.log(id);
-          fetchAvailableDates(id);
+          currentFriends.push(data[0]);
         }
         if (friend_two == user.id) {
           const { data, error } = await supabase
@@ -52,27 +49,13 @@ const DisplayDates = ({ session }) => {
             .select()
             .eq("id", friend_one);
 
-          currentFriends.push(data[0]);
           const id = data[0].id;
-          console.log(id);
-          fetchAvailableDates(id);
+          currentFriends.push(data[0]);
         }
       }
     }
+
     setFriends(currentFriends);
-  };
-
-  // Fetch available dates here
-
-  // const test = "6d63176d-aad5-4912-a017-a5dc4d05c21a";
-
-  const fetchAvailableDates = async (friendId) => {
-    const { data, error } = await supabase.rpc("testing_five", {
-      user_id_input: user.id,
-      friend_id_input: friendId,
-    });
-
-    console.log(data);
   };
 
   return (
@@ -86,7 +69,7 @@ const DisplayDates = ({ session }) => {
               <div key={friend.id}>
                 <p>{friend.username}</p>
                 <p>{friend.name}</p>
-                <p>{dates}</p>
+                <GetDates friendId={friend.id} />
               </div>
             ))}
           </div>
