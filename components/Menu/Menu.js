@@ -2,6 +2,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./Menu.styled";
 import Link from "next/link";
 import { useEffect } from "react";
+import Router from "next/router";
 
 const Menu = ({ session }) => {
   const supabase = useSupabaseClient();
@@ -22,6 +23,7 @@ const Menu = ({ session }) => {
               className="button block"
               onClick={() => {
                 supabase.auth.signOut();
+                Router.push("/");
               }}
             >
               Sign Out

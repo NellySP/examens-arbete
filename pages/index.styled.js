@@ -6,6 +6,9 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #b9c9b7;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100%;
   min-height: 100vh;
   padding: 0px;
@@ -31,36 +34,50 @@ export const LoginWrapper = styled.div`
     rgba(154, 186, 157, 1) 87%,
     rgba(182, 196, 186, 1) 100%
   ); */
+  background-color: black;
   background-color: #b9c9b7;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   height: 100%;
 `;
 
 export const loginContainer = styled.div`
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 100px, 50px;
   border-radius: 20px;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
 `;
 
 export const header = styled.div`
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  background-image: url("/test7.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
   color: white;
-  height: 300px;
   width: 100%;
+  min-height: 100vh;
+  border-radius: 10px;
+  padding: 100px 0px;
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+  }
 `;
 
 export const LoginDiv = styled.div`
   background-color: white;
+  color: black;
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -68,10 +85,11 @@ export const LoginDiv = styled.div`
   width: 80%;
   border-radius: 10px;
   height: 400px;
-  background-color: #f0f2f0;
+  background-color: white;
 
   button {
     background-color: black;
+    border-color: black;
   }
 
   button:hover {
@@ -102,7 +120,8 @@ export const infoDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #f0f2f0;
+  color: black;
+  background-color: white;
   padding: 10px;
   margin: 10px;
   width: 80%;
@@ -113,6 +132,10 @@ export const infoDiv = styled.div`
     margin-top: 10px;
   }
 
+  h1 {
+    font-family: var(--railway);
+    font-weight: 500;
+  }
   @media (min-width: 500px) {
     margin: 50px;
     width: 70%;
@@ -126,7 +149,7 @@ export const infoDiv = styled.div`
 `;
 
 export const imgDiv = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   align-self: center;
 `;
