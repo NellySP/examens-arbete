@@ -14,12 +14,24 @@ const FriendList = ({ session }) => {
     fetchFriendIds();
   }, [session]);
 
+  // Remove friend from friendlist
+
+  const RemoveFriend = async (friendId) => {
+    const { data, error } = await supabase
+      .from("friends")
+      .delete()
+      .or(`user_one.eq.${user.id},user_one.eq.${friendId}`)
+      .or(`user_two.eq.${user.id},user_two.eq.${friendId}`);
+
+    fetchFriendIds();
+  };
+
+  //  Fetch all users friends
   const fetchFriendIds = async () => {
     const { data, error } = await supabase
       .from("friends")
       .select()
       .or(`user_one.eq.${user.id},user_two.eq.${user.id}`);
-    console.log("halloj");
 
     // placeholder array to save result from loop!
     const currentFriends = [];
@@ -62,7 +74,15 @@ const FriendList = ({ session }) => {
             {friends.map((friend) => (
               <div key={friend.id}>
                 <p>{friend.username}</p>
+
                 <p>{friend.name}</p>
+                <button
+                  onClick={() => {
+                    RemoveFriend(friend.id);
+                  }}
+                >
+                  Ta bort {friend.name} som vän
+                </button>
               </div>
             ))}
           </div>

@@ -11,7 +11,6 @@ const DisplayDates = ({ session }) => {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    // fetchAvailableDates();
     fetchFriendIds();
   }, [session]);
 
