@@ -47,6 +47,7 @@ export const loginContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 100px, 50px;
+  border-radius: 20px;
 `;
 
 export const header = styled.div`
