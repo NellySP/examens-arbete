@@ -10,7 +10,8 @@ export const MenuDiv = styled.div`
     margin-bottom: 50px;
     margin-left: 50px;
     border-radius: 10px;
-    position: sticky;
+    height: 700px;
+    position: fixed;
   }
 `;
 
@@ -18,9 +19,20 @@ export const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 550px;
-  padding: 80px;
+  height: 700px;
+  padding: 60px;
   font-size: 20px;
+  width: 270px;
+
+  a {
+    padding-top: 20px;
+    font-family: var(--railway);
+    font-weight: 500;
+  }
+  a:hover {
+    color: #47594c;
+    text-decoration: underline;
+  }
 `;
 
 export const LinkWrapper = styled.div`
@@ -29,6 +41,7 @@ export const LinkWrapper = styled.div`
 `;
 
 export const LogOutButton = styled.button`
+  background-color: #47594c;
   background-color: black;
   color: white;
   padding: 20px;
@@ -41,6 +54,6 @@ export const LogOutButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   margin-top: 20px;
-  width: 100px;
+  width: 150px;
   cursor: pointer;
 `;
