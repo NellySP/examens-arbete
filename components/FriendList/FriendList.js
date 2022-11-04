@@ -3,6 +3,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./FriendList.styled";
 // Vilken variant kör vi? Denna?
 import { supabase } from "../../utils/supabaseClient";
+import Image from "next/image";
 
 const FriendList = ({ session }) => {
   const supabase = useSupabaseClient();
@@ -67,15 +68,29 @@ const FriendList = ({ session }) => {
 
   return (
     <S.dateDisplayDiv>
-      <h4>Dina vänner:</h4>
+      <h2>Din vänlista</h2>
+      <p>
+        Här visas dina nuvarande vänner. Vill du lägga till nya vänner så kan du
+        göra det via sök användare i menyn.
+      </p>
       <div>
         {friends && (
           <div>
             {friends.map((friend) => (
-              <div key={friend.id}>
-                <p>{friend.username}</p>
-
-                <p>{friend.name}</p>
+              <S.FriendDiv key={friend.id}>
+                <S.profileWrapper>
+                  <S.imageWrapper>
+                    <Image
+                      src="/profilepicture.png"
+                      width={100}
+                      height={100}
+                    ></Image>
+                  </S.imageWrapper>
+                  <S.textWrapper>
+                    <p> {friend.username} </p>
+                    <p>{friend.name}</p>
+                  </S.textWrapper>
+                </S.profileWrapper>
                 <button
                   onClick={() => {
                     RemoveFriend(friend.id);
@@ -83,7 +98,7 @@ const FriendList = ({ session }) => {
                 >
                   Ta bort {friend.name} som vän
                 </button>
-              </div>
+              </S.FriendDiv>
             ))}
           </div>
         )}

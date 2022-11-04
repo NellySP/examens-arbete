@@ -6,31 +6,43 @@ export const SearchFriendWrapper = styled.div`
   margin-top: 50px;
 
   form button {
-    background-color: black;
+    background-color: #47594c;
     color: white;
     border-radius: 5px;
-    border-color: black;
-    width: 100px;
+    border-color: #47594c;
+    width: 70px;
     border-style: none;
-    height: 50px;
+    height: 30px;
     margin-left: 20px;
     cursor: pointer;
+
+    @media (min-width: 800px) {
+      width: 100px;
+      height: 40px;
+    }
   }
 
   input {
-    height: 50px;
+    height: 30px;
     border: 2px solid gray;
     border-radius: 5px;
+    width: 63%;
+
+    @media (min-width: 800px) {
+      width: 40%;
+      height: 40px;
+    }
   }
   input:focus {
     outline: none;
-    border: 4px solid #47594c;
+    border: 3px solid #47594c;
   }
 `;
 
 export const FriendDiv = styled.div`
   background-color: #e1ecdf;
   background-color: #f5f3f0;
+  background-color: #f7f7f5;
   width: 100%;
   padding: 10px;
   border-radius: 10px;

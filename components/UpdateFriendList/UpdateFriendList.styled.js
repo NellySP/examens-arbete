@@ -8,10 +8,10 @@ export const buttonDiv = styled.div`
     flex-direction: column;
   }
   button {
-    background-color: black;
+    background-color: #47594c;
     color: white;
     border-radius: 5px;
-    border-color: black;
+    border-color: #47594c;
     width: 100px;
     border-style: none;
     height: 40px;

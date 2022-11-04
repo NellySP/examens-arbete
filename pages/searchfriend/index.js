@@ -36,6 +36,7 @@ const SearchFriend = () => {
       {session ? (
         <GS.Div>
           <S.searchfieldWrapper>
+            <h2>Sök användare</h2>
             Här kan du söka på andra användare. Du kan söka både via namn och
             användarnamn.
             <SearchUser session={session} />
