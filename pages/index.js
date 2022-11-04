@@ -15,14 +15,11 @@ const Home = () => {
         <GS.LoginWrapper>
           <GS.loginContainer>
             <GS.header>
-              <Image src="/testingTwo.jpg" height={500} width={1000}></Image>
-            </GS.header>
-            <GS.contentWrapper>
               <GS.infoDiv>
                 <GS.imgDiv>
-                  <Image src="/Union.png" width={100} height={100}></Image>
+                  <Image src="/Union4.png" width={110} height={100}></Image>
                 </GS.imgDiv>
-                <h1>Placeholder</h1>
+                <h1>Här står det något käckt!</h1>
                 <p>
                   Svårt att hitta lediga dagar där alla i kompisgänget kan
                   träffas? Lugn, vi löser det åt dig!
@@ -37,7 +34,7 @@ const Home = () => {
                   // theme="dark"
                 />
               </GS.LoginDiv>
-            </GS.contentWrapper>
+            </GS.header>
           </GS.loginContainer>
         </GS.LoginWrapper>
       ) : (
