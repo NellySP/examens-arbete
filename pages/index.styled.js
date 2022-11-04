@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #b9c9b7;
+  background-color: #ebe7df;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,12 +19,13 @@ export const Wrapper = styled.div`
 export const Div = styled.div`
   background-color: white;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
   margin: 50px;
   width: 100%;
   border-radius: 10px;
+
+  @media (min-width: 1000px) {
+    margin-left: 370px;
+  }
 `;
 
 export const LoginWrapper = styled.div`
@@ -36,6 +38,7 @@ export const LoginWrapper = styled.div`
   ); */
   background-color: black;
   background-color: #b9c9b7;
+  background-color: #ebe7df;
   display: flex;
   justify-content: center;
   align-items: center;

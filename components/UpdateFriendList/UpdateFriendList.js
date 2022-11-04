@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import { useUser } from "@supabase/auth-helpers-react";
+import * as S from "./UpdateFriendList.styled";
 
 const UpdateFriendList = ({ session, searchResult }) => {
   const [isFriend, setIsFriend] = useState(false);
@@ -42,7 +43,7 @@ const UpdateFriendList = ({ session, searchResult }) => {
     const { data, error } = await supabase
       .from("friends")
       .insert({ user_one: user.id, user_two: userTwoId, is_friends: true });
-    const message = "Vännen tillagd";
+    const message = "Vännen har lagts i din vänlista";
     setIsFriendMessage(message);
     checkIfFriend();
   };
@@ -60,7 +61,7 @@ const UpdateFriendList = ({ session, searchResult }) => {
   };
 
   return (
-    <div>
+    <S.buttonDiv>
       {isFriend ? (
         <div>
           <p>Ni är redan vänner</p>
@@ -69,24 +70,24 @@ const UpdateFriendList = ({ session, searchResult }) => {
               RemoveFriend(searchResult.id);
             }}
           >
-            Ta bort {searchResult.name} som vän
+            Ta bort vän
           </button>
-          {isFriendMessage}
+          {/* {isFriendMessage} */}
         </div>
       ) : (
         <div>
+          <p>{isFriendMessage}</p>
           <button
             onClick={() => {
               addFriend(searchResult.id);
               useEffect;
             }}
           >
-            Add friend
+            Lägg till vän
           </button>
-          {isFriendMessage}
         </div>
       )}
-    </div>
+    </S.buttonDiv>
   );
 };
 export default UpdateFriendList;

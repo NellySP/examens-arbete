@@ -53,19 +53,19 @@ const SearchUser = ({ session }) => {
         <div>
           {searchResults.map((searchResult) => (
             <S.FriendDiv key={searchResult.id}>
-              <S.imageWrapper>
-                <Image
-                  src="/profilepicture.png"
-                  width={100}
-                  height={100}
-                ></Image>
-              </S.imageWrapper>
-              <S.textWrapper>
-                <h4>Användarnamn:</h4>
-                <p> {searchResult.username} </p>
-                <h4>Namn</h4>
-                <p>{searchResult.name}</p>
-              </S.textWrapper>
+              <S.profileWrapper>
+                <S.imageWrapper>
+                  <Image
+                    src="/profilepicture.png"
+                    width={100}
+                    height={100}
+                  ></Image>
+                </S.imageWrapper>
+                <S.textWrapper>
+                  <p> {searchResult.username} </p>
+                  <p>{searchResult.name}</p>
+                </S.textWrapper>
+              </S.profileWrapper>
               <UpdateFriendList searchResult={searchResult}></UpdateFriendList>
             </S.FriendDiv>
           ))}

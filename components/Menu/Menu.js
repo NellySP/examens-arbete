@@ -13,9 +13,9 @@ const Menu = ({ session }) => {
       {session ? (
         <S.MenuWrapper>
           <S.LinkWrapper>
-            <Link href="/">Startsida</Link>
+            <Link href="/">Gemensamma datum</Link>
             <Link href="/calenderpage">Kalender</Link>
-            <Link href="/searchfriend">Lägg till vänner</Link>
+            <Link href="/searchfriend">Sök användare</Link>
             <Link href="/friends">Vänlista</Link>
           </S.LinkWrapper>
           <div>
