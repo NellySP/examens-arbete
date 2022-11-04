@@ -7,12 +7,10 @@ import Image from "next/image";
 
 const SearchUser = ({ session }) => {
   const [fetchError, setFetchError] = useState(null);
-  // other users
   const [searchResults, setSearchResults] = useState(null);
-  // logged in user
   const user = useUser();
 
-  useEffect(() => {}, [session]);
+  useEffect(() => {}, [session], [searchResults]);
 
   // fetch searched users from profile table
 
@@ -55,7 +53,9 @@ const SearchUser = ({ session }) => {
         <div>
           {searchResults.map((searchResult) => (
             <S.FriendDiv key={searchResult.id}>
-              <Image src="/blanprofile.webp" width={100} height={100}></Image>
+              <S.imageWrapper>
+                <Image src="/blanprofile.webp" width={100} height={100}></Image>
+              </S.imageWrapper>
               <S.textWrapper>
                 <h4>Användarnamn:</h4>
                 <p> {searchResult.username} </p>

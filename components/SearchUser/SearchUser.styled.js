@@ -20,3 +20,7 @@ export const FriendDiv = styled.div`
 export const textWrapper = styled.div`
   justify-content: space-around;
 `;
+
+export const imageWrapper = styled.div`
+  border-radius: 50%;
+`;

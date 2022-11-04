@@ -5,6 +5,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 const UpdateFriendList = ({ session, searchResult }) => {
   const [isFriend, setIsFriend] = useState(false);
   const [friendId, setFriendId] = useState();
+  const [isFriendMessage, setIsFriendMessage] = useState(null);
   const user = useUser();
 
   // Checks if users are friends
@@ -25,22 +26,25 @@ const UpdateFriendList = ({ session, searchResult }) => {
 
   useEffect(
     () => {
-      async function checkIfFriend() {
-        const result = await checkIfAlreadyFriends(searchResult.id);
-        setIsFriend(result);
-      }
       checkIfFriend();
     },
-    [searchResult.id],
-    [session]
+    [session],
+    [isFriendMessage]
   );
 
+  async function checkIfFriend() {
+    const result = await checkIfAlreadyFriends(searchResult.id);
+    setIsFriend(result);
+  }
   // Add friend to friendlist
 
   const addFriend = async (userTwoId) => {
     const { data, error } = await supabase
       .from("friends")
       .insert({ user_one: user.id, user_two: userTwoId, is_friends: true });
+    const message = "Vännen tillagd";
+    setIsFriendMessage(message);
+    checkIfFriend();
   };
 
   // Remove friend from friendlist
@@ -50,6 +54,9 @@ const UpdateFriendList = ({ session, searchResult }) => {
       .from("friends")
       .delete()
       .eq("id", friendId);
+    const message = "Vännen borttagen";
+    setIsFriendMessage(message);
+    checkIfFriend();
   };
 
   return (
@@ -64,16 +71,20 @@ const UpdateFriendList = ({ session, searchResult }) => {
           >
             Ta bort {searchResult.name} som vän
           </button>
+          {isFriendMessage}
         </div>
       ) : (
-        <button
-          onClick={() => {
-            addFriend(searchResult.id);
-            useEffect;
-          }}
-        >
-          Add friend
-        </button>
+        <div>
+          <button
+            onClick={() => {
+              addFriend(searchResult.id);
+              useEffect;
+            }}
+          >
+            Add friend
+          </button>
+          {isFriendMessage}
+        </div>
       )}
     </div>
   );
