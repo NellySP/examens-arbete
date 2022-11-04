@@ -8,12 +8,9 @@ import GetDates from "../GetDates/GetDates";
 const DisplayDates = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
-  const [dates, setDates] = useState([]);
   const [friends, setFriends] = useState([]);
-  const [friendId, setFriendId] = useState([]);
 
   useEffect(() => {
-    // fetchAvailableDates();
     fetchFriendIds();
   }, [session]);
 
