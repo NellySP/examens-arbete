@@ -8,6 +8,11 @@ export const calenderDiv = styled.div`
 
 export const calenderSection = styled.section`
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
   width: 100%;
   height: 100%;
   border-radius: 20px;
@@ -77,13 +82,16 @@ export const calenderMenu = styled.div`
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 30px;
+  height: 60px;
   background-color: #b9c9b7;
+
+  width: 80%;
 
   @media (min-width: 500px) {
   }
 
   @media (min-width: 1000px) {
+    width: 60%;
   }
 `;
 
@@ -108,19 +116,22 @@ export const calenderGrid = styled.div`
   grid-template-rows: repeat(6, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  background-color: #f2faf2;
+  background-color: white;
+  width: 80%;
 
   button {
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     padding: 15px;
     text-align: center;
     border-radius: 50%;
-    width: 50px;
-    margin: 10px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     cursor: pointer;
   }
 
@@ -128,5 +139,12 @@ export const calenderGrid = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  @media (min-width: 1000px) {
+    width: 60%;
+    button {
+      width: 50px;
+      height: 50px;
+    }
   }
 `;

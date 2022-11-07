@@ -52,15 +52,18 @@ a {
 }
 
 .test {
-  color: green;
+  color: black;
+  background-color: white;
+  font-weight: 500;
 }
 
 .test:hover {
-  background-color: pink;
+  background-color: #b9c9b7;
 }
 
 .pushed {
-  background-color: lightgreen;
+  background-color: #47594c;
+  color: white;
 }
 
 .today {
@@ -74,6 +77,7 @@ a {
   height: 5px;
 }
 .selectedDayTest {
+  margin-top: 4px;
   background-color: red;
   width: 5px;
   height: 5px;

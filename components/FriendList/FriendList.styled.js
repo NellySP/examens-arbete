@@ -10,7 +10,6 @@ export const SearchFriendWrapper = styled.div`
   margin-top: 50px;
 
   form button {
-    background-color: #47594c;
     color: white;
     border-radius: 5px;
     border-color: #47594c;
