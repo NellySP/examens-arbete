@@ -17,7 +17,7 @@ import {
   isSameDay,
   parseISO,
 } from "date-fns";
-import DatesInDatabse from "../DatesInDatabase/DatesInDatabase";
+import DatesInDatabase from "../DatesInDatabase/DatesInDatabase";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -159,7 +159,7 @@ const NewCalender = ({ session }) => {
                   <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
                   </time>
-                  <DatesInDatabse sameDate={sameDate} day={day} />
+                  <DatesInDatabase sameDate={sameDate} day={day} />
                 </button>
               </div>
             ))}

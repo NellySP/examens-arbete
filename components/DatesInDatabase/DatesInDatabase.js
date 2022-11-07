@@ -12,4 +12,4 @@ const DatesInDatabse = ({ sameDate, day }) => {
   );
 };
 
-export default DatesInDatabse;
+export default DatesInDatabase;
