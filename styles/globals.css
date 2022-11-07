@@ -52,6 +52,30 @@ a {
 }
 
 .test {
-  background-color: blue;
+  color: green;
+}
+
+.test:hover {
+  background-color: pink;
+}
+
+.pushed {
+  background-color: lightgreen;
+}
+
+.today {
+  color: red;
+  font-weight: 900;
+}
+
+.selectedDay {
+  text-decoration: underline;
+  width: 5px;
+  height: 5px;
+}
+.selectedDayTest {
+  background-color: red;
+  width: 5px;
+  height: 5px;
   text-decoration: underline;
 }

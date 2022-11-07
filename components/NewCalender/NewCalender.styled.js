@@ -51,6 +51,7 @@ export const calenderButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   margin-top: 20px;
+  cursor: pointer;
 `;
 
 export const h2 = styled.h2`
@@ -116,7 +117,10 @@ export const calenderGrid = styled.div`
     align-items: center;
     padding: 15px;
     text-align: center;
-    background-color: #f2faf2;
+    border-radius: 50%;
+    width: 50px;
+    margin: 10px;
+    height: 50px;
     cursor: pointer;
   }
 

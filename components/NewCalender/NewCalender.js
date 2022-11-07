@@ -14,6 +14,8 @@ import {
   isEqual,
   isToday,
   isSameMonth,
+  isSameDay,
+  parseISO,
 } from "date-fns";
 
 function classNames(...classes) {
@@ -25,11 +27,18 @@ const NewCalender = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   let today = startOfToday();
-  let [selectedDay, setSelectedDay] = useState(today);
+  let [selectedDay, setSelectedDay] = useState();
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
+  let [sameDate, setSameDate] = useState([]);
 
-  useEffect(() => {}, [session]);
+  useEffect(
+    () => {
+      fetchAvailableDate();
+    },
+    [session],
+    [sameDate]
+  );
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -46,12 +55,11 @@ const NewCalender = ({ session }) => {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
-  // Check if date and user already exist in database. If not. Add new row.
-
+  // Add selected date to database
   async function addAvailableDate() {
     const date_input = format(selectedDay, "yyyy-MM-dd");
-    console.log(date_input + " Hej");
 
+    // push to database
     const { data, error } = await supabase
       .from("available_dates")
       .select()
@@ -60,15 +68,12 @@ const NewCalender = ({ session }) => {
     if (error) {
       setFetchError("Välj ett datum");
     }
-
     // if data is returned, check length
-
     if (data) {
       data.length;
       setFetchError(null);
     }
     // if length of returned array = 0, insert submitted data
-
     if (data == 0) {
       const { data, error } = await supabase
         .from("available_dates")
@@ -76,6 +81,29 @@ const NewCalender = ({ session }) => {
     }
     error;
   }
+
+  // Fetch from database
+  async function fetchAvailableDate() {
+    const emptyarray = [];
+    const { data, error } = await supabase
+      .from("available_dates")
+      .select()
+      .eq(`user_id`, user.id);
+
+    console.log(data.length);
+
+    for (let i = 0; i < data.length; i++) {
+      console.log(data[i].date);
+      emptyarray.push(data[i].date);
+    }
+    // filters the array
+    emptyarray.filter((sameDay) =>
+      isSameDay(parseISO(sameDay.date), selectedDay)
+    );
+    setSameDate(emptyarray);
+  }
+
+  // fetchAvailableDate();
 
   return (
     <S.calenderDiv>
@@ -106,8 +134,8 @@ const NewCalender = ({ session }) => {
                   type="button"
                   onClick={() => setSelectedDay(day)}
                   className={classNames(
-                    isEqual(day, selectedDay) && "test",
-                    !isEqual(day, selectedDay) && isToday(day) && "test",
+                    isEqual(day, selectedDay) && "pushed",
+                    !isEqual(day, selectedDay) && isToday(day) && "today",
                     !isEqual(day, selectedDay) &&
                       !isToday(day) &&
                       isSameMonth(day, firstDayCurrentMonth) &&
@@ -126,11 +154,14 @@ const NewCalender = ({ session }) => {
                   <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
                   </time>
+                  <div className="selectedDay">
+                    {sameDate.some((sameDay) =>
+                      isSameDay(parseISO(sameDay), day)
+                    ) && <div className="selectedDayTest"></div>}{" "}
+                  </div>
                 </button>
               </div>
             ))}
-
-            {console.log(selectedDay)}
           </S.calenderGrid>
           <S.calenderButton onClick={addAvailableDate}>
             Add date
