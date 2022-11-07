@@ -90,6 +90,16 @@ const NewCalender = ({ session }) => {
     }
   }
 
+  async function removeAvailableDate() {
+    const date_input = format(selectedDay, "yyyy-MM-dd");
+    console.log(date_input);
+    const { data, error } = await supabase
+      .from("available_dates")
+      .delete()
+      .or(`and(date.eq.${date_input},user_id.eq.${user.id})`);
+    fetchAvailableDate();
+  }
+
   // Fetch from database
   async function fetchAvailableDate() {
     const emptyarray = [];
@@ -164,9 +174,21 @@ const NewCalender = ({ session }) => {
               </div>
             ))}
           </S.calenderGrid>
-          <S.calenderButton onClick={addAvailableDate}>
-            Add date
-          </S.calenderButton>
+          {
+            <div>
+              {sameDate.some((sameDay) =>
+                isSameDay(parseISO(sameDay), selectedDay)
+              ) ? (
+                <S.calenderButton onClick={removeAvailableDate}>
+                  Remove date!
+                </S.calenderButton>
+              ) : (
+                <S.calenderButton onClick={addAvailableDate}>
+                  Add date
+                </S.calenderButton>
+              )}
+            </div>
+          }
           <p>{fetchError}</p>
         </S.calenderSection>
       ) : (

@@ -1,7 +1,7 @@
 import { isSameDay, parseISO } from "date-fns";
 import { useEffect } from "react";
 
-const DatesInDatabse = ({ sameDate, day }) => {
+const DatesInDatabase = ({ sameDate, day }) => {
   useEffect(() => {}, [sameDate, day]);
   return (
     <div>
