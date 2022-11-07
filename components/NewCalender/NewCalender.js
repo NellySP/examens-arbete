@@ -98,10 +98,7 @@ const NewCalender = ({ session }) => {
       .select()
       .eq(`user_id`, user.id);
 
-    console.log(data.length);
-
     for (let i = 0; i < data.length; i++) {
-      console.log(data[i].date);
       emptyarray.push(data[i].date);
     }
     // filters the array
