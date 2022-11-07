@@ -4,6 +4,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Account from "../components/Account/Account";
 import Menu from "../components/Menu/Menu";
 import Image from "next/image";
+import Head from "next/head";
 
 const Home = () => {
   const session = useSession();
@@ -11,6 +12,10 @@ const Home = () => {
 
   return (
     <div>
+      <Head>
+        <title>Datum-hittare</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       {!session ? (
         <GS.LoginWrapper>
           <GS.loginContainer>
