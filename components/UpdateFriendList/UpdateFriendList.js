@@ -37,6 +37,11 @@ const UpdateFriendList = ({ session, searchResult }) => {
     const result = await checkIfAlreadyFriends(searchResult.id);
     setIsFriend(result);
   }
+
+  // Remove error message after 5 seconds
+  setTimeout(function () {
+    setIsFriendMessage(null);
+  }, 5000);
   // Add friend to friendlist
 
   const addFriend = async (userTwoId) => {
@@ -65,6 +70,7 @@ const UpdateFriendList = ({ session, searchResult }) => {
       {isFriend ? (
         <div>
           <p>Ni är vänner</p>
+
           <button
             onClick={() => {
               RemoveFriend(searchResult.id);
