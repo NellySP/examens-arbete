@@ -17,6 +17,7 @@ import {
   isSameDay,
   parseISO,
 } from "date-fns";
+import DatesInDatabse from "../DatesInDatabase/DatesInDatabase";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -57,29 +58,36 @@ const NewCalender = ({ session }) => {
 
   // Add selected date to database
   async function addAvailableDate() {
-    const date_input = format(selectedDay, "yyyy-MM-dd");
+    if (selectedDay) {
+      const date_input = format(selectedDay, "yyyy-MM-dd");
 
-    // push to database
-    const { data, error } = await supabase
-      .from("available_dates")
-      .select()
-      .or(`and(date.eq.${date_input},user_id.eq.${user.id})`);
-
-    if (error) {
-      setFetchError("Välj ett datum");
-    }
-    // if data is returned, check length
-    if (data) {
-      data.length;
-      setFetchError(null);
-    }
-    // if length of returned array = 0, insert submitted data
-    if (data == 0) {
+      // Fetch dates from database
       const { data, error } = await supabase
         .from("available_dates")
-        .insert({ date: date_input, user_id: user.id });
+        .select()
+        .or(`and(date.eq.${date_input},user_id.eq.${user.id})`);
+
+      // if data is returned, check length
+      if (data) {
+        data.length;
+        setFetchError(null);
+      }
+      // if length of returned array = 0, insert submitted data
+      if (data == 0) {
+        const { data, error } = await supabase
+          .from("available_dates")
+          .insert({ date: date_input, user_id: user.id });
+        fetchAvailableDate();
+        // This is not an error.
+        setFetchError("Datumet inlagt!");
+      }
+      // If data is 1 it means the date is already in DB.
+      if (data.length == 1) {
+        setFetchError("Du har redan lagt in det här datumet");
+      }
+    } else {
+      setFetchError("Du har inte valt något datum");
     }
-    error;
   }
 
   // Fetch from database
@@ -102,8 +110,6 @@ const NewCalender = ({ session }) => {
     );
     setSameDate(emptyarray);
   }
-
-  // fetchAvailableDate();
 
   return (
     <S.calenderDiv>
@@ -132,7 +138,9 @@ const NewCalender = ({ session }) => {
               >
                 <button
                   type="button"
-                  onClick={() => setSelectedDay(day)}
+                  onClick={() => {
+                    setSelectedDay(day);
+                  }}
                   className={classNames(
                     isEqual(day, selectedDay) && "pushed",
                     !isEqual(day, selectedDay) && isToday(day) && "today",
@@ -154,11 +162,7 @@ const NewCalender = ({ session }) => {
                   <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
                   </time>
-                  <div className="selectedDay">
-                    {sameDate.some((sameDay) =>
-                      isSameDay(parseISO(sameDay), day)
-                    ) && <div className="selectedDayTest"></div>}{" "}
-                  </div>
+                  <DatesInDatabse sameDate={sameDate} day={day} />
                 </button>
               </div>
             ))}
@@ -166,7 +170,7 @@ const NewCalender = ({ session }) => {
           <S.calenderButton onClick={addAvailableDate}>
             Add date
           </S.calenderButton>
-          {fetchError}
+          <p>{fetchError}</p>
         </S.calenderSection>
       ) : (
         <S.calenderSection>

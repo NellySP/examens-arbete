@@ -64,7 +64,7 @@ const UpdateFriendList = ({ session, searchResult }) => {
     <S.buttonDiv>
       {isFriend ? (
         <div>
-          <p>Ni är redan vänner</p>
+          <p>Ni är vänner</p>
           <button
             onClick={() => {
               RemoveFriend(searchResult.id);
