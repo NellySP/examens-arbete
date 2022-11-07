@@ -41,6 +41,11 @@ const NewCalender = ({ session }) => {
     [sameDate]
   );
 
+  // Remove error message after 5 seconds
+  setTimeout(function () {
+    setFetchError(null);
+  }, 5000);
+
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
@@ -98,6 +103,7 @@ const NewCalender = ({ session }) => {
       .delete()
       .or(`and(date.eq.${date_input},user_id.eq.${user.id})`);
     fetchAvailableDate();
+    setFetchError("Datum borttaget!");
   }
 
   // Fetch from database
