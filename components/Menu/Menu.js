@@ -26,7 +26,7 @@ const Menu = ({ session }) => {
                 Router.push("/");
               }}
             >
-              Sign Out
+              Logga ut
             </S.LogOutButton>
           </div>
         </S.MenuWrapper>

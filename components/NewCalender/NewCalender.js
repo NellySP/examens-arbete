@@ -186,11 +186,11 @@ const NewCalender = ({ session }) => {
                 isSameDay(parseISO(sameDay), selectedDay)
               ) ? (
                 <S.calenderButton onClick={removeAvailableDate}>
-                  Remove date!
+                  Ta bort datum
                 </S.calenderButton>
               ) : (
                 <S.calenderButton onClick={addAvailableDate}>
-                  Add date
+                  Lägg till datum
                 </S.calenderButton>
               )}
             </div>

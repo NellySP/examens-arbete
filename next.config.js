@@ -10,4 +10,13 @@ module.exports = {
   compiler: {
     styledComponents: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
