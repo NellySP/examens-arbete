@@ -1,8 +1,7 @@
-import Calender from "../../components/Calender/Calender";
 import Menu from "../../components/Menu/Menu";
 import * as GS from "../index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
-import NewCalender from "../../components/NewCalender/NewCalender";
+import Calender from "../../components/Calender/Calender";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -25,7 +24,7 @@ const Calenderpage = () => {
       <Menu session={session} />
       {session ? (
         <GS.Div>
-          <NewCalender session={session} />
+          <Calender session={session} />
         </GS.Div>
       ) : (
         // It should not get here, but it's a backup

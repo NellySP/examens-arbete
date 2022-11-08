@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import * as S from "./GetDates.styled";
-// Vilken variant kör vi? Denna?
-import { supabase } from "../../utils/supabaseClient";
+import * as S from "./GetMutualDates.styled";
 
-const GetDates = ({ session, friendId }) => {
+const GetMutualDates = ({ session, friendId }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [dates, setDates] = useState([]);
@@ -44,4 +42,4 @@ const GetDates = ({ session, friendId }) => {
   );
 };
 
-export default GetDates;
+export default GetMutualDates;
