@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import * as S from "../../pages/signup/index.styled";
+import * as S from "../RegisterProfile/RegisterProfile.styled";
 import LoggedInHome from "../LoggedInHome/LoggedInHome";
 import RegisterProfile from "../RegisterProfile/RegisterProfile";
 
