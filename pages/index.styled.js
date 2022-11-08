@@ -5,15 +5,21 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #b9c9b7;
-  background-color: #ebe7df;
+  /* background-color: #b9c9b7;
+  background-color: #ebe7df; */
+  background-image: url("/test5.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
   min-height: 100vh;
+  width: 100%;
   padding: 0px;
   margin: 0px;
+  background-attachment: fixed;
 `;
 
 export const Div = styled.div`
@@ -36,7 +42,6 @@ export const LoginWrapper = styled.div`
     rgba(154, 186, 157, 1) 87%,
     rgba(182, 196, 186, 1) 100%
   ); */
-  background-color: black;
   background-color: #b9c9b7;
   background-color: #ebe7df;
   display: flex;
