@@ -126,9 +126,11 @@ const Calender = ({ session }) => {
     <S.calenderDiv>
       {session ? (
         <S.calenderSection>
-          <S.h2>{format(firstDayCurrentMonth, "MMMM yyyy")}</S.h2>
-          <button onClick={previousMonth}>Förra månaden</button>
-          <button onClick={nextMonth}>Nästa månad</button>
+          <h2>{format(firstDayCurrentMonth, "MMMM yyyy")}</h2>
+          <S.buttonWrapper>
+            <button onClick={previousMonth}>Förra månaden</button>
+            <button onClick={nextMonth}>Nästa månad</button>
+          </S.buttonWrapper>
           <S.calenderMenu>
             <S.calenderBox>M</S.calenderBox>
             <S.calenderBox>T</S.calenderBox>
@@ -157,16 +159,16 @@ const Calender = ({ session }) => {
                     !isEqual(day, selectedDay) &&
                       !isToday(day) &&
                       isSameMonth(day, firstDayCurrentMonth) &&
-                      "test",
+                      "standard",
                     !isEqual(day, selectedDay) &&
                       !isToday(day) &&
                       !isSameMonth(day, firstDayCurrentMonth) &&
-                      "test",
-                    isEqual(day, selectedDay) && isToday(day) && "test",
-                    isEqual(day, selectedDay) && !isToday(day) && "test",
-                    !isEqual(day, selectedDay) && "test",
-                    (isEqual(day, selectedDay) || isToday(day)) && "test",
-                    "test",
+                      "standard",
+                    isEqual(day, selectedDay) && isToday(day) && "standard",
+                    isEqual(day, selectedDay) && !isToday(day) && "standard",
+                    !isEqual(day, selectedDay) && "standard",
+                    (isEqual(day, selectedDay) || isToday(day)) && "standard",
+                    "standard",
                     sameDate.some((sameDay) =>
                       isSameDay(parseISO(sameDay), day)
                     ) && "newClass"

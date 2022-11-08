@@ -51,7 +51,7 @@ a {
   grid-column: 6;
 }
 
-.test {
+.standard {
   color: black;
   background-color: white;
   font-weight: 500;
@@ -85,5 +85,5 @@ a {
 }
 
 .newClass {
-  background-color: red;
+  background-color: #b9c9b7;
 }

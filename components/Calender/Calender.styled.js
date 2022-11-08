@@ -23,6 +23,11 @@ export const calenderHeading = styled.h1`
   margin: 0px;
 `;
 
+export const buttonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const calenderText = styled.p`
   margin-top: 30px;
   width: 200px;
