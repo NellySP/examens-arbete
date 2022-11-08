@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./GetMutualDates.styled";
 
-const GetMutualDates = ({ session, friendId }) => {
+const GetMutualDates = ({ session, friendId, friendName }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [dates, setDates] = useState([]);
@@ -26,9 +26,12 @@ const GetMutualDates = ({ session, friendId }) => {
     }
     setDates(currentDate);
   };
-
+  if (!dates.length) {
+    return null;
+  }
   return (
     <div>
+      <p>{friendName}</p>
       {dates && (
         <S.dateDiv>
           {dates.map((date) => (

@@ -16,7 +16,6 @@ import {
   isSameDay,
   parseISO,
 } from "date-fns";
-import RegisteredDatesInDatabase from "../RegisteredDatesInDatabase/RegisteredDatesInDatabase";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -131,7 +130,6 @@ const Calender = ({ session }) => {
           <button onClick={previousMonth}>Förra månaden</button>
           <button onClick={nextMonth}>Nästa månad</button>
           <S.calenderMenu>
-            {/* grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500"> */}
             <S.calenderBox>M</S.calenderBox>
             <S.calenderBox>T</S.calenderBox>
             <S.calenderBox>O</S.calenderBox>
@@ -168,13 +166,15 @@ const Calender = ({ session }) => {
                     isEqual(day, selectedDay) && !isToday(day) && "test",
                     !isEqual(day, selectedDay) && "test",
                     (isEqual(day, selectedDay) || isToday(day)) && "test",
-                    "test"
+                    "test",
+                    sameDate.some((sameDay) =>
+                      isSameDay(parseISO(sameDay), day)
+                    ) && "newClass"
                   )}
                 >
                   <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
                   </time>
-                  <RegisteredDatesInDatabase sameDate={sameDate} day={day} />
                 </button>
               </div>
             ))}

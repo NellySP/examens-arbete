@@ -63,9 +63,7 @@ const DisplayDates = ({ session }) => {
           <div>
             {friends.map((friend) => (
               <div key={friend.id}>
-                <h4>Lediga datum med: {friend.username}</h4>
-                <p>{friend.name}</p>
-                <GetDates friendId={friend.id} />
+                <GetDates friendId={friend.id} friendName={friend.name} />
               </div>
             ))}
           </div>
