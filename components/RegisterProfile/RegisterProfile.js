@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import * as S from "../../pages/signup/index.styled";
+import * as S from "../UpdateProfile/UpdateProfile.styled";
 import { useRouter } from "next/router";
 
 export default function RegisterProfile({ session }) {
