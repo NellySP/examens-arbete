@@ -3,9 +3,22 @@ import Menu from "../../components/Menu/Menu";
 import * as GS from "../index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
 import NewCalender from "../../components/NewCalender/NewCalender";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Calenderpage = () => {
+  const router = useRouter();
   const session = useSession();
+
+  useEffect(() => {
+    reRout();
+  }, [session]);
+
+  function reRout() {
+    if (!session) {
+      router.push("/");
+    }
+  }
 
   return (
     <GS.Wrapper>
@@ -15,7 +28,8 @@ const Calenderpage = () => {
           <NewCalender session={session} />
         </GS.Div>
       ) : (
-        <div>Du är inte inloggad placeholder</div>
+        // It should not get here, but it's a backup
+        <div>Du är inte inloggad</div>
       )}
     </GS.Wrapper>
   );

@@ -29,7 +29,14 @@ const SearchFriend = () => {
       }
     };
     fetchTest();
+    reRout();
   }, [session]);
+
+  function reRout() {
+    if (!session) {
+      router.push("/");
+    }
+  }
   return (
     <GS.Wrapper>
       <Menu session={session} />
@@ -43,7 +50,8 @@ const SearchFriend = () => {
           </S.searchfieldWrapper>
         </GS.Div>
       ) : (
-        <div>Du är inte inloggad placeholder</div>
+        // It should not get here, but it's a backup
+        <div>Du är inte inloggad</div>
       )}
     </GS.Wrapper>
   );
