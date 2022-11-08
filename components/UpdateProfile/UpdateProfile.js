@@ -21,7 +21,7 @@ export default function UpdateProfile({ session }) {
   return (
     <S.signUpDiv>
       <S.signUpSection>
-        <S.signUpHeading>Uppdatera din profil</S.signUpHeading>
+        <h2>Uppdatera din profil</h2>
         <S.signUpText>Ändra namn eller användarnamn här</S.signUpText>
         <S.signUpForm onSubmit={updateProfile}>
           <S.signUpLabel htmlFor="email">Användarnamn</S.signUpLabel>
