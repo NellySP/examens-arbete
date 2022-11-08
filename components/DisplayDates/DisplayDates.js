@@ -3,7 +3,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./DisplayDates.styled";
 // Vilken variant kör vi? Denna?
 import { supabase } from "../../utils/supabaseClient";
-import GetDates from "../GetMutualDates/GetMutualDates";
+import GetMutualDates from "../GetMutualDates/GetMutualDates";
 
 const DisplayDates = ({ session }) => {
   const supabase = useSupabaseClient();
@@ -63,7 +63,7 @@ const DisplayDates = ({ session }) => {
           <div>
             {friends.map((friend) => (
               <div key={friend.id}>
-                <GetDates friendId={friend.id} friendName={friend.name} />
+                <GetMutualDates friendId={friend.id} friendName={friend.name} />
               </div>
             ))}
           </div>
