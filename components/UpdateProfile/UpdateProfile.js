@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./UpdateProfile.styled";
+import Image from "next/image";
 
 export default function UpdateProfile({ session }) {
   const supabase = useSupabaseClient();
@@ -9,6 +10,8 @@ export default function UpdateProfile({ session }) {
   const [userName, setUserName] = useState();
   const [nameMessage, setNameMessage] = useState();
   const [usernameMessage, setUsernameMessage] = useState();
+  const [imageMessage, setImageMessage] = useState();
+  const [selectedImage, setSelectedImage] = useState();
 
   useEffect(() => {
     fetchUserData();
@@ -22,6 +25,12 @@ export default function UpdateProfile({ session }) {
       .eq("id", user.id);
     setName(data[0].name);
     setUserName(data[0].username);
+  }
+
+  // update user image!
+  async function updateImage(event) {
+    console.log("Hej bild");
+    setImageMessage("Bild uppladdad");
   }
   // Updates the username!
   async function updateUsername(event) {
@@ -48,18 +57,53 @@ export default function UpdateProfile({ session }) {
     }
   }, 5000);
 
-  // Remove message after 5 seconds
   setTimeout(function () {
     if (nameMessage != null) {
       setNameMessage(null);
     }
   }, 5000);
 
+  setTimeout(function () {
+    if (imageMessage != null) {
+      setImageMessage(null);
+    }
+  }, 5000);
+
+  // Preview Image
+  const imageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(URL.createObjectURL(e.target.files[0]));
+      // set S.imagePreview to display block
+    }
+  };
+
   return (
     <S.signUpDiv>
       <S.signUpSection>
         <h2>Uppdatera din profil</h2>
-        <S.signUpText>Ändra namn eller användarnamn här</S.signUpText>
+        <S.signUpText>
+          Lägg till profilbild eller ändra användarnamn
+        </S.signUpText>
+        <S.signUpForm onSubmit={updateImage}>
+          <S.signUpFileLabel htmlFor="image">Välj bild</S.signUpFileLabel>
+          {selectedImage ? (
+            <S.imagePreview>
+              <Image src={selectedImage} width={300} height={300} />
+            </S.imagePreview>
+          ) : (
+            <p></p>
+          )}
+          <S.signUpFileInput
+            onChange={imageChange}
+            type="file"
+            id="image"
+            className="file"
+            name="image"
+            accept="image/*"
+          ></S.signUpFileInput>
+          {imageMessage}
+          <S.signUpButton type="submit">Ladda upp</S.signUpButton>
+        </S.signUpForm>
         <S.signUpForm onSubmit={updateUsername}>
           <S.signUpLabel htmlFor="email">Användarnamn</S.signUpLabel>
           <S.signUpInput
