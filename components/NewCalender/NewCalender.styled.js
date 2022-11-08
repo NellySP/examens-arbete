@@ -4,6 +4,7 @@ export const calenderDiv = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
+  border-radius: 20%;
 `;
 
 export const calenderSection = styled.section`

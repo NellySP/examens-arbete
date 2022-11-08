@@ -96,7 +96,7 @@ const FriendList = ({ session }) => {
                     RemoveFriend(friend.id);
                   }}
                 >
-                  Ta bort {friend.name} som vän
+                  Ta bort vän
                 </button>
               </S.FriendDiv>
             ))}

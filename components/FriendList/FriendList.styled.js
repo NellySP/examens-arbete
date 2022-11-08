@@ -57,8 +57,28 @@ export const FriendDiv = styled.div`
   padding-left: 40px;
   padding-right: 40px;
 
+  button {
+    background-color: #47594c;
+    color: white;
+    border-radius: 5px;
+    border-color: #47594c;
+    width: 100px;
+    border-style: none;
+    height: 40px;
+
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
   @media (min-width: 800px) {
     flex-direction: row;
+
+    button {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      margin-left: 20px;
+    }
   }
 `;
 
