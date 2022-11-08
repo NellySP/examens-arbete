@@ -3,7 +3,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./DisplayDates.styled";
 // Vilken variant kör vi? Denna?
 import { supabase } from "../../utils/supabaseClient";
-import GetDates from "../GetDates/GetDates";
+import GetDates from "../GetMutualDates/GetMutualDates";
 
 const DisplayDates = ({ session }) => {
   const supabase = useSupabaseClient();

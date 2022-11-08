@@ -76,12 +76,12 @@ a {
   width: 5px;
   height: 5px;
 }
-.selectedDayTest {
+.registeredDate {
   margin-top: 4px;
   background-color: red;
   width: 5px;
   height: 5px;
-  text-decoration: underline;
+  border-radius: 50%;
 }
 
 .newClass {
