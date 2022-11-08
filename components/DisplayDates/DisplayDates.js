@@ -57,7 +57,7 @@ const DisplayDates = ({ session }) => {
 
   return (
     <S.dateDisplayDiv>
-      <h3>Lediga datum!</h3>
+      <h2>Gemensamma datum med dina vänner</h2>
       <div>
         {friends && (
           <div>
