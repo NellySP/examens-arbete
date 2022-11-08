@@ -14,7 +14,7 @@ const Friends = () => {
           <FriendList session={session} />
         </GS.Div>
       ) : (
-        <div>Du är inte inloggad placeholder</div>
+        <div>Du är inte inloggad</div>
       )}
     </GS.Wrapper>
   );
