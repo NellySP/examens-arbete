@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import * as S from "../../pages/signup/index.styled";
+import * as S from "./UpdateProfile.styled";
 
 export default function UpdateProfile({ session }) {
   const supabase = useSupabaseClient();
