@@ -39,14 +39,14 @@ export default function RegisterProfile({ session }) {
             type="text"
             id="username"
             name="username"
-            placeholder="Write your username here"
+            placeholder="Fyll i användarnamn här!"
           ></S.signUpInput>
           <S.signUpLabel htmlFor="name">Namn</S.signUpLabel>
           <S.signUpInput
             type="text"
             id="name"
             name="name"
-            placeholder="Write your name here"
+            placeholder="Fyll i namn här!"
           ></S.signUpInput>
           <S.signUpButton type="submit">Slutför registrering</S.signUpButton>
         </S.signUpForm>

@@ -21,22 +21,25 @@ export default function UpdateProfile({ session }) {
   return (
     <S.signUpDiv>
       <S.signUpSection>
-        <S.signUpHeading>Uppdatera din profil!</S.signUpHeading>
-        <S.signUpText>Ändra namn eller användarnamn här!</S.signUpText>
+        <S.signUpHeading>Uppdatera din profil</S.signUpHeading>
+        <S.signUpText>Ändra namn eller användarnamn här</S.signUpText>
         <S.signUpForm onSubmit={updateProfile}>
           <S.signUpLabel htmlFor="email">Användarnamn</S.signUpLabel>
           <S.signUpInput
             type="text"
             id="username"
             name="username"
-            placeholder="Write your username here"
+            placeholder="Fyll i användarnamn här"
           ></S.signUpInput>
+          <S.signUpButton type="submit">Skicka in</S.signUpButton>
+        </S.signUpForm>
+        <S.signUpForm onSubmit={updateProfile}>
           <S.signUpLabel htmlFor="name">Namn</S.signUpLabel>
           <S.signUpInput
             type="text"
             id="name"
             name="name"
-            placeholder="Write your name here"
+            placeholder="Fyll i namn här"
           ></S.signUpInput>
           <S.signUpButton type="submit">Skicka in</S.signUpButton>
         </S.signUpForm>
