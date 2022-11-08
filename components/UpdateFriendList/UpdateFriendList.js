@@ -48,8 +48,6 @@ const UpdateFriendList = ({ session, searchResult }) => {
     const { data, error } = await supabase
       .from("friends")
       .insert({ user_one: user.id, user_two: userTwoId, is_friends: true });
-    const message = "Vännen har lagts i din vänlista";
-    setIsFriendMessage(message);
     checkIfFriend();
   };
 
