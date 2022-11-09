@@ -1,50 +1,85 @@
 import styled from "styled-components";
 
-export const signUpDiv = styled.div`
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-`;
-
-export const signUpSection = styled.section`
+export const updateProfileDiv = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: white;
+  min-height: 100vh;
+  width: 100%;
   padding: 60px;
   border-radius: 20%;
+  background-color: white;
 `;
 
-export const signUpHeading = styled.h1`
-  margin: 0px;
-`;
+export const updateProfileSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 
-export const signUpText = styled.p`
-  margin-top: 30px;
-  width: 200px;
-
-  @media (min-width: 500px) {
-    width: 300px;
+  @media (min-width: 1200px) {
+    flex-direction: row;
+    width: 100%;
   }
 `;
 
-export const signUpForm = styled.form`
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 1200px) {
+    width: 50%;
+  }
+`;
+
+export const wrapperImageDiv = styled.div`
+  background-color: #f7f7f5;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: 1200px) {
+    margin: 20px;
+  }
+`;
+
+export const wrapperDiv = styled.div`
+  background-color: #f7f7f5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+
+  @media (min-width: 1200px) {
+    margin: 20px;
+  }
+`;
+
+export const updateProfileText = styled.p`
+  margin-top: 30px;
+  width: 100%;
+
+  @media (min-width: 500px) {
+  }
+`;
+
+export const updateProfileForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
 `;
 
-export const signUpInput = styled.input`
+export const updateProfileInput = styled.input`
   margin-top: 10px;
   height: 30px;
-  width: 200px;
+  width: 100%;
 
   @media (min-width: 500px) {
-    width: 300px;
   }
 `;
 
-export const signUpFileInput = styled.input`
+export const updateProfileFileInput = styled.input`
   opacity: 0;
   width: 0.1px;
   height: 0.1px;
@@ -54,13 +89,15 @@ export const imagePreview = styled.div`
   width: 100%;
   margin-top: 10%;
   margin-bottom: 10%;
+
   img {
     border-radius: 50%;
+    object-fit: cover;
   }
 `;
 
-export const signUpFileLabel = styled.label`
-  background-color: black;
+export const updateProfileFileLabel = styled.label`
+  background-color: #47594c;
   color: white;
   padding: 20px;
   text-align: center;
@@ -72,17 +109,18 @@ export const signUpFileLabel = styled.label`
   font-weight: 500;
   font-size: 14px;
   margin-top: 20px;
+  cursor: pointer;
 `;
 
-export const signUpLabel = styled.label`
+export const updateProfileLabel = styled.label`
   font-weight: 600;
   padding-top: 20px;
 `;
 
-export const signUpButton = styled.button`
-  background-color: black;
+export const updateProfileButton = styled.button`
+  background-color: #47594c;
   color: white;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -92,4 +130,5 @@ export const signUpButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   margin-top: 20px;
+  cursor: pointer;
 `;

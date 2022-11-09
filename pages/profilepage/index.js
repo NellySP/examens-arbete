@@ -4,6 +4,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import RegisterProfile from "../../components/RegisterProfile/RegisterProfile";
 
 const ProfilePage = () => {
   const session = useSession();

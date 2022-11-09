@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import * as S from "../UpdateProfile/UpdateProfile.styled";
+import * as S from "./RegisterProfile.styled";
 import { useRouter } from "next/router";
 
 export default function RegisterProfile({ session }) {
@@ -26,31 +26,35 @@ export default function RegisterProfile({ session }) {
   }
 
   return (
-    <S.signUpDiv>
-      <S.signUpSection>
-        <S.signUpHeading>Steg två</S.signUpHeading>
-        <S.signUpText>
+    <S.registerProfileDiv>
+      <S.registerProfileSection>
+        <h2>Registrering: Steg två</h2>
+        <S.registerProfileText>
           Välj ett coolt användarnamn och fyll i ditt namn så att dina vänner
           kan hitta dig!
-        </S.signUpText>
-        <S.signUpForm onSubmit={updateProfile}>
-          <S.signUpLabel htmlFor="email">Användarnamn</S.signUpLabel>
-          <S.signUpInput
+        </S.registerProfileText>
+        <S.registerProfileForm onSubmit={updateProfile}>
+          <S.registerProfileLabel htmlFor="email">
+            Användarnamn
+          </S.registerProfileLabel>
+          <S.registerProfileInput
             type="text"
             id="username"
             name="username"
             placeholder="Fyll i användarnamn här!"
-          ></S.signUpInput>
-          <S.signUpLabel htmlFor="name">Namn</S.signUpLabel>
-          <S.signUpInput
+          ></S.registerProfileInput>
+          <S.registerProfileLabel htmlFor="name">Namn</S.registerProfileLabel>
+          <S.registerProfileInput
             type="text"
             id="name"
             name="name"
             placeholder="Fyll i namn här!"
-          ></S.signUpInput>
-          <S.signUpButton type="submit">Slutför registrering</S.signUpButton>
-        </S.signUpForm>
-      </S.signUpSection>
-    </S.signUpDiv>
+          ></S.registerProfileInput>
+          <S.registerProfileButton type="submit">
+            Slutför registrering
+          </S.registerProfileButton>
+        </S.registerProfileForm>
+      </S.registerProfileSection>
+    </S.registerProfileDiv>
   );
 }

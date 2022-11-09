@@ -40,6 +40,7 @@ export default function UpdateProfile({ session }) {
       .remove(userImage);
 
     setUserImage();
+    setImage();
   }
   // Delete user image from database
 
@@ -130,72 +131,108 @@ export default function UpdateProfile({ session }) {
   };
 
   return (
-    <S.signUpDiv>
-      <button onClick={deleteImage}>_ta bort bild</button>
-
-      <S.signUpSection>
-        <h2>Uppdatera din profil</h2>
-        <S.signUpText>
-          Lägg till profilbild eller ändra användarnamn
-        </S.signUpText>
-        <S.signUpForm onSubmit={updateImage}>
-          {selectedImage ? (
-            <S.imagePreview>
-              <Image src={selectedImage} width={200} height={200} />
-            </S.imagePreview>
-          ) : (
-            <div>
-              {" "}
-              {userImage ? (
+    <S.updateProfileDiv>
+      <h2>Uppdatera din profil</h2>
+      <S.updateProfileText>
+        Här kan du ändra ditt namn, användarnamn och profilbild så att dina
+        vänner hittar dig lättare!
+      </S.updateProfileText>
+      <S.updateProfileSection>
+        <S.Wrapper>
+          <S.wrapperImageDiv>
+            <S.updateProfileForm onSubmit={updateImage}>
+              <h3>Ändra profilbild</h3>
+              {selectedImage ? (
                 <S.imagePreview>
-                  <Image
-                    src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${userImage}`}
-                    width={200}
-                    height={200}
-                  />
+                  <Image src={selectedImage} width={200} height={200} />
                 </S.imagePreview>
               ) : (
-                <S.imagePreview>
-                  <Image src="/profilepicture.png" width={200} height={200} />
-                </S.imagePreview>
+                <div>
+                  {userImage ? (
+                    <S.imagePreview>
+                      <Image
+                        src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${userImage}`}
+                        width={200}
+                        height={200}
+                      />
+                    </S.imagePreview>
+                  ) : (
+                    <S.imagePreview>
+                      <Image
+                        src="/profilepicture.png"
+                        width={200}
+                        height={200}
+                      />
+                    </S.imagePreview>
+                  )}
+                </div>
               )}
-            </div>
-          )}
-          <S.signUpFileInput
-            onChange={imageChange}
-            type="file"
-            id="image"
-            className="file"
-            name="image"
-            accept="image/*"
-          ></S.signUpFileInput>
-          {imageMessage}
-          <S.signUpFileLabel htmlFor="image">Välj bild</S.signUpFileLabel>
-          <S.signUpButton type="submit">Ladda upp</S.signUpButton>
-        </S.signUpForm>
-        <S.signUpForm onSubmit={updateUsername}>
-          <S.signUpLabel htmlFor="name">Användarnamn</S.signUpLabel>
-          <S.signUpInput
-            type="text"
-            id="username"
-            name="username"
-            placeholder={userName}
-          ></S.signUpInput>
-          {usernameMessage}
-          <S.signUpButton type="submit">Skicka in</S.signUpButton>
-        </S.signUpForm>
-        <S.signUpForm onSubmit={updateName}>
-          <S.signUpLabel htmlFor="name">Namn</S.signUpLabel>
-          <S.signUpInput
-            type="text"
-            id="name"
-            name="name"
-            placeholder={name}
-          ></S.signUpInput>
-          {nameMessage}
-          <S.signUpButton type="submit">Skicka in</S.signUpButton>
-        </S.signUpForm>
-      </S.signUpSection>
-    </S.signUpDiv>
+              <S.updateProfileFileInput
+                onChange={imageChange}
+                type="file"
+                id="image"
+                className="file"
+                name="image"
+                accept="image/*"
+              ></S.updateProfileFileInput>
+              {imageMessage}
+              <S.updateProfileFileLabel htmlFor="image">
+                Välj bild
+              </S.updateProfileFileLabel>
+              {selectedImage ? (
+                <S.updateProfileButton type="submit">
+                  Ladda upp
+                </S.updateProfileButton>
+              ) : (
+                <div></div>
+              )}
+              {userImage ? (
+                <S.updateProfileButton onClick={deleteImage}>
+                  Ta bort bild
+                </S.updateProfileButton>
+              ) : (
+                <div></div>
+              )}
+            </S.updateProfileForm>
+          </S.wrapperImageDiv>
+        </S.Wrapper>
+        <S.Wrapper>
+          <S.wrapperDiv>
+            <S.updateProfileForm onSubmit={updateUsername}>
+              <S.updateProfileLabel htmlFor="name">
+                <h3>Ändra användarnamn</h3>
+              </S.updateProfileLabel>
+              <S.updateProfileInput
+                type="text"
+                id="username"
+                name="username"
+                placeholder={userName}
+              ></S.updateProfileInput>
+              {usernameMessage}
+              <S.updateProfileButton type="submit">
+                Skicka in
+              </S.updateProfileButton>
+            </S.updateProfileForm>
+          </S.wrapperDiv>
+          <S.wrapperDiv>
+            <S.updateProfileForm onSubmit={updateName}>
+              <S.updateProfileLabel htmlFor="name">
+                <h3>Ändra namn</h3>
+              </S.updateProfileLabel>
+              <S.updateProfileInput
+                type="text"
+                id="name"
+                name="name"
+                placeholder={name}
+              ></S.updateProfileInput>
+              {nameMessage}
+              <S.updateProfileButton type="submit">
+                Skicka in
+              </S.updateProfileButton>
+            </S.updateProfileForm>
+          </S.wrapperDiv>
+        </S.Wrapper>
+      </S.updateProfileSection>
+    </S.updateProfileDiv>
   );
 }
