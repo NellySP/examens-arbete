@@ -5,10 +5,15 @@ import Account from "../components/Account/Account";
 import Menu from "../components/Menu/Menu";
 import Image from "next/image";
 import Head from "next/head";
+import HamburgerMenu from "../components/HamburgerMenu/HamburgerMenu";
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
@@ -45,7 +50,9 @@ const Home = () => {
       ) : (
         <GS.Wrapper>
           <Menu session={session} />
+          <HamburgerMenu session={session} open={open} setOpen={setOpen} />
           <GS.Div>
+            <BurgerMenu open={open} setOpen={setOpen} />
             <Account session={session} />
           </GS.Div>
         </GS.Wrapper>

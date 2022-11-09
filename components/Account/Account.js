@@ -36,9 +36,9 @@ export default function Account({ session }) {
           <LoggedInHome session={session} />
         </div>
       ) : (
-        <S.signUpDiv>
+        <S.registerProfileDiv>
           <RegisterProfile session={session} />
-        </S.signUpDiv>
+        </S.registerProfileDiv>
       )}
     </div>
   );

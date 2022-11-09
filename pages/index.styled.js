@@ -25,11 +25,12 @@ export const Wrapper = styled.div`
 export const Div = styled.div`
   background-color: white;
   display: flex;
-  margin: 50px;
+  margin: 20px;
   width: 100%;
   border-radius: 10px;
 
   @media (min-width: 1000px) {
+    margin: 50px;
     margin-left: 370px;
   }
 `;
