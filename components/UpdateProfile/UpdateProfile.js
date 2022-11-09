@@ -12,6 +12,9 @@ export default function UpdateProfile({ session }) {
   const [usernameMessage, setUsernameMessage] = useState();
   const [imageMessage, setImageMessage] = useState();
   const [selectedImage, setSelectedImage] = useState();
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [image, setImage] = useState();
+  const [userImage, setUserImage] = useState();
 
   useEffect(() => {
     fetchUserData();
@@ -25,12 +28,38 @@ export default function UpdateProfile({ session }) {
       .eq("id", user.id);
     setName(data[0].name);
     setUserName(data[0].username);
+    setUserImage(data[0].avatar_url);
   }
 
   // update user image!
   async function updateImage(event) {
-    console.log("Hej bild");
+    event.preventDefault();
+    const inavatar_url = event.target.image.value;
+    let inavatarUrl = "";
+
+    if (image) {
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .upload(`${Date.now()}_${image.name}`, image);
+
+      if (error) {
+        console.log(error);
+      }
+
+      if (data) {
+        setAvatarUrl(data.path);
+        inavatarUrl = data.path;
+      }
+    }
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .upsert({ id: user.id, avatar_url: inavatarUrl });
     setImageMessage("Bild uppladdad");
+
+    if (error) {
+      console.log(error);
+    }
   }
   // Updates the username!
   async function updateUsername(event) {
@@ -73,12 +102,21 @@ export default function UpdateProfile({ session }) {
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
-      // set S.imagePreview to display block
+      setImage(e.target.files[0]);
     }
   };
 
   return (
     <S.signUpDiv>
+      {userImage ? (
+        <Image
+          src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${userImage}`}
+          width={300}
+          height={300}
+        />
+      ) : (
+        <p>Du har ingen bild</p>
+      )}
       <S.signUpSection>
         <h2>Uppdatera din profil</h2>
         <S.signUpText>
