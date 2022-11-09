@@ -21,7 +21,7 @@ export default function UpdateProfile({ session }) {
   }, [session]);
 
   // Fetch user data from profiles!
-  async function fetchUserData(event) {
+  async function fetchUserData() {
     const { data, error } = await supabase
       .from("profiles")
       .select()
@@ -31,11 +31,33 @@ export default function UpdateProfile({ session }) {
     setUserImage(data[0].avatar_url);
   }
 
+  // Delete user image from database
+
+  async function deleteImage(event) {
+    event.preventDefault();
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .remove(userImage);
+
+    setUserImage();
+  }
+  // Delete user image from database
+
+  async function deleteImageWhenUploadingNew() {
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .remove(userImage);
+  }
+
   // update user image!
   async function updateImage(event) {
     event.preventDefault();
     const inavatar_url = event.target.image.value;
     let inavatarUrl = "";
+
+    if (userImage) {
+      deleteImageWhenUploadingNew();
+    }
 
     if (image) {
       const { data, error } = await supabase.storage
@@ -109,6 +131,8 @@ export default function UpdateProfile({ session }) {
 
   return (
     <S.signUpDiv>
+      <button onClick={deleteImage}>_ta bort bild</button>
+
       <S.signUpSection>
         <h2>Uppdatera din profil</h2>
         <S.signUpText>
