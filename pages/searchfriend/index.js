@@ -6,12 +6,14 @@ import * as GS from "../index.styled";
 import * as S from "./index.styled";
 import Menu from "../../components/Menu/Menu";
 import SearchUser from "../../components/SearchUser/SearchUser";
+import { useRouter } from "next/router";
 
 const SearchFriend = () => {
   const [fetchError, setFetchError] = useState(null);
   const [tests, setTest] = useState(null);
   const user = useUser();
   const session = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTest = async () => {
