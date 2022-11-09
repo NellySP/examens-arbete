@@ -7,6 +7,8 @@ import * as S from "./index.styled";
 import Menu from "../../components/Menu/Menu";
 import SearchUser from "../../components/SearchUser/SearchUser";
 import { useRouter } from "next/router";
+import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
+import BurgerMenu from "../../components/BurgerMenu/BurgerMenu";
 
 const SearchFriend = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -14,9 +16,11 @@ const SearchFriend = () => {
   const user = useUser();
   const session = useSession();
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const fetchTest = async () => {
+      setOpen(true);
       const { data, error } = await supabase.from("profiles").select();
 
       if (error) {
@@ -42,8 +46,11 @@ const SearchFriend = () => {
   return (
     <GS.Wrapper>
       <Menu session={session} />
+      <HamburgerMenu session={session} open={open} setOpen={setOpen} />
+
       {session ? (
         <GS.Div>
+          <BurgerMenu open={open} setOpen={setOpen} />
           <S.searchfieldWrapper>
             <h2>Sök användare</h2>
             Här kan du söka på andra användare. Du kan söka både via namn och

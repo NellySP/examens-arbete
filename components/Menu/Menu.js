@@ -17,7 +17,7 @@ const Menu = ({ session }) => {
             <Link href="/calenderpage">Kalender</Link>
             <Link href="/searchfriend">Sök användare</Link>
             <Link href="/friends">Vänlista</Link>
-            <Link href="/profilepage">Profil</Link>
+            <Link href="/profilepage"> Ändra profil</Link>
           </S.LinkWrapper>
           <div>
             <S.LogOutButton
