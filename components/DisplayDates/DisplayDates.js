@@ -63,7 +63,11 @@ const DisplayDates = ({ session }) => {
           <div>
             {friends.map((friend) => (
               <div key={friend.id}>
-                <GetMutualDates friendId={friend.id} friendName={friend.name} />
+                <GetMutualDates
+                  friendId={friend.id}
+                  friendName={friend.name}
+                  friendAvatar={friend.avatar_url}
+                />
               </div>
             ))}
           </div>
