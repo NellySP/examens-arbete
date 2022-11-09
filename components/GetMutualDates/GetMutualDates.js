@@ -31,9 +31,9 @@ const GetMutualDates = ({ session, friendId, friendName }) => {
   }
   return (
     <div>
-      <p>{friendName}</p>
       {dates && (
         <S.dateDiv>
+          <p>{friendName}</p>
           {dates.map((date) => (
             <div key={date}>
               <p>{date}</p>

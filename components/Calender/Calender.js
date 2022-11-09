@@ -182,7 +182,7 @@ const Calender = ({ session }) => {
             ))}
           </S.calenderGrid>
           {
-            <div>
+            <S.calenderButtonWrapper>
               {sameDate.some((sameDay) =>
                 isSameDay(parseISO(sameDay), selectedDay)
               ) ? (
@@ -194,7 +194,7 @@ const Calender = ({ session }) => {
                   Lägg till datum
                 </S.calenderButton>
               )}
-            </div>
+            </S.calenderButtonWrapper>
           }
           <p>{fetchError}</p>
         </S.calenderSection>

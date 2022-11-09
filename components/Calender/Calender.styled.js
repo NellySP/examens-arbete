@@ -49,10 +49,18 @@ export const calenderLabel = styled.label`
   padding-top: 20px;
 `;
 
+export const calenderButtonWrapper = styled.div`
+  width: 80%;
+
+  @media (min-width: 1000px) {
+    width: 60%;
+  }
+`;
+
 export const calenderButton = styled.button`
-  background-color: black;
+  background-color: #47594c;
   color: white;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -60,7 +68,6 @@ export const calenderButton = styled.button`
   border-radius: 10px;
   border-style: none;
   font-weight: 500;
-  font-size: 14px;
   margin-top: 20px;
   cursor: pointer;
 `;
@@ -131,11 +138,9 @@ export const calenderGrid = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
     margin-bottom: 10px;
     margin-top: 10px;
     cursor: pointer;

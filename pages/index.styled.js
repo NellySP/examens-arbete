@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   flex-direction: row;
   /* background-color: #b9c9b7;
   background-color: #ebe7df; */
-  background-image: url("/test5.jpg");
+  background-image: url("/test7.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
