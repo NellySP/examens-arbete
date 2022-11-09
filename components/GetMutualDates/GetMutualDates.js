@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./GetMutualDates.styled";
+import Image from "next/image";
 
-const GetMutualDates = ({ session, friendId, friendName }) => {
+const GetMutualDates = ({ session, friendId, friendName, friendAvatar }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [dates, setDates] = useState([]);
@@ -10,6 +11,8 @@ const GetMutualDates = ({ session, friendId, friendName }) => {
   useEffect(() => {
     fetchAvailableDates(friendId);
   }, [session]);
+
+  console.log(friendAvatar);
 
   // Fetch available dates here
 
@@ -33,7 +36,20 @@ const GetMutualDates = ({ session, friendId, friendName }) => {
     <div>
       {dates && (
         <S.dateDiv>
-          <p>{friendName}</p>
+          {friendAvatar ? (
+            <S.imageWrapper>
+              <Image
+                src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friendAvatar}`}
+                width={100}
+                height={100}
+              ></Image>
+            </S.imageWrapper>
+          ) : (
+            <S.imageWrapper>
+              <Image src="/profilepicture.png" width={100} height={100}></Image>
+            </S.imageWrapper>
+          )}
+          <h3>{friendName}</h3>
           {dates.map((date) => (
             <div key={date}>
               <p>{date}</p>
