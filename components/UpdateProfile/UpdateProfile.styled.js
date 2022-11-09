@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const signUpDiv = styled.div`
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  border-radius: 20%;
 `;
 
 export const signUpSection = styled.section`

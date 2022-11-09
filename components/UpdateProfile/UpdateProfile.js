@@ -78,6 +78,7 @@ export default function UpdateProfile({ session }) {
       .from("profiles")
       .upsert({ id: user.id, avatar_url: inavatarUrl });
     setImageMessage("Bild uppladdad");
+    fetchUserData();
 
     if (error) {
       console.log(error);
@@ -130,29 +131,35 @@ export default function UpdateProfile({ session }) {
 
   return (
     <S.signUpDiv>
-      {userImage ? (
-        <Image
-          src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${userImage}`}
-          width={300}
-          height={300}
-        />
-      ) : (
-        <p>Du har ingen bild</p>
-      )}
       <button onClick={deleteImage}>_ta bort bild</button>
+
       <S.signUpSection>
         <h2>Uppdatera din profil</h2>
         <S.signUpText>
           Lägg till profilbild eller ändra användarnamn
         </S.signUpText>
         <S.signUpForm onSubmit={updateImage}>
-          <S.signUpFileLabel htmlFor="image">Välj bild</S.signUpFileLabel>
           {selectedImage ? (
             <S.imagePreview>
-              <Image src={selectedImage} width={300} height={300} />
+              <Image src={selectedImage} width={200} height={200} />
             </S.imagePreview>
           ) : (
-            <p></p>
+            <div>
+              {" "}
+              {userImage ? (
+                <S.imagePreview>
+                  <Image
+                    src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${userImage}`}
+                    width={200}
+                    height={200}
+                  />
+                </S.imagePreview>
+              ) : (
+                <S.imagePreview>
+                  <Image src="/profilepicture.png" width={200} height={200} />
+                </S.imagePreview>
+              )}
+            </div>
           )}
           <S.signUpFileInput
             onChange={imageChange}
@@ -163,10 +170,11 @@ export default function UpdateProfile({ session }) {
             accept="image/*"
           ></S.signUpFileInput>
           {imageMessage}
+          <S.signUpFileLabel htmlFor="image">Välj bild</S.signUpFileLabel>
           <S.signUpButton type="submit">Ladda upp</S.signUpButton>
         </S.signUpForm>
         <S.signUpForm onSubmit={updateUsername}>
-          <S.signUpLabel htmlFor="email">Användarnamn</S.signUpLabel>
+          <S.signUpLabel htmlFor="name">Användarnamn</S.signUpLabel>
           <S.signUpInput
             type="text"
             id="username"
