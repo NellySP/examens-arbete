@@ -79,13 +79,23 @@ const FriendList = ({ session }) => {
             {friends.map((friend) => (
               <S.FriendDiv key={friend.id}>
                 <S.profileWrapper>
-                  <S.imageWrapper>
-                    <Image
-                      src="/profilepicture.png"
-                      width={100}
-                      height={100}
-                    ></Image>
-                  </S.imageWrapper>
+                  {friend.avatar_url ? (
+                    <S.imageWrapper>
+                      <Image
+                        src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                        width={100}
+                        height={100}
+                      ></Image>
+                    </S.imageWrapper>
+                  ) : (
+                    <S.imageWrapper>
+                      <Image
+                        src="/profilepicture.png"
+                        width={100}
+                        height={100}
+                      ></Image>
+                    </S.imageWrapper>
+                  )}
                   <S.textWrapper>
                     <p> {friend.username} </p>
                     <p>{friend.name}</p>

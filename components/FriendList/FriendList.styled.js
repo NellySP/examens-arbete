@@ -118,5 +118,8 @@ export const textWrapper = styled.div`
 `;
 
 export const imageWrapper = styled.div`
-  border-radius: 50%;
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
 `;
