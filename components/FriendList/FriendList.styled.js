@@ -43,8 +43,6 @@ export const SearchFriendWrapper = styled.div`
 `;
 
 export const FriendDiv = styled.div`
-  background-color: #e1ecdf;
-  background-color: #f5f3f0;
   background-color: #f7f7f5;
   width: 100%;
   padding: 10px;
@@ -118,8 +116,15 @@ export const textWrapper = styled.div`
 `;
 
 export const imageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
   img {
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  @media (min-width: 800px) {
+    margin-bottom: 0px;
   }
 `;

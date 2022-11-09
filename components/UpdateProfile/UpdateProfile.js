@@ -78,7 +78,7 @@ export default function UpdateProfile({ session }) {
     const { data, error } = await supabase
       .from("profiles")
       .upsert({ id: user.id, avatar_url: inavatarUrl });
-    setImageMessage("Bild uppladdad");
+    setImageMessage("Bild nya profilbild har laddats upp!");
     fetchUserData();
 
     if (error) {
@@ -90,7 +90,7 @@ export default function UpdateProfile({ session }) {
     event.preventDefault();
     const username = event.target.username.value;
     await supabase.from("profiles").upsert({ username: username, id: user.id });
-    setUsernameMessage("Användarnamn uppdaterat!");
+    setUsernameMessage("Ditt användarnamn har uppdaterats!");
     fetchUserData();
   }
 
@@ -99,7 +99,7 @@ export default function UpdateProfile({ session }) {
     event.preventDefault();
     const name = event.target.name.value;
     await supabase.from("profiles").upsert({ name: name, id: user.id });
-    setNameMessage("Namn uppdaterat!");
+    setNameMessage("Ditt namn har uppdaterats!");
     fetchUserData();
   }
 
@@ -140,8 +140,9 @@ export default function UpdateProfile({ session }) {
       <S.updateProfileSection>
         <S.Wrapper>
           <S.wrapperImageDiv>
-            <S.updateProfileForm onSubmit={updateImage}>
-              <h3>Ändra profilbild</h3>
+            <h3>Ändra profilbild</h3>
+            {imageMessage}
+            <form onSubmit={updateImage}>
               {selectedImage ? (
                 <S.imagePreview>
                   <Image src={selectedImage} width={200} height={200} />
@@ -175,25 +176,29 @@ export default function UpdateProfile({ session }) {
                 name="image"
                 accept="image/*"
               ></S.updateProfileFileInput>
-              {imageMessage}
+
               <S.updateProfileFileLabel htmlFor="image">
-                Välj bild
+                Välj ny bild
               </S.updateProfileFileLabel>
               {selectedImage ? (
-                <S.updateProfileButton type="submit">
+                <S.updateProfileButton type="submit" inputWidth="100%">
                   Ladda upp
                 </S.updateProfileButton>
               ) : (
                 <div></div>
               )}
               {userImage ? (
-                <S.updateProfileButton onClick={deleteImage}>
+                <S.updateProfileButton
+                  onClick={deleteImage}
+                  inputColor="#94716d"
+                  inputWidth="100%"
+                >
                   Ta bort bild
                 </S.updateProfileButton>
               ) : (
                 <div></div>
               )}
-            </S.updateProfileForm>
+            </form>
           </S.wrapperImageDiv>
         </S.Wrapper>
         <S.Wrapper>

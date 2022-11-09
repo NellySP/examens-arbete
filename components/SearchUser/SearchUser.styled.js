@@ -95,9 +95,15 @@ export const textWrapper = styled.div`
 `;
 
 export const imageWrapper = styled.div`
-  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
   img {
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  @media (min-width: 800px) {
+    margin-bottom: 0px;
   }
 `;

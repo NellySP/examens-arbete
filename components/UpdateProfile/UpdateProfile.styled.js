@@ -38,6 +38,7 @@ export const wrapperImageDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   @media (min-width: 1200px) {
     margin: 20px;
@@ -56,7 +57,7 @@ export const wrapperDiv = styled.div`
 `;
 
 export const updateProfileText = styled.p`
-  margin-top: 30px;
+  margin-top: 00px;
   width: 100%;
 
   @media (min-width: 500px) {
@@ -97,8 +98,8 @@ export const imagePreview = styled.div`
 `;
 
 export const updateProfileFileLabel = styled.label`
-  background-color: #47594c;
-  color: white;
+  background-color: transparent;
+  color: orange;
   padding: 20px;
   text-align: center;
   display: flex;
@@ -107,9 +108,13 @@ export const updateProfileFileLabel = styled.label`
   border-radius: 10px;
   border-style: none;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 20px;
   cursor: pointer;
+
+  :hover {
+    color: green;
+  }
 `;
 
 export const updateProfileLabel = styled.label`
@@ -118,7 +123,8 @@ export const updateProfileLabel = styled.label`
 `;
 
 export const updateProfileButton = styled.button`
-  background-color: #47594c;
+  background-color: ${(props) => props.inputColor || "#47594c"};
+  width: ${(props) => props.inputWidth};
   color: white;
   padding: 15px;
   text-align: center;
