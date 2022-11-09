@@ -55,11 +55,23 @@ const SearchUser = ({ session }) => {
             <S.FriendDiv key={searchResult.id}>
               <S.profileWrapper>
                 <S.imageWrapper>
-                  <Image
-                    src="/profilepicture.png"
-                    width={100}
-                    height={100}
-                  ></Image>
+                  {searchResult.avatar_url ? (
+                    <S.imageWrapper>
+                      <Image
+                        src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${searchResult.avatar_url}`}
+                        width={100}
+                        height={100}
+                      ></Image>
+                    </S.imageWrapper>
+                  ) : (
+                    <S.imageWrapper>
+                      <Image
+                        src="/profilepicture.png"
+                        width={100}
+                        height={100}
+                      ></Image>
+                    </S.imageWrapper>
+                  )}
                 </S.imageWrapper>
                 <S.textWrapper>
                   <p> {searchResult.username} </p>
