@@ -3,6 +3,7 @@ import * as S from "./CreateGroup.styled";
 import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
+import AddFriendToGroup from "../AddFriendToGroup/AddFriendToGroup";
 
 const CreateGroups = ({ session }) => {
   const supabase = useSupabaseClient();
@@ -43,7 +44,9 @@ const CreateGroups = ({ session }) => {
     }
 
     if (data) {
-      emptyArray.push(data[0]);
+      for (let i = 0; i < data.length; i++) {
+        emptyArray.push(data[i]);
+      }
     }
     setCreatedGroup(emptyArray);
   }
@@ -76,7 +79,12 @@ const CreateGroups = ({ session }) => {
           <S.wrapperDiv>
             {createdGroup.map((group) => (
               <div key={group.id}>
+
                 <h4>{group.name}</h4>
+                <AddFriendToGroup group={group} />
+
+                
+
               </div>
             ))}
           </S.wrapperDiv>
