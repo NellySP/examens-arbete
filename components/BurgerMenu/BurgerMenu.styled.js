@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledBurger = styled.button`
+  z-index: 2;
   padding: 20px 10px;
   border: none;
   background-color: #b9c9b7;
