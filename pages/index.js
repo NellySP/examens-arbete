@@ -15,6 +15,10 @@ const Home = () => {
   const supabase = useSupabaseClient();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setOpen(true);
+  }, [session]);
+
   return (
     <div>
       <Head>
