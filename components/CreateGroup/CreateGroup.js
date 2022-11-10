@@ -37,7 +37,6 @@ const CreateGroups = ({ session }) => {
       .select()
       .eq("creator", user.id);
 
-    console.log(data + "hej");
     const emptyArray = [];
     if (!data.length) {
       return false;
@@ -78,12 +77,12 @@ const CreateGroups = ({ session }) => {
         {createdGroup && (
           <div>
             {createdGroup.map((group) => (
-              <S.wrapperDiv>
-                <div key={group.id}>
+              <div key={group.id}>
+                <S.wrapperDiv>
                   <h4>{group.name}</h4>
-                  <AddFriendToGroup group={group} />
-                </div>
-              </S.wrapperDiv>
+                  <AddFriendToGroup groupId={group.id} groupName={group.name} />
+                </S.wrapperDiv>
+              </div>
             ))}
           </div>
         )}

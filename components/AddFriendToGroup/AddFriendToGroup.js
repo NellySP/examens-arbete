@@ -3,26 +3,25 @@ import * as S from "./AddFriendToGroup.styled";
 import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
-import { fromUnixTime } from "date-fns";
 
-const AddFriendToGroup = ({ session, group }) => {
+const AddFriendToGroup = ({ session, groupId, groupName }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
-  const [friendId, setFriendId] = useState();
   const [message, setMessage] = useState();
   const [friends, setFriends] = useState([]);
-
-  async function addFriendToGroup(event) {
-    event.prevent.default;
-    const [data, error] = await supabase
-      .from("group_relations")
-      .insert("id", group.id, "user_id", friendId);
-    setMessage(`Vän tillagd i ${group.name}`);
-  }
+  //   const [groupId, setGroupId] = useState();
 
   useEffect(() => {
     fetchFriendIds();
   }, [session]);
+
+  async function addFriendToGroup(friendId) {
+    const [data, error] = await supabase
+      .from("group_relations")
+      .insert({ group_id: groupId, user_id: friendId });
+    setMessage(`Vän tillagd i ${groupName}`);
+  }
+
   //  Fetch all users friends
   const fetchFriendIds = async () => {
     const { data, error } = await supabase
@@ -64,25 +63,26 @@ const AddFriendToGroup = ({ session, group }) => {
 
   return (
     <S.Wrapper>
-      <p>lägg till vänner i {group.name}</p>
-      <form>
-        <div>
-          <label htmlFor="friends">Välj vän:</label>
-        </div>
-        <select name="friends" id="friends">
-          <option></option>
-          {friends && (
-            <>
-              {friends.map((friend) => (
-                <option key={friend.id}>{friend.name}</option>
-              ))}
-            </>
-          )}
-        </select>
-        <div>
-          <button type="submit">Lägg till</button>
-        </div>
-      </form>
+      <p>lägg till vänner i {groupName}</p>
+
+      {friends && (
+        <>
+          {friends.map((friend) => (
+            <div key={friend.id}>
+              <p>{friend.name}</p>
+              <button
+                onClick={() => {
+                  addFriendToGroup(friend.id);
+                }}
+              >
+                Lägg till vän
+              </button>
+            </div>
+          ))}
+        </>
+      )}
+
+      {message}
     </S.Wrapper>
   );
 };
