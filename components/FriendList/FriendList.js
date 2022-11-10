@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./FriendList.styled";
-// Vilken variant kör vi? Denna?
-import { supabase } from "../../utils/supabaseClient";
 import Image from "next/image";
 
 const FriendList = ({ session }) => {
