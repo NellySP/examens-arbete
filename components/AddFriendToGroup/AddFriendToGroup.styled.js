@@ -24,6 +24,9 @@ export const addFriendSection = styled.section`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #b9c9b7;
+  border-radius: 10px;
+  padding: 10px;
   width: 100%;
 
   @media (min-width: 1200px) {
@@ -123,18 +126,87 @@ export const addFriendLabel = styled.label`
 `;
 
 export const addFriendButton = styled.button`
-  background-color: ${(props) => props.inputColor || "#47594c"};
-  width: ${(props) => props.inputWidth};
+  background-color: #b9c9b7;
   color: white;
-  padding: 15px;
+
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 100%;
   border-style: none;
   font-weight: 500;
   font-size: 14px;
-  margin-top: 20px;
   cursor: pointer;
+  height: 30px;
+  width: 30px;
+  align-self: center;
+  :hover {
+    background-color: #47594c;
+  }
+`;
+
+export const imageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 800px) {
+    margin-bottom: 0px;
+  }
+`;
+
+export const textWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 20px;
+
+  p {
+    margin: 0px;
+    font-size: 12px;
+  }
+  p:first-of-type {
+    font-weight: 600px;
+    margin: 0px;
+  }
+
+  @media (min-width: 800px) {
+    p {
+      font-size: 16px;
+    }
+  }
+`;
+
+export const profileWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+
+  @media (min-width: 800px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+`;
+
+export const groupWrapperDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media (min-width: 800px) {
+    margin-bottom: 0px;
+  }
 `;

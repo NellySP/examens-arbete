@@ -5,9 +5,13 @@ export const createGroupWrapper = styled.div`
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  padding: 60px;
+  padding: 30px;
   border-radius: 20%;
   background-color: white;
+
+  @media (min-width: 1200px) {
+    padding: 60px;
+  }
 `;
 
 export const createGroupDiv = styled.div`

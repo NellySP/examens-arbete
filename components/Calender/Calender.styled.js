@@ -90,14 +90,13 @@ export const h2 = styled.h2`
 // Calenderstyling
 
 export const calenderMenu = styled.div`
+  background-color: #b9c9b7;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   height: 60px;
-  background-color: #b9c9b7;
-
   width: 80%;
 
   @media (min-width: 500px) {

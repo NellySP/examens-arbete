@@ -3,6 +3,7 @@ import * as S from "./AddFriendToGroup.styled";
 import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
+import Image from "next/image";
 
 const AddFriendToGroup = ({ session, groupId, groupName }) => {
   const supabase = useSupabaseClient();
@@ -62,28 +63,53 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
   };
 
   return (
-    <S.Wrapper>
-      <p>Lägg till vänner {groupName}</p>
+    <>
+      <p>Lägg till vänner</p>
+      <S.Wrapper>
+        {friends && (
+          <>
+            {friends.map((friend) => (
+              <div key={friend.id}>
+                <S.profileWrapper>
+                  <S.groupWrapperDiv>
+                    {friend.avatar_url ? (
+                      <S.imageWrapper>
+                        <Image
+                          src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                          width={50}
+                          height={50}
+                        ></Image>
+                      </S.imageWrapper>
+                    ) : (
+                      <S.imageWrapper>
+                        <Image
+                          src="/profilepicture.png"
+                          width={50}
+                          height={50}
+                        ></Image>
+                      </S.imageWrapper>
+                    )}
+                    <S.textWrapper>
+                      <p> {friend.username} </p>
+                      <p>{friend.name}</p>
+                    </S.textWrapper>
+                  </S.groupWrapperDiv>
+                  <S.addFriendButton
+                    onClick={() => {
+                      addFriendToGroup(friend.id);
+                    }}
+                  >
+                    +
+                  </S.addFriendButton>
+                </S.profileWrapper>
+              </div>
+            ))}
+          </>
+        )}
 
-      {friends && (
-        <>
-          {friends.map((friend) => (
-            <div key={friend.id}>
-              <p>{friend.name}</p>
-              <S.addFriendButton
-                onClick={() => {
-                  addFriendToGroup(friend.id);
-                }}
-              >
-                Lägg till vän
-              </S.addFriendButton>
-            </div>
-          ))}
-        </>
-      )}
-
-      {message}
-    </S.Wrapper>
+        {message}
+      </S.Wrapper>
+    </>
   );
 };
 
