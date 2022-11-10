@@ -76,18 +76,16 @@ const CreateGroups = ({ session }) => {
       <div>
         <h3>Dina grupper</h3>
         {createdGroup && (
-          <S.wrapperDiv>
+          <div>
             {createdGroup.map((group) => (
-              <div key={group.id}>
-
-                <h4>{group.name}</h4>
-                <AddFriendToGroup group={group} />
-
-                
-
-              </div>
+              <S.wrapperDiv>
+                <div key={group.id}>
+                  <h4>{group.name}</h4>
+                  <AddFriendToGroup group={group} />
+                </div>
+              </S.wrapperDiv>
             ))}
-          </S.wrapperDiv>
+          </div>
         )}
       </div>
     </S.createGroupWrapper>

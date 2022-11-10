@@ -60,6 +60,11 @@ export const wrapperDiv = styled.div`
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;
+  width: 100%;
+
+  h3 {
+    margin-bottom: 30px;
+  }
 
   @media (min-width: 1200px) {
   }
@@ -78,6 +83,7 @@ export const createGroupForm = styled.form`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const createGroupInput = styled.input`
