@@ -29,6 +29,7 @@ const CreateGroups = ({ session }) => {
       .from("groups")
       .insert({ creator: user.id, name: groupname });
     setMessage("Grupp skapad");
+    fetchCreatorsGroups();
   }
   async function fetchCreatorsGroups() {
     const { data, error } = await supabase
@@ -51,31 +52,45 @@ const CreateGroups = ({ session }) => {
   }
 
   return (
-    <div>
+    <S.createGroupWrapper>
+      <h2>Grupper</h2>
+      <p>
+        Här kan du skapa nya grupper för att se när flera av dina vänner är
+        lediga samtidigt.
+      </p>
       <S.createGroupForm onSubmit={createGroup}>
-        <S.createGroupInput
-          type="text"
-          id="groupname"
-          name="groupname"
-        ></S.createGroupInput>
-        <S.createGroupButton type="submit" inputWidth="100%">
-          Skapa grupp
-        </S.createGroupButton>
+        <S.wrapperDiv>
+          <h3>Skapa ny grupp</h3>
+          <h4>Namnge gruppen</h4>
+          <S.createGroupInput
+            type="text"
+            id="groupname"
+            name="groupname"
+          ></S.createGroupInput>
+          <S.createGroupButton type="submit" inputWidth="100%">
+            Skapa grupp
+          </S.createGroupButton>
+        </S.wrapperDiv>
       </S.createGroupForm>
       {message}
       <div>
+        <h3>Dina grupper</h3>
         {createdGroup && (
-          <div>
+          <S.wrapperDiv>
             {createdGroup.map((group) => (
               <div key={group.id}>
-                <p>{group.name}</p>
+
+                <h4>{group.name}</h4>
                 <AddFriendToGroup group={group} />
+
+                
+
               </div>
             ))}
-          </div>
+          </S.wrapperDiv>
         )}
       </div>
-    </div>
+    </S.createGroupWrapper>
   );
 };
 
