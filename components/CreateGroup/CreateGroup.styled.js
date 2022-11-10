@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+export const createGroupWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  padding: 60px;
+  border-radius: 20%;
+  background-color: white;
+`;
+
 export const createGroupDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,7 +62,6 @@ export const wrapperDiv = styled.div`
   margin-top: 20px;
 
   @media (min-width: 1200px) {
-    margin: 20px;
   }
 `;
 

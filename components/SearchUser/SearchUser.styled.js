@@ -40,8 +40,6 @@ export const SearchFriendWrapper = styled.div`
 `;
 
 export const FriendDiv = styled.div`
-  background-color: #e1ecdf;
-  background-color: #f5f3f0;
   background-color: #f7f7f5;
   width: 100%;
   padding: 10px;
