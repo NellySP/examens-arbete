@@ -16,7 +16,7 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
   }, [session]);
 
   async function addFriendToGroup(friendId) {
-    const [data, error] = await supabase
+    const { data, error } = await supabase
       .from("group_relations")
       .insert({ group_id: groupId, user_id: friendId });
     setMessage(`Vän tillagd i ${groupName}`);
@@ -63,20 +63,20 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
 
   return (
     <S.Wrapper>
-      <p>lägg till vänner i {groupName}</p>
+      <p>Lägg till vänner {groupName}</p>
 
       {friends && (
         <>
           {friends.map((friend) => (
             <div key={friend.id}>
               <p>{friend.name}</p>
-              <button
+              <S.addFriendButton
                 onClick={() => {
                   addFriendToGroup(friend.id);
                 }}
               >
                 Lägg till vän
-              </button>
+              </S.addFriendButton>
             </div>
           ))}
         </>
