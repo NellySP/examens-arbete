@@ -57,7 +57,10 @@ const DisplayDates = ({ session }) => {
 
   return (
     <S.dateDisplayDiv>
-      <h2>Gemensamma datum med dina vänner</h2>
+      <h2>Gemensamma datum</h2>
+      <p>
+        Här ser du gemensamma datum du har med dina vänner. Se till att träffas!{" "}
+      </p>
       <div>
         {friends && (
           <div>
