@@ -15,13 +15,13 @@ module.exports = {
     domains: ["zsmobqgplqouebjzyqmy.supabase.co"],
   },
 
-  async redirects() {
-    return [
-      {
-        source: "/about",
-        destination: "/",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/about",
+  //       destination: "/",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };

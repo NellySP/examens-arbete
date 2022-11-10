@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
 
-const CreateGroups = (session) => {
+const CreateGroups = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [message, setMessage] = useState();
@@ -30,11 +30,17 @@ const CreateGroups = (session) => {
     setMessage("Grupp skapad");
   }
   async function fetchCreatorsGroups() {
-    const emptyArray = [];
     const { data, error } = await supabase
       .from("groups")
       .select()
       .eq("creator", user.id);
+
+    console.log(data + "hej");
+    const emptyArray = [];
+    if (!data.length) {
+      return false;
+    }
+
     if (data) {
       emptyArray.push(data[0]);
     }
