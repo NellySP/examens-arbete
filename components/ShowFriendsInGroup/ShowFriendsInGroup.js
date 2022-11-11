@@ -10,6 +10,7 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
   const user = useUser();
   const [message, setMessage] = useState();
   const [friends, setFriends] = useState([]);
+  const [friendsInGroup, setFriendsInGroup] = useState([]);
 
   useEffect(() => {
     fetchFriendIds();
@@ -61,15 +62,41 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
       }
     }
     setFriends(currentFriends);
+    getFriendsInGroup();
   };
+
+  async function getFriendsInGroup() {
+    const { data, error } = await supabase
+      .from("group_relations")
+      .select("user_id")
+      .eq("group_id", groupId);
+
+    if (!data) {
+      return false;
+    }
+
+    const currentFriends = [];
+
+    for (let i = 0; i < data.length; i++) {
+      const friend = data[i].user_id;
+      if (friend) {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select()
+          .eq("id", friend);
+        currentFriends.push(data[0]);
+      }
+    }
+    setFriendsInGroup(currentFriends);
+  }
 
   return (
     <>
       <p>Vänner i din grupp</p>
       <S.Wrapper>
-        {friends && (
+        {friendsInGroup && (
           <>
-            {friends.map((friend) => (
+            {friendsInGroup.map((friend) => (
               <div key={friend.id}>
                 <S.showFriendsWrapper>
                   <S.showFriendsWrapperDiv>
