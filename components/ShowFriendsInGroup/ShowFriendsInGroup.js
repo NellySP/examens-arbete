@@ -1,16 +1,15 @@
 import React from "react";
-import * as S from "./AddFriendToGroup.styled";
+import * as S from "./ShowFriendsInGroup.styled";
 import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 
-const AddFriendToGroup = ({ session, groupId, groupName }) => {
+const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [message, setMessage] = useState();
   const [friends, setFriends] = useState([]);
-  //   const [groupId, setGroupId] = useState();
 
   useEffect(() => {
     fetchFriendIds();
@@ -22,21 +21,7 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
       .delete()
       .eq("user_id", friendId);
     setMessage(`Vän borttagen från ${groupName}`);
-
-    <S.addFriendButton
-      onClick={() => {
-        removeFriendFromGroup(friend.id);
-      }}
-    >
-      -
-    </S.addFriendButton>;
-  }
-
-  async function addFriendToGroup(friendId) {
-    const { data, error } = await supabase
-      .from("group_relations")
-      .insert({ group_id: groupId, user_id: friendId });
-    setMessage(`Vän tillagd i ${groupName}`);
+    fetchFriendIds();
   }
 
   //  Fetch all users friends
@@ -80,14 +65,14 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
 
   return (
     <>
-      <p>Lägg till vänner</p>
+      <p>Vänner i din grupp</p>
       <S.Wrapper>
         {friends && (
           <>
             {friends.map((friend) => (
               <div key={friend.id}>
-                <S.profileWrapper>
-                  <S.groupWrapperDiv>
+                <S.showFriendsWrapper>
+                  <S.showFriendsWrapperDiv>
                     {friend.avatar_url ? (
                       <S.imageWrapper>
                         <Image
@@ -109,15 +94,13 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
                       <p> {friend.username} </p>
                       <p>{friend.name}</p>
                     </S.textWrapper>
-                  </S.groupWrapperDiv>
-                  <S.addFriendButton
+                  </S.showFriendsWrapperDiv>
+                  <S.showFriendsButton
                     onClick={() => {
-                      addFriendToGroup(friend.id);
+                      removeFriendFromGroup(friend.id);
                     }}
-                  >
-                    +
-                  </S.addFriendButton>
-                </S.profileWrapper>
+                  ></S.showFriendsButton>
+                </S.showFriendsWrapper>
               </div>
             ))}
           </>
@@ -129,4 +112,4 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
   );
 };
 
-export default AddFriendToGroup;
+export default ShowFriendsInGroup;
