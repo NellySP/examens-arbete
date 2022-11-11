@@ -94,6 +94,7 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
     <>
       <p>Vänner i din grupp</p>
       <S.Wrapper>
+        <S.center>{message}</S.center>
         {friendsInGroup && (
           <>
             {friendsInGroup.map((friend) => (
@@ -135,8 +136,6 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
             ))}
           </>
         )}
-
-        {message}
       </S.Wrapper>
     </>
   );

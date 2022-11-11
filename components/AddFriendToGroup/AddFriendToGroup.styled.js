@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+export const p = styled.p`
+  font-weight: 600;
+  color: orange;
+  cursor: pointer;
+
+  :hover {
+    color: green;
+  }
+`;
+
 export const addFriendDiv = styled.div`
   display: flex;
   flex-direction: column;

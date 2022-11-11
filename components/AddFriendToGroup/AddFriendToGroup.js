@@ -10,11 +10,15 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
   const user = useUser();
   const [message, setMessage] = useState();
   const [friends, setFriends] = useState([]);
+  const [openAddUser, setOpenAddUser] = useState(false);
   //   const [groupId, setGroupId] = useState();
 
   useEffect(() => {
     fetchFriendIds();
+    setOpenAddUser(false);
   }, [session]);
+
+  console.log(openAddUser);
 
   async function addFriendToGroup(friendId) {
     const { data, error } = await supabase
@@ -62,53 +66,63 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
     setFriends(currentFriends);
   };
 
+  function setToTrue() {
+    if (openAddUser == false) {
+      setOpenAddUser(true);
+    }
+    if (openAddUser) {
+      setOpenAddUser(false);
+    }
+  }
   return (
     <>
-      <p>Lägg till vänner</p>
-      <S.Wrapper>
-        {friends && (
-          <>
-            {friends.map((friend) => (
-              <div key={friend.id}>
-                <S.profileWrapper>
-                  <S.groupWrapperDiv>
-                    {friend.avatar_url ? (
-                      <S.imageWrapper>
-                        <Image
-                          src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
-                          width={50}
-                          height={50}
-                        ></Image>
-                      </S.imageWrapper>
-                    ) : (
-                      <S.imageWrapper>
-                        <Image
-                          src="/profilepicture.png"
-                          width={50}
-                          height={50}
-                        ></Image>
-                      </S.imageWrapper>
-                    )}
-                    <S.textWrapper>
-                      <p> {friend.username} </p>
-                      <p>{friend.name}</p>
-                    </S.textWrapper>
-                  </S.groupWrapperDiv>
-                  <S.addFriendButton
-                    onClick={() => {
-                      addFriendToGroup(friend.id);
-                    }}
-                  >
-                    +
-                  </S.addFriendButton>
-                </S.profileWrapper>
-              </div>
-            ))}
-          </>
-        )}
+      <S.p onClick={setToTrue}>Lägg till användare i gruppen</S.p>
+      {openAddUser && (
+        <S.Wrapper>
+          {friends && (
+            <>
+              {friends.map((friend) => (
+                <div key={friend.id}>
+                  <S.profileWrapper>
+                    <S.groupWrapperDiv>
+                      {friend.avatar_url ? (
+                        <S.imageWrapper>
+                          <Image
+                            src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                            width={50}
+                            height={50}
+                          ></Image>
+                        </S.imageWrapper>
+                      ) : (
+                        <S.imageWrapper>
+                          <Image
+                            src="/profilepicture.png"
+                            width={50}
+                            height={50}
+                          ></Image>
+                        </S.imageWrapper>
+                      )}
+                      <S.textWrapper>
+                        <p> {friend.username} </p>
+                        <p>{friend.name}</p>
+                      </S.textWrapper>
+                    </S.groupWrapperDiv>
+                    <S.addFriendButton
+                      onClick={() => {
+                        addFriendToGroup(friend.id);
+                      }}
+                    >
+                      +
+                    </S.addFriendButton>
+                  </S.profileWrapper>
+                </div>
+              ))}
+            </>
+          )}
 
-        {message}
-      </S.Wrapper>
+          {message}
+        </S.Wrapper>
+      )}
     </>
   );
 };

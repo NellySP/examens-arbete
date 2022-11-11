@@ -7,13 +7,23 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
+export const center = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
 export const showFriendsWrapper = styled.div`
   display: flex;
   background-color: white;
   flex-direction: row;
+  align-items: center;
+
   justify-content: space-between;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   margin: 10px;
 `;
@@ -35,6 +45,7 @@ export const imageWrapper = styled.div`
   img {
     border-radius: 50%;
     object-fit: cover;
+    justify-self: center;
   }
 
   @media (min-width: 800px) {
@@ -53,10 +64,6 @@ export const textWrapper = styled.div`
   p {
     margin: 0px;
     font-size: 12px;
-  }
-  p:first-of-type {
-    font-weight: 600px;
-    margin: 0px;
   }
 
   @media (min-width: 800px) {
@@ -79,6 +86,6 @@ export const showFriendsButton = styled.button`
   padding: 15px;
   font-weight: 500;
   font-size: 14px;
-  margin-top: 20px;
+
   cursor: pointer;
 `;
