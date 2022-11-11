@@ -16,22 +16,6 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
     fetchFriendIds();
   }, [session]);
 
-  async function removeFriendFromGroup(friendId) {
-    const { data, error } = await supabase
-      .from("group_relations")
-      .delete()
-      .eq("user_id", friendId);
-    setMessage(`Vän borttagen från ${groupName}`);
-
-    <S.addFriendButton
-      onClick={() => {
-        removeFriendFromGroup(friend.id);
-      }}
-    >
-      -
-    </S.addFriendButton>;
-  }
-
   async function addFriendToGroup(friendId) {
     const { data, error } = await supabase
       .from("group_relations")
