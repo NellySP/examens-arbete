@@ -96,10 +96,13 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
                     </S.textWrapper>
                   </S.showFriendsWrapperDiv>
                   <S.showFriendsButton
+                    inputColor="#94716d"
                     onClick={() => {
                       removeFriendFromGroup(friend.id);
                     }}
-                  ></S.showFriendsButton>
+                  >
+                    Ta bort från grupp
+                  </S.showFriendsButton>
                 </S.showFriendsWrapper>
               </div>
             ))}
