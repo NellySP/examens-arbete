@@ -74,6 +74,11 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
       setOpenAddUser(false);
     }
   }
+
+  setTimeout(function () {
+    setMessage(null);
+  }, 5000);
+
   return (
     <>
       <S.p onClick={setToTrue}>Lägg till användare i gruppen</S.p>

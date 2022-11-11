@@ -90,6 +90,10 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
     setFriendsInGroup(currentFriends);
   }
 
+  setTimeout(function () {
+    setMessage(null);
+  }, 5000);
+
   return (
     <>
       <p>Vänner i din grupp</p>
