@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import AddFriendToGroup from "../AddFriendToGroup/AddFriendToGroup";
+import ShowFriendsInGroup from "../ShowFriendsInGroup/ShowFriendsInGroup";
 
 const CreateGroups = ({ session }) => {
   const supabase = useSupabaseClient();
@@ -80,6 +81,10 @@ const CreateGroups = ({ session }) => {
               <div key={group.id}>
                 <S.wrapperDiv>
                   <h4>{group.name}</h4>
+                  <ShowFriendsInGroup
+                    groupId={group.id}
+                    groupName={group.name}
+                  />
                   <AddFriendToGroup groupId={group.id} groupName={group.name} />
                 </S.wrapperDiv>
               </div>
