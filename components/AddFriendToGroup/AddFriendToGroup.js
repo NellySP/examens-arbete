@@ -18,8 +18,6 @@ const AddFriendToGroup = ({ session, groupId, groupName }) => {
     setOpenAddUser(false);
   }, [session]);
 
-  console.log(openAddUser);
-
   async function addFriendToGroup(friendId) {
     const { data, error } = await supabase
       .from("group_relations")
