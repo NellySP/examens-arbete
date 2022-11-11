@@ -88,7 +88,6 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
       }
     }
     setFriendsInGroup(currentFriends);
-    fetchFriendIds();
   }
 
   return (
