@@ -10,6 +10,7 @@ const CreateGroups = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [message, setMessage] = useState();
+  const [noGroupMessage, setNoGroupMessage] = useState();
   const [createdGroup, setCreatedGroup] = useState([]);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const CreateGroups = ({ session }) => {
       .insert({ creator: user.id, name: groupname });
     setMessage("Grupp skapad");
     fetchCreatorsGroups();
+    setCreatedGroup("");
   }
   async function fetchCreatorsGroups() {
     const { data, error } = await supabase
@@ -39,16 +41,35 @@ const CreateGroups = ({ session }) => {
       .eq("creator", user.id);
 
     const emptyArray = [];
+
     if (!data.length) {
-      return false;
+      setNoGroupMessage("");
     }
 
     if (data) {
       for (let i = 0; i < data.length; i++) {
         emptyArray.push(data[i]);
+        setCreatedGroup("");
       }
     }
     setCreatedGroup(emptyArray);
+  }
+
+  async function removeGroup(groupId) {
+    const { data, error } = await supabase
+      .from("groups")
+      .delete()
+      .eq("id", groupId);
+    removeGroupRelations(groupId);
+    fetchCreatorsGroups();
+    setMessage("Grupp Borttagen!");
+  }
+
+  async function removeGroupRelations(groupId) {
+    const { data, error } = await supabase
+      .from("group_relations")
+      .delete()
+      .eq("group_id", groupId);
   }
 
   return (
@@ -72,15 +93,25 @@ const CreateGroups = ({ session }) => {
           </S.createGroupButton>
         </S.wrapperDiv>
       </S.createGroupForm>
-      {message}
       <div>
         <h3>Dina grupper</h3>
+        {message}
+        {noGroupMessage}
         {createdGroup && (
           <div>
             {createdGroup.map((group) => (
               <div key={group.id}>
                 <S.wrapperDiv>
-                  <h4>{group.name}</h4>
+                  <S.Container>
+                    <h4>{group.name}</h4>
+                    <button
+                      onClick={() => {
+                        removeGroup(group.id);
+                      }}
+                    >
+                      Ta bort grupp
+                    </button>
+                  </S.Container>
                   <ShowFriendsInGroup
                     groupId={group.id}
                     groupName={group.name}

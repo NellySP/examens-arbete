@@ -157,3 +157,17 @@ export const createGroupButton = styled.button`
   margin-top: 20px;
   cursor: pointer;
 `;
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    background-color: darkred;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+  }
+`;
