@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "../RegisterProfile/RegisterProfile.styled";
-import LoggedInHome from "../LoggedInHome/LoggedInHome";
+import * as Style from "../Account/Account.styled";
 import RegisterProfile from "../RegisterProfile/RegisterProfile";
+import DisplayDates from "../DisplayDates/DisplayDates";
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient();
@@ -32,9 +33,9 @@ export default function Account({ session }) {
   return (
     <div>
       {profile ? (
-        <div>
-          <LoggedInHome session={session} />
-        </div>
+        <Style.Wrapper>
+          <DisplayDates session={session} />
+        </Style.Wrapper>
       ) : (
         <S.registerProfileDiv>
           <RegisterProfile session={session} />
