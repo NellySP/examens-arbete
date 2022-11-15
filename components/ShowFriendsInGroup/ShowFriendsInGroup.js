@@ -79,7 +79,7 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
 
     for (let i = 0; i < data.length; i++) {
       const friend = data[i].user_id;
-      if (friend) {
+      if (friend != user.id) {
         const { data, error } = await supabase
           .from("profiles")
           .select()

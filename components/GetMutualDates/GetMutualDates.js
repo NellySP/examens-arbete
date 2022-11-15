@@ -10,9 +10,20 @@ const GetMutualDates = ({ session, friendId, friendName, friendAvatar }) => {
 
   useEffect(() => {
     fetchAvailableDates(friendId);
+    getGroupDates();
   }, [session]);
 
   console.log(friendAvatar);
+
+  // Fetch group date
+
+  async function getGroupDates() {
+    const { data, error } = await supabase
+      .from("group_relations")
+      .select()
+      .eq("user_id", user.id);
+    console.log(data);
+  }
 
   // Fetch available dates here
 

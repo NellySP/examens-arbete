@@ -33,7 +33,21 @@ const CreateGroups = ({ session }) => {
     setMessage("Grupp skapad");
     fetchCreatorsGroups();
     setCreatedGroup("");
+    insertCreatorInToGroup();
   }
+
+  async function insertCreatorInToGroup() {
+    const { data, error } = await supabase.rpc("fetch_last_group", {
+      user_id_input: user.id,
+    });
+    const groupId = data.id;
+    if (groupId) {
+      const { data, error } = await supabase
+        .from("group_relations")
+        .insert({ group_id: groupId, user_id: user.id });
+    }
+  }
+
   async function fetchCreatorsGroups() {
     const { data, error } = await supabase
       .from("groups")
