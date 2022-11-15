@@ -4,14 +4,17 @@ import * as S from "./DisplayDates.styled";
 // Vilken variant kör vi? Denna?
 import { supabase } from "../../utils/supabaseClient";
 import GetMutualDates from "../GetMutualDates/GetMutualDates";
+import GetGroupDates from "../GetGroupDates/GetGroupDates";
 
 const DisplayDates = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [friends, setFriends] = useState([]);
+  const [groupIds, setGroupIds] = useState([]);
 
   useEffect(() => {
     fetchFriendIds();
+    getGroupWhereUserIsIn();
   }, [session]);
 
   const fetchFriendIds = async () => {
@@ -55,27 +58,66 @@ const DisplayDates = ({ session }) => {
     setFriends(currentFriends);
   };
 
+  // Fetch group date
+
+  async function getGroupWhereUserIsIn() {
+    const { data, error } = await supabase
+      .from("group_relations")
+      .select()
+      .eq("user_id", user.id);
+
+    const currentGroupIds = [];
+
+    if (!data.length) {
+      return null;
+    }
+
+    for (let i = 0; i < data.length; i++) {
+      const id = data[i].group_id;
+      currentGroupIds.push(id);
+    }
+    setGroupIds(currentGroupIds);
+  }
+
+  async function getGroupNames(groupId) {
+    const { data, error } = await supabase
+      .from("groups")
+      .select()
+      .eq("id", groupId);
+  }
+
   return (
     <S.dateDisplayDiv>
       <h2>Gemensamma datum</h2>
       <p>
-        Här ser du gemensamma datum du har med dina vänner. Se till att träffas!{" "}
+        Här ser du gemensamma datum du har med dina vänner. Se till att träffas!
       </p>
       <div>
         {friends && (
-          <div>
+          <>
             {friends.map((friend) => (
-              <div key={friend.id}>
+              <S.friendDiv key={friend.id}>
                 <GetMutualDates
                   friendId={friend.id}
                   friendName={friend.name}
+                  friendUserName={friend.username}
                   friendAvatar={friend.avatar_url}
                 />
-              </div>
+              </S.friendDiv>
             ))}
-          </div>
+          </>
         )}
       </div>
+      <h4>Dina grupper</h4>
+      {groupIds && (
+        <div>
+          {groupIds.map((groupId) => (
+            <div key={groupId}>
+              <GetGroupDates groupId={groupId} />
+            </div>
+          ))}
+        </div>
+      )}
     </S.dateDisplayDiv>
   );
 };

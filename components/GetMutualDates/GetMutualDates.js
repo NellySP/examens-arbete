@@ -3,25 +3,20 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./GetMutualDates.styled";
 import Image from "next/image";
 
-const GetMutualDates = ({ session, friendId, friendName, friendAvatar }) => {
+const GetMutualDates = ({
+  session,
+  friendId,
+  friendName,
+  friendAvatar,
+  friendUserName,
+}) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
     fetchAvailableDates(friendId);
-    getGroupDates();
   }, [session]);
-
-  // Fetch group date
-
-  async function getGroupDates() {
-    const { data, error } = await supabase
-      .from("group_relations")
-      .select()
-      .eq("user_id", user.id);
-    console.log(data);
-  }
 
   // Fetch available dates here
 
@@ -41,24 +36,28 @@ const GetMutualDates = ({ session, friendId, friendName, friendAvatar }) => {
   if (!dates.length) {
     return null;
   }
+
   return (
-    <div>
+    <>
       {dates && (
         <S.dateDiv>
-          {friendAvatar ? (
-            <S.imageWrapper>
-              <Image
-                src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friendAvatar}`}
-                width={100}
-                height={100}
-              ></Image>
-            </S.imageWrapper>
-          ) : (
-            <S.imageWrapper>
-              <Image src="/profilepicture.png" width={100} height={100}></Image>
-            </S.imageWrapper>
-          )}
-          <h3>{friendName}</h3>
+          <S.userWrapper>
+            {friendAvatar ? (
+              <S.imageWrapper>
+                <Image
+                  src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friendAvatar}`}
+                  width={50}
+                  height={50}
+                ></Image>
+              </S.imageWrapper>
+            ) : (
+              <S.imageWrapper>
+                <Image src="/profilepicture.png" width={50} height={50}></Image>
+              </S.imageWrapper>
+            )}
+            <h3>{friendUserName}</h3>
+            <p>{friendName}</p>
+          </S.userWrapper>
           {dates.map((date) => (
             <div key={date}>
               <p>{date}</p>
@@ -66,7 +65,7 @@ const GetMutualDates = ({ session, friendId, friendName, friendAvatar }) => {
           ))}
         </S.dateDiv>
       )}
-    </div>
+    </>
   );
 };
 
