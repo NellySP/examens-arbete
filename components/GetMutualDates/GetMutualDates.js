@@ -13,8 +13,6 @@ const GetMutualDates = ({ session, friendId, friendName, friendAvatar }) => {
     getGroupDates();
   }, [session]);
 
-  console.log(friendAvatar);
-
   // Fetch group date
 
   async function getGroupDates() {
