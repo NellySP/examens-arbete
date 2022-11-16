@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./GetGroupDates.styled";
 import Image from "next/image";
+import CommonGroupDates from "../CommonGroupDates/CommonGroupDates";
 
 const GetGroupDates = ({ session, groupId }) => {
   const supabase = useSupabaseClient();
@@ -11,9 +12,13 @@ const GetGroupDates = ({ session, groupId }) => {
   const [allDates, setAllDates] = useState([]);
   const [openAddUser, setOpenAddUser] = useState(false);
 
-  useEffect(() => {
-    getGroupNames();
-  }, [session]);
+  useEffect(
+    () => {
+      getGroupNames();
+    },
+    [session],
+    allDates
+  );
 
   // fetch groupnames here
   async function getGroupNames() {
@@ -49,32 +54,32 @@ const GetGroupDates = ({ session, groupId }) => {
       }
     }
     setFriendsInGroup(currentFriends);
-    getMutualGroupDates();
+    // getMutualGroupDates();
   }
 
   // Get mutual group dates
   const allInGroup = friendsInGroup.length + 1;
 
-  const getMutualGroupDates = async () => {
-    const { data, error } = await supabase.rpc("get_dates_from_group", {
-      group_id_input: groupId,
-      group_members_input: allInGroup,
-    });
-    console.log(allInGroup);
-    const emptyArray = [];
-    if (data.length) {
-      for (let i = 0; i < data.length; i++) {
-        const date = data[i].date;
-        console.log(date);
-        emptyArray.push(date);
-      }
-      setAllDates(emptyArray);
-    }
-    if (!data.length) {
-      setAllDates(null);
-    }
-  };
-  console.log(allDates);
+  // const getMutualGroupDates = async () => {
+  //   const { data, error } = await supabase.rpc("get_dates_from_group", {
+  //     group_id_input: groupId,
+  //     group_members_input: allInGroup,
+  //   });
+  //   console.log(allInGroup);
+  //   const emptyArray = [];
+  //   if (data.length) {
+  //     for (let i = 0; i < data.length; i++) {
+  //       const date = data[i].date;
+  //       console.log(date);
+  //       emptyArray.push(date);
+  //     }
+  //     setAllDates(emptyArray);
+  //   }
+  //   if (!data.length) {
+  //     setAllDates(null);
+  //   }
+  // };
+  // console.log(allDates);
 
   function setToTrue() {
     if (openAddUser == false) {
@@ -89,6 +94,7 @@ const GetGroupDates = ({ session, groupId }) => {
     <div>
       <h3>{groupNames}</h3>
       <p>Lediga datum </p>
+      <CommonGroupDates />
       {allDates && (
         <>
           {allDates.map((date) => (
