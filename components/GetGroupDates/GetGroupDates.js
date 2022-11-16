@@ -9,16 +9,11 @@ const GetGroupDates = ({ session, groupId }) => {
   const user = useUser();
   const [groupNames, setGroupNames] = useState([]);
   const [friendsInGroup, setFriendsInGroup] = useState([]);
-  const [allDates, setAllDates] = useState([]);
   const [openAddUser, setOpenAddUser] = useState(false);
 
-  useEffect(
-    () => {
-      getGroupNames();
-    },
-    [session],
-    allDates
-  );
+  useEffect(() => {
+    getGroupNames();
+  }, [session]);
 
   // fetch groupnames here
   async function getGroupNames() {
@@ -60,27 +55,6 @@ const GetGroupDates = ({ session, groupId }) => {
   // Get mutual group dates
   const allInGroup = friendsInGroup.length + 1;
 
-  // const getMutualGroupDates = async () => {
-  //   const { data, error } = await supabase.rpc("get_dates_from_group", {
-  //     group_id_input: groupId,
-  //     group_members_input: allInGroup,
-  //   });
-  //   console.log(allInGroup);
-  //   const emptyArray = [];
-  //   if (data.length) {
-  //     for (let i = 0; i < data.length; i++) {
-  //       const date = data[i].date;
-  //       console.log(date);
-  //       emptyArray.push(date);
-  //     }
-  //     setAllDates(emptyArray);
-  //   }
-  //   if (!data.length) {
-  //     setAllDates(null);
-  //   }
-  // };
-  // console.log(allDates);
-
   function setToTrue() {
     if (openAddUser == false) {
       setOpenAddUser(true);
@@ -94,16 +68,8 @@ const GetGroupDates = ({ session, groupId }) => {
     <div>
       <h3>{groupNames}</h3>
       <p>Lediga datum </p>
-      <CommonGroupDates />
-      {allDates && (
-        <>
-          {allDates.map((date) => (
-            <div key={date}>
-              <p> {date} </p>
-            </div>
-          ))}
-        </>
-      )}
+      <CommonGroupDates allInGroup={allInGroup} groupId={groupId} />
+
       <button onClick={setToTrue}>Se medlemmar i gruppen</button>
       {openAddUser && (
         <>
