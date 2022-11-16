@@ -18,7 +18,7 @@ const HamburgerMenu = ({ session, open }) => {
         <Link href="/searchfriend">Sök användare</Link>
         <Link href="/friends">Vänlista</Link>
         <Link href="/profilepage"> Ändra profil</Link>
-        <Link href="/grouppage"> Gemensamma datum</Link>
+        <Link href="/grouppage"> Grupper</Link>
       </S.LinkWrapper>
     </S.StyledMenu>
   );

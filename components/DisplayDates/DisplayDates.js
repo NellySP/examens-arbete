@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./DisplayDates.styled";
-// Vilken variant kör vi? Denna?
-import { supabase } from "../../utils/supabaseClient";
 import GetMutualDates from "../GetMutualDates/GetMutualDates";
 import GetGroupDates from "../GetGroupDates/GetGroupDates";
 
@@ -77,13 +75,6 @@ const DisplayDates = ({ session }) => {
       currentGroupIds.push(id);
     }
     setGroupIds(currentGroupIds);
-  }
-
-  async function getGroupNames(groupId) {
-    const { data, error } = await supabase
-      .from("groups")
-      .select()
-      .eq("id", groupId);
   }
 
   return (
