@@ -66,8 +66,8 @@ const GetGroupDates = ({ session, groupId }) => {
 
   return (
     <div>
-      <h3>{groupNames}</h3>
-      <p>Lediga datum </p>
+      <h4>{groupNames}</h4>
+
       <CommonGroupDates allInGroup={allInGroup} groupId={groupId} />
 
       <button onClick={setToTrue}>Se medlemmar i gruppen</button>

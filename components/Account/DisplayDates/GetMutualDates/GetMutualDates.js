@@ -55,14 +55,18 @@ const GetMutualDates = ({
                 <Image src="/profilepicture.png" width={50} height={50}></Image>
               </S.imageWrapper>
             )}
-            <h3>{friendUserName}</h3>
-            <p>{friendName}</p>
+            <S.textWrapper>
+              <h4>{friendUserName}</h4>
+              <p>{friendName}</p>
+            </S.textWrapper>
           </S.userWrapper>
-          {dates.map((date) => (
-            <div key={date}>
-              <S.p>{date}</S.p>
-            </div>
-          ))}
+          <S.dateWrapper>
+            {dates.map((date) => (
+              <div key={date}>
+                <S.p>{date}</S.p>
+              </div>
+            ))}
+          </S.dateWrapper>
         </S.dateDiv>
       )}
     </>
