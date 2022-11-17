@@ -22,7 +22,6 @@ const CommonGroupDates = ({ session, groupId, allInGroup }) => {
     if (data.length) {
       for (let i = 0; i < data.length; i++) {
         const date = data[i].date;
-        console.log(date);
         emptyArray.push(date);
       }
 
