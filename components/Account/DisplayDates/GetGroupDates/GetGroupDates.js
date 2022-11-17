@@ -68,9 +68,7 @@ const GetGroupDates = ({ session, groupId }) => {
   return (
     <S.Wrapper>
       <h4>{groupNames}</h4>
-
       <CommonGroupDates allInGroup={allInGroup} groupId={groupId} />
-
       <S.showFriendsInGroup onClick={setToTrue}>
         Se medlemmar i gruppen
       </S.showFriendsInGroup>
@@ -81,21 +79,25 @@ const GetGroupDates = ({ session, groupId }) => {
               {friendsInGroup.map((friend) => (
                 <S.friendWrapper key={friend.id}>
                   {friend.avatar_url ? (
-                    <S.imageWrapper>
-                      <Image
-                        src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
-                        width={50}
-                        height={50}
-                      ></Image>
-                    </S.imageWrapper>
+<S.imageWrapper>
+                    <Image
+                      src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                      width={50}
+                      height={50}
+                      alt="profilbild"
+                    ></Image>
+                     </S.imageWrapper>
                   ) : (
-                    <S.imageWrapper>
-                      <Image
-                        src="/profilepicture.png"
-                        width={50}
-                        height={50}
-                      ></Image>
-                    </S.imageWrapper>
+                  <S.imageWrapper>
+                    <Image
+                      src="/profilepicture.png"
+                      width={50}
+                      height={50}
+                      alt="profilbild"
+                    ></Image>
+                      </S.imageWrapper>
+
+                
                   )}
                   <S.textWrapper>
                     <h4> {friend.username} </h4>
