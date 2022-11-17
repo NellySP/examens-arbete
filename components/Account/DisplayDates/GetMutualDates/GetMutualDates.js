@@ -49,11 +49,17 @@ const GetMutualDates = ({
                   src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friendAvatar}`}
                   width={50}
                   height={50}
+                  alt="profilbild"
                 ></Image>
               </S.imageWrapper>
             ) : (
               <S.imageWrapper>
-                <Image src="/profilepicture.png" width={50} height={50}></Image>
+                <Image
+                  src="/profilepicture.png"
+                  width={50}
+                  height={50}
+                  alt="profilbild"
+                ></Image>
               </S.imageWrapper>
             )}
             <S.textWrapper>
