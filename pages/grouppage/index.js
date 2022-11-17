@@ -21,7 +21,7 @@ const ProfilePage = () => {
 
   function reRout() {
     if (!session) {
-      // router.push("/");
+      router.push("/");
     }
   }
   return (
