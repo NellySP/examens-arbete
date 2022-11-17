@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
-import * as S from "../../AddFriendToGroup/AddFriendToGroup.styled";
+import * as S from "./ShowGroup.styled";
 import Image from "next/image";
 // import AddFriend from "./AddFriend/AddFriend";
 // import ShowFriend from "./ShowFriend/ShowFriend";
@@ -13,6 +13,8 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
   const [friends, setFriends] = useState([]);
   const [friendsInGroup, setFriendsInGroup] = useState([]);
   const [friendsNotInGroup, setFriendsNotInGroup] = useState([]);
+  const [openAddUser, setOpenAddUser] = useState(false);
+  const [message, setMessage] = useState();
 
   useEffect(() => {
     fetchFriends();
@@ -69,6 +71,7 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
 
       if (data.length == 0) {
         placeholderArray.push(friends[i]);
+        setMessage(null);
       }
       if (data.length) {
         secondPlaceholderArray.push(friends[i]);
@@ -76,6 +79,10 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
     }
     setFriendsInGroup(secondPlaceholderArray);
     setFriendsNotInGroup(placeholderArray);
+    if (placeholderArray.length == 0) {
+      setMessage("Du har inga fler vänner att lägga till i gruppen");
+      setOpenAddUser(false);
+    }
   }
 
   async function addFriendToGroup(friendId) {
@@ -83,7 +90,6 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
       .from("group_relations")
       .insert({ group_id: groupId, user_id: friendId });
     fetchFriends();
-    // setMessage(`Vän tillagd i ${groupName}`);
   }
   async function removeFriendFromGroup(friendId) {
     const { data, error } = await supabase
@@ -92,6 +98,15 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
       .eq("user_id", friendId);
 
     fetchFriends();
+  }
+
+  function setToTrue() {
+    if (openAddUser == false) {
+      setOpenAddUser(true);
+    }
+    if (openAddUser) {
+      setOpenAddUser(false);
+    }
   }
 
   // console.log(JSON.stringify(friendsInGroup) + "Du är i gruppen");
@@ -115,6 +130,7 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
                           src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
                           width={50}
                           height={50}
+                          alt="profilepicture"
                         ></Image>
                       </S.imageWrapper>
                     ) : (
@@ -123,6 +139,7 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
                           src="/profilepicture.png"
                           width={50}
                           height={50}
+                          alt="profilepicture"
                         ></Image>
                       </S.imageWrapper>
                     )}
@@ -133,6 +150,7 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
                     </S.textWrapper>
                   </S.groupWrapperDiv>
                   <S.addFriendButton
+                    inputColor="#94716d"
                     onClick={() => {
                       removeFriendFromGroup(friend.id);
                     }}
@@ -145,23 +163,55 @@ const ShowGroupContent = ({ session, groupId, groupName }) => {
           </>
         )}
       </>
-      <p>EJ I GRUPPEN!!!</p>
-      <>
-        {friendsNotInGroup && (
-          <>
-            {friendsNotInGroup.map((friend) => (
-              <div key={friend.id}>
-                {friend.name}
-                <button
-                  onClick={() => {
-                    addFriendToGroup(friend.id);
-                  }}
-                ></button>
-              </div>
-            ))}
-          </>
-        )}
-      </>
+      <S.p onClick={setToTrue}>Lägg till användare i gruppen</S.p>
+      {openAddUser && (
+        <>
+          {friendsNotInGroup && (
+            <S.Wrapper>
+              {message}
+              {friendsNotInGroup.map((friend) => (
+                <div key={friend.id}>
+                  <S.profileWrapper>
+                    <S.groupWrapperDiv>
+                      {friend.avatar_url ? (
+                        <S.imageWrapper>
+                          <Image
+                            src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                            width={50}
+                            height={50}
+                            alt="profilepicture"
+                          ></Image>
+                        </S.imageWrapper>
+                      ) : (
+                        <S.imageWrapper>
+                          <Image
+                            src="/profilepicture.png"
+                            width={50}
+                            height={50}
+                            alt="profilepicture"
+                          ></Image>
+                        </S.imageWrapper>
+                      )}
+
+                      <S.textWrapper>
+                        <p> {friend.username} </p>
+                        <p>{friend.name}</p>
+                      </S.textWrapper>
+                    </S.groupWrapperDiv>
+                    <S.addFriendButton
+                      onClick={() => {
+                        addFriendToGroup(friend.id);
+                      }}
+                    >
+                      +
+                    </S.addFriendButton>
+                  </S.profileWrapper>
+                </div>
+              ))}
+            </S.Wrapper>
+          )}
+        </>
+      )}
     </>
   );
 };
