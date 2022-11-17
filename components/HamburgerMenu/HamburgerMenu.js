@@ -1,4 +1,4 @@
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./HamburgerMenu.styled";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -8,7 +8,7 @@ import { bool } from "prop-types";
 const HamburgerMenu = ({ session, open }) => {
   const supabase = useSupabaseClient();
 
-  useEffect(() => {});
+  useEffect(() => {}, [session]);
 
   return (
     <S.StyledMenu open={open}>
@@ -20,6 +20,17 @@ const HamburgerMenu = ({ session, open }) => {
         <Link href="/profilepage"> Ändra profil</Link>
         <Link href="/grouppage"> Grupper</Link>
       </S.LinkWrapper>
+      <div>
+        <S.LogOutButton
+          className="button block"
+          onClick={() => {
+            supabase.auth.signOut();
+            Router.push("/");
+          }}
+        >
+          Logga ut
+        </S.LogOutButton>
+      </div>
     </S.StyledMenu>
   );
 };

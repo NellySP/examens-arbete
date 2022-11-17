@@ -34,3 +34,22 @@ export const LinkWrapper = styled.div`
     text-decoration: underline;
   }
 `;
+
+export const LogOutButton = styled.button`
+  background-color: #47594c;
+  background-color: black;
+  background-color: #47594c;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border-style: none;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 20px;
+  width: 150px;
+  cursor: pointer;
+`;
