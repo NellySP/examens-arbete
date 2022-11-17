@@ -4,10 +4,9 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import * as S from "./ShowGroup.styled";
 import Image from "next/image";
-// import AddFriend from "./AddFriend/AddFriend";
-// import ShowFriend from "./ShowFriend/ShowFriend";
+import { te } from "date-fns/locale";
 
-const ShowGroupContent = ({ session, groupId, groupName }) => {
+const ShowGroupContent = ({ session, groupId }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [friends, setFriends] = useState([]);

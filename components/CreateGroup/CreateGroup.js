@@ -127,15 +127,7 @@ const CreateGroups = ({ session }) => {
                       Ta bort grupp
                     </button>
                   </S.Container>
-                  <ShowGroupContent
-                    groupId={group.id}
-                    groupName={group.name}
-                  ></ShowGroupContent>
-                  {/* <ShowFriendsInGroup
-                    groupId={group.id}
-                    groupName={group.name}
-                  />
-                  <AddFriendToGroup groupId={group.id} groupName={group.name} /> */}
+                  <ShowGroupContent groupId={group.id}></ShowGroupContent>
                 </S.wrapperDiv>
               </div>
             ))}
