@@ -136,9 +136,8 @@ export const addFriendLabel = styled.label`
 `;
 
 export const addFriendButton = styled.button`
-  background-color: #b9c9b7;
   color: white;
-
+  background-color: ${(props) => props.inputColor || "#b9c9b7"};
   text-align: center;
   display: flex;
   justify-content: center;
