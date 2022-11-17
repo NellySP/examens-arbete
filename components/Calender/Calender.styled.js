@@ -58,7 +58,7 @@ export const calenderButtonWrapper = styled.div`
 `;
 
 export const calenderButton = styled.button`
-  background-color: #47594c;
+  background-color: ${(props) => props.inputColor || "#47594c"};
   color: white;
   padding: 15px;
   text-align: center;

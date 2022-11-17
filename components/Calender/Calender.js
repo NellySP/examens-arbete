@@ -187,7 +187,10 @@ const Calender = ({ session }) => {
               {sameDate.some((sameDay) =>
                 isSameDay(parseISO(sameDay), selectedDay)
               ) ? (
-                <S.calenderButton onClick={removeAvailableDate}>
+                <S.calenderButton
+                  inputColor="#94716d"
+                  onClick={removeAvailableDate}
+                >
                   Ta bort datum
                 </S.calenderButton>
               ) : (
