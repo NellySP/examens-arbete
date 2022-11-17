@@ -55,34 +55,30 @@ const ShowGroupContent = ({ session, groupId }) => {
         }
       }
     }
-    setFriends(placeholderArray);
-    checkifFriendIsAlreadyInGroup();
-  };
 
-  async function checkifFriendIsAlreadyInGroup() {
-    const placeholderArray = [];
+    const firstPlaceholderArray = [];
     const secondPlaceholderArray = [];
-    for (let i = 0; i < friends.length; i++) {
+    for (let i = 0; i < placeholderArray.length; i++) {
       const { data, error } = await supabase
         .from("group_relations")
         .select()
-        .or(`and(user_id.eq.${friends[i].id},group_id.eq.${groupId})`);
+        .or(`and(user_id.eq.${placeholderArray[i].id},group_id.eq.${groupId})`);
 
       if (data.length == 0) {
-        placeholderArray.push(friends[i]);
+        firstPlaceholderArray.push(placeholderArray[i]);
         setMessage(null);
       }
       if (data.length) {
-        secondPlaceholderArray.push(friends[i]);
+        secondPlaceholderArray.push(placeholderArray[i]);
       }
     }
     setFriendsInGroup(secondPlaceholderArray);
-    setFriendsNotInGroup(placeholderArray);
-    if (placeholderArray.length == 0) {
+    setFriendsNotInGroup(firstPlaceholderArray);
+    if (firstPlaceholderArray.length == 0) {
       setMessage("Du har inga fler vänner att lägga till i gruppen");
       setOpenAddUser(false);
     }
-  }
+  };
 
   async function addFriendToGroup(friendId) {
     const { data, error } = await supabase
