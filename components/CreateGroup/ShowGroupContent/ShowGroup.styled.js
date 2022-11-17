@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-export const p = styled.p`
+export const p = styled.div`
   font-weight: 600;
   color: orange;
   cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
 
   :hover {
     color: green;

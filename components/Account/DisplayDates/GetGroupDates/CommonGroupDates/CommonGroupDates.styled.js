@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const dateWrapper = styled.div`
-  background-color: #665c57;
+  background-color: #66575e;
   color: white;
   margin: 10px;
   width: 100px;
