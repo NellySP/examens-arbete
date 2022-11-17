@@ -11,6 +11,7 @@ const FriendList = ({ session }) => {
 
   useEffect(() => {
     fetchFriendIds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // Remove friend from friendlist
@@ -83,6 +84,7 @@ const FriendList = ({ session }) => {
                         src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
                         width={100}
                         height={100}
+                        alt="profilbild"
                       ></Image>
                     </S.imageWrapper>
                   ) : (
@@ -91,6 +93,7 @@ const FriendList = ({ session }) => {
                         src="/profilepicture.png"
                         width={100}
                         height={100}
+                        alt="profilbild"
                       ></Image>
                     </S.imageWrapper>
                   )}

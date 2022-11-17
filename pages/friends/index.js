@@ -14,6 +14,7 @@ const Friends = () => {
 
   useEffect(() => {
     setOpen(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     reRout();
   }, [session]);
 

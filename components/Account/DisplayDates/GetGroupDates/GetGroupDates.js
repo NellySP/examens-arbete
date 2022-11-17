@@ -13,6 +13,7 @@ const GetGroupDates = ({ session, groupId }) => {
 
   useEffect(() => {
     getGroupNames();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // fetch groupnames here

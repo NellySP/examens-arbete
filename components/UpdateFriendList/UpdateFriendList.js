@@ -28,6 +28,7 @@ const UpdateFriendList = ({ session, searchResult }) => {
   useEffect(
     () => {
       checkIfFriend();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
     [session],
     [isFriendMessage]

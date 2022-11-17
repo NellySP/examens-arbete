@@ -11,31 +11,33 @@ import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
 import BurgerMenu from "../../components/BurgerMenu/BurgerMenu";
 
 const SearchFriend = () => {
-  const [fetchError, setFetchError] = useState(null);
-  const [tests, setTest] = useState(null);
+  // const [fetchError, setFetchError] = useState(null);
+  // const [tests, setTest] = useState(null);
   const user = useUser();
   const session = useSession();
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const fetchTest = async () => {
-      setOpen(true);
-      const { data, error } = await supabase.from("profiles").select();
+    // const fetchTest = async () => {
+    //   setOpen(true);
+    //   const { data, error } = await supabase.from("profiles").select();
 
-      if (error) {
-        setFetchError("Something went wrong");
-        setTest(null);
-        console.log(error);
-      }
+    //   if (error) {
+    //     setFetchError("Something went wrong");
+    //     setTest(null);
+    //     console.log(error);
+    //   }
 
-      if (data) {
-        setTest(data);
-        setFetchError(null);
-      }
-    };
-    fetchTest();
+    //   if (data) {
+    //     setTest(data);
+    //     setFetchError(null);
+    //   }
+    // };
+    // fetchTest();
     reRout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setOpen(true);
   }, [session]);
 
   function reRout() {

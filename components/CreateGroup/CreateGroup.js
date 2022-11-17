@@ -16,6 +16,7 @@ const CreateGroups = ({ session }) => {
 
   useEffect(() => {
     fetchCreatorsGroups();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // Remove message after 5 seconds

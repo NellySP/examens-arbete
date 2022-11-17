@@ -18,6 +18,7 @@ export default function UpdateProfile({ session }) {
 
   useEffect(() => {
     fetchUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // Fetch user data from profiles!
@@ -145,7 +146,12 @@ export default function UpdateProfile({ session }) {
             <form onSubmit={updateImage}>
               {selectedImage ? (
                 <S.imagePreview>
-                  <Image src={selectedImage} width={200} height={200} />
+                  <Image
+                    src={selectedImage}
+                    width={200}
+                    height={200}
+                    alt="profilbild"
+                  />
                 </S.imagePreview>
               ) : (
                 <div>
@@ -155,6 +161,7 @@ export default function UpdateProfile({ session }) {
                         src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${userImage}`}
                         width={200}
                         height={200}
+                        alt="profilbild"
                       />
                     </S.imagePreview>
                   ) : (
@@ -163,6 +170,7 @@ export default function UpdateProfile({ session }) {
                         src="/profilepicture.png"
                         width={200}
                         height={200}
+                        alt="profilbild"
                       />
                     </S.imagePreview>
                   )}

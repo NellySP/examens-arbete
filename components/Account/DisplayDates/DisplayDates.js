@@ -12,7 +12,9 @@ const DisplayDates = ({ session }) => {
 
   useEffect(() => {
     fetchFriendIds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     getGroupWhereUserIsIn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   const fetchFriendIds = async () => {
