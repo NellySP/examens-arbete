@@ -9,8 +9,12 @@ export const createGroupWrapper = styled.div`
   border-radius: 20%;
   background-color: white;
 
+  p {
+    margin: 0px;
+  }
+
   @media (min-width: 1200px) {
-    padding: 60px;
+    padding: 40px;
   }
 `;
 

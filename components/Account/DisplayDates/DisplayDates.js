@@ -101,7 +101,7 @@ const DisplayDates = ({ session }) => {
           </>
         )}
       </div>
-      <h4>Dina grupper</h4>
+      <h3>Gemensamma datum i grupper</h3>
       {groupIds && (
         <div>
           {groupIds.map((groupId) => (
