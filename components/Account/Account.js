@@ -12,6 +12,7 @@ export default function Account({ session }) {
 
   useEffect(() => {
     checkIfProfileExists();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   //checks if person already exists in profiles.

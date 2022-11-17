@@ -18,6 +18,7 @@ export default function UpdateProfile({ session }) {
 
   useEffect(() => {
     fetchUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // Fetch user data from profiles!

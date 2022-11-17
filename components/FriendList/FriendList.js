@@ -11,6 +11,7 @@ const FriendList = ({ session }) => {
 
   useEffect(() => {
     fetchFriendIds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // Remove friend from friendlist

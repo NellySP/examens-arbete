@@ -16,6 +16,7 @@ const GetMutualDates = ({
 
   useEffect(() => {
     fetchAvailableDates(friendId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // Fetch available dates here

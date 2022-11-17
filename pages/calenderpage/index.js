@@ -14,6 +14,7 @@ const Calenderpage = () => {
 
   useEffect(() => {
     reRout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     setOpen(true);
   }, [session]);
 

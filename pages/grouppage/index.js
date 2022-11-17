@@ -16,6 +16,7 @@ const ProfilePage = () => {
   useEffect(() => {
     setOpen(true);
     reRout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   function reRout() {

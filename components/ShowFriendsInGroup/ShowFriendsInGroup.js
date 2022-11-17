@@ -14,6 +14,7 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
 
   useEffect(() => {
     fetchFriendIds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   async function removeFriendFromGroup(friendId) {

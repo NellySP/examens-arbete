@@ -9,6 +9,7 @@ const CommonGroupDates = ({ session, groupId, allInGroup }) => {
 
   useEffect(() => {
     getMutualGroupDates();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   const getMutualGroupDates = async () => {
