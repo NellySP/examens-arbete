@@ -34,7 +34,7 @@ const ProfilePage = () => {
           <UpdateProfile />
         </GS.Div>
       ) : (
-        <div>Du är inte inloggad</div>
+        <></>
       )}
     </GS.Wrapper>
   );

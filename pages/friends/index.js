@@ -35,7 +35,7 @@ const Friends = () => {
         </GS.Div>
       ) : (
         // It should not get here, but it's a backup
-        <div>Du är inte inloggad</div>
+        <></>
       )}
     </GS.Wrapper>
   );

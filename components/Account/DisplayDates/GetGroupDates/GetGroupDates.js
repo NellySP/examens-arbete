@@ -77,25 +77,33 @@ const GetGroupDates = ({ session, groupId }) => {
           {friendsInGroup && (
             <>
               {friendsInGroup.map((friend) => (
-                <div key={friend.id}>
+                <S.friendWrapper key={friend.id}>
                   {friend.avatar_url ? (
+<S.imageWrapper>
                     <Image
                       src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
                       width={50}
                       height={50}
                       alt="profilbild"
                     ></Image>
+                     </S.imageWrapper>
                   ) : (
+                  <S.imageWrapper>
                     <Image
                       src="/profilepicture.png"
                       width={50}
                       height={50}
                       alt="profilbild"
                     ></Image>
+                      </S.imageWrapper>
+
+                
                   )}
-                  <p> {friend.username} </p>
-                  <p>{friend.name}</p>
-                </div>
+                  <S.textWrapper>
+                    <h4> {friend.username} </h4>
+                    <p>{friend.name}</p>
+                  </S.textWrapper>
+                </S.friendWrapper>
               ))}
             </>
           )}

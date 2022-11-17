@@ -50,6 +50,7 @@ export const p = styled.div`
   background-color: #b59e8f;
   background-color: #6e5a4e;
   background-color: #665c57;
+  background-color: #665757;
   color: white;
   margin: 10px;
   width: 100px;
