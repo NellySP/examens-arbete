@@ -31,7 +31,12 @@ const Home = () => {
             <GS.header>
               <GS.infoDiv>
                 <GS.imgDiv>
-                  <Image src="/Union4.png" width={110} height={100}></Image>
+                  <Image
+                    src="/Union4.png"
+                    width={110}
+                    height={100}
+                    alt="backgroundimage"
+                  ></Image>
                 </GS.imgDiv>
                 <h1>Här står det något käckt!</h1>
                 <p>
