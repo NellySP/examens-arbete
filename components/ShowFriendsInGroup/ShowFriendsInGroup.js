@@ -112,6 +112,7 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
                           src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
                           width={50}
                           height={50}
+                          alt="profilbild"
                         ></Image>
                       </S.imageWrapper>
                     ) : (
@@ -120,6 +121,7 @@ const ShowFriendsInGroup = ({ session, groupId, groupName }) => {
                           src="/profilepicture.png"
                           width={50}
                           height={50}
+                          alt="profilbild"
                         ></Image>
                       </S.imageWrapper>
                     )}

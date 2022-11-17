@@ -68,9 +68,7 @@ const GetGroupDates = ({ session, groupId }) => {
   return (
     <S.Wrapper>
       <h4>{groupNames}</h4>
-
       <CommonGroupDates allInGroup={allInGroup} groupId={groupId} />
-
       <S.showFriendsInGroup onClick={setToTrue}>
         Se medlemmar i gruppen
       </S.showFriendsInGroup>
@@ -85,12 +83,14 @@ const GetGroupDates = ({ session, groupId }) => {
                       src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
                       width={50}
                       height={50}
+                      alt="profilbild"
                     ></Image>
                   ) : (
                     <Image
                       src="/profilepicture.png"
                       width={50}
                       height={50}
+                      alt="profilbild"
                     ></Image>
                   )}
                   <p> {friend.username} </p>
