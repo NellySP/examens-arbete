@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-// import * as S from "./CommonGroupDates.styled";
+import * as S from "./CommonGroupDates.styled";
 
 const CommonGroupDates = ({ session, groupId, allInGroup }) => {
   const supabase = useSupabaseClient();
@@ -34,17 +34,17 @@ const CommonGroupDates = ({ session, groupId, allInGroup }) => {
   };
 
   return (
-    <div>
+    <S.Wrapper>
       {allDates && (
         <>
           {allDates.map((date) => (
-            <div key={date}>
+            <S.dateWrapper key={date}>
               <p> {date} </p>
-            </div>
+            </S.dateWrapper>
           ))}
         </>
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 

@@ -66,12 +66,14 @@ const GetGroupDates = ({ session, groupId }) => {
   }
 
   return (
-    <div>
+    <S.Wrapper>
       <h4>{groupNames}</h4>
 
       <CommonGroupDates allInGroup={allInGroup} groupId={groupId} />
 
-      <button onClick={setToTrue}>Se medlemmar i gruppen</button>
+      <S.showFriendsInGroup onClick={setToTrue}>
+        Se medlemmar i gruppen
+      </S.showFriendsInGroup>
       {openAddUser && (
         <>
           {friendsInGroup && (
@@ -99,7 +101,7 @@ const GetGroupDates = ({ session, groupId }) => {
           )}
         </>
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 

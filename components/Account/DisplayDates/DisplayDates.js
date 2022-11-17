@@ -102,6 +102,10 @@ const DisplayDates = ({ session }) => {
         )}
       </div>
       <h3>Gemensamma datum i grupper</h3>
+      <p>
+        Här ser du gemensamma datum du har med alla användare i en grupp. Hitta
+        på något kul ihop!
+      </p>
       {groupIds && (
         <div>
           {groupIds.map((groupId) => (
