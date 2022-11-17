@@ -35,7 +35,7 @@ const ProfilePage = () => {
           <CreateGroups session={session} />
         </GS.Div>
       ) : (
-        <div>Du är inte inloggad</div>
+        <></>
       )}
     </GS.Wrapper>
   );
