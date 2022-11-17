@@ -8,10 +8,7 @@ An application where you can add your friends and find common free days where yo
 
 Built with Next JS and Supabase. 
 
-```
-Here you can write something cool 😎
-```
-Visit the site [here]()
+Visit the site [here]() ... Soon
 
 ## Contributors
 
