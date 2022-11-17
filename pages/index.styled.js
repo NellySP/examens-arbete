@@ -5,8 +5,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  /* background-color: #b9c9b7;
-  background-color: #ebe7df; */
   background-image: url("/test7.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -36,13 +34,6 @@ export const Div = styled.div`
 `;
 
 export const LoginWrapper = styled.div`
-  /* background: linear-gradient(
-    331deg,
-    rgba(237, 244, 157, 1) 0%,
-    rgba(100, 150, 100, 1) 46%,
-    rgba(154, 186, 157, 1) 87%,
-    rgba(182, 196, 186, 1) 100%
-  ); */
   background-color: #b9c9b7;
   background-color: #ebe7df;
   display: flex;

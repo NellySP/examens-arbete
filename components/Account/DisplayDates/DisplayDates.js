@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./DisplayDates.styled";
-import GetMutualDates from "../GetMutualDates/GetMutualDates";
-import GetGroupDates from "../GetGroupDates/GetGroupDates";
+import GetMutualDates from "./GetMutualDates/GetMutualDates";
+import GetGroupDates from "./GetGroupDates/GetGroupDates";
 
 const DisplayDates = ({ session }) => {
   const supabase = useSupabaseClient();
@@ -78,7 +78,7 @@ const DisplayDates = ({ session }) => {
   }
 
   return (
-    <S.dateDisplayDiv>
+    <S.wrapper>
       <h2>Gemensamma datum</h2>
       <p>
         Här ser du gemensamma datum du har med dina vänner. Se till att träffas!
@@ -109,7 +109,7 @@ const DisplayDates = ({ session }) => {
           ))}
         </div>
       )}
-    </S.dateDisplayDiv>
+    </S.wrapper>
   );
 };
 

@@ -3,7 +3,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "../RegisterProfile/RegisterProfile.styled";
 import * as Style from "../Account/Account.styled";
 import RegisterProfile from "../RegisterProfile/RegisterProfile";
-import DisplayDates from "../DisplayDates/DisplayDates";
+import DisplayDates from "./DisplayDates/DisplayDates";
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient();
@@ -31,16 +31,16 @@ export default function Account({ session }) {
   }
 
   return (
-    <div>
+    <Style.Div>
       {profile ? (
-        <Style.Wrapper>
+        <>
           <DisplayDates session={session} />
-        </Style.Wrapper>
+        </>
       ) : (
         <S.registerProfileDiv>
           <RegisterProfile session={session} />
         </S.registerProfileDiv>
       )}
-    </div>
+    </Style.Div>
   );
 }

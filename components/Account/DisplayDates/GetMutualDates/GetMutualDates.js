@@ -60,7 +60,7 @@ const GetMutualDates = ({
           </S.userWrapper>
           {dates.map((date) => (
             <div key={date}>
-              <p>{date}</p>
+              <S.p>{date}</S.p>
             </div>
           ))}
         </S.dateDiv>

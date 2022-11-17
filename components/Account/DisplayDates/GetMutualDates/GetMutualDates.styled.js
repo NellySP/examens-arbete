@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const dateDiv = styled.div`
   padding: 20px;
   width: 100%;
-  background-color: red;
+  background-color: #f7f7f5;
   margin-top: 10px;
   border-radius: 10px;
   display: flex;
@@ -21,4 +21,16 @@ export const imageWrapper = styled.div`
     border-radius: 50%;
     object-fit: cover;
   }
+`;
+
+export const p = styled.div`
+  background-color: #47594c;
+  color: white;
+  margin: 10px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px;
 `;

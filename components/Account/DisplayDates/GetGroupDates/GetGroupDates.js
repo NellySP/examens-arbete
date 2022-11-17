@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./GetGroupDates.styled";
 import Image from "next/image";
-import CommonGroupDates from "../CommonGroupDates/CommonGroupDates";
+import CommonGroupDates from "./CommonGroupDates/CommonGroupDates";
 
 const GetGroupDates = ({ session, groupId }) => {
   const supabase = useSupabaseClient();

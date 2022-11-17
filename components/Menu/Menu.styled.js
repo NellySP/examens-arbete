@@ -42,8 +42,6 @@ export const LinkWrapper = styled.div`
 
 export const LogOutButton = styled.button`
   background-color: #47594c;
-  background-color: black;
-  background-color: #47594c;
   color: white;
   padding: 20px;
   text-align: center;
