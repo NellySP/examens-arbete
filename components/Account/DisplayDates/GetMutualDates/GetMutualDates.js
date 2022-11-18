@@ -13,7 +13,6 @@ const GetMutualDates = ({
   const supabase = useSupabaseClient();
   const user = useUser();
   const [dates, setDates] = useState([]);
-  const [message, setMessage] = useState();
 
   useEffect(() => {
     fetchAvailableDates(friendId);
@@ -36,8 +35,6 @@ const GetMutualDates = ({
   if (!dates.length) {
     return null;
   }
-
-  console.log(dates);
 
   return (
     <>

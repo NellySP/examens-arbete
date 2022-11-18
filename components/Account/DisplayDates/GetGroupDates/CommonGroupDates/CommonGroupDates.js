@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./CommonGroupDates.styled";
 
 const CommonGroupDates = ({ session, groupId, allInGroup }) => {
   const supabase = useSupabaseClient();
-  const user = useUser();
   const [allDates, setAllDates] = useState([]);
 
   useEffect(() => {
     getMutualGroupDates();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   const getMutualGroupDates = async () => {

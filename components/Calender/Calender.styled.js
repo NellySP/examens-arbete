@@ -5,18 +5,23 @@ export const calenderDiv = styled.div`
   height: 100%;
   background-color: white;
   border-radius: 20%;
+  padding: 40px;
 `;
 
 export const calenderSection = styled.section`
   background-color: white;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin-top: 30px;
   width: 100%;
-  height: 100%;
   border-radius: 20px;
+  padding-top: 40px;
+
+  @media (min-width: 1000px) {
+    background-color: #f7f7f5;
+  }
 `;
 
 export const calenderHeading = styled.h1`
@@ -26,6 +31,37 @@ export const calenderHeading = styled.h1`
 export const buttonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  background-color: #b9c9b7;
+  width: 100%;
+  color: white;
+  border-radius: 10px 10px 0px 0px;
+
+  h2 {
+    font-size: 18px;
+  }
+
+  @media (min-width: 1000px) {
+    width: 80%;
+  }
+  @media (min-width: 1200px) {
+    width: 60%;
+    h2 {
+      font-size: 24px;
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    margin: 5px;
+    font-weight: 600;
+    font-size: 20px;
+  }
 `;
 
 export const calenderText = styled.p`
@@ -91,18 +127,20 @@ export const h2 = styled.h2`
 
 export const calenderMenu = styled.div`
   background-color: #b9c9b7;
+  background-color: white;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   height: 60px;
-  width: 80%;
-
-  @media (min-width: 500px) {
-  }
+  width: 100%;
 
   @media (min-width: 1000px) {
+    width: 80%;
+  }
+
+  @media (min-width: 1200px) {
     width: 60%;
   }
 `;
@@ -129,7 +167,8 @@ export const calenderGrid = styled.div`
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-color: white;
-  width: 80%;
+  width: 100%;
+  border-radius: 0px 0px 10px 10px;
 
   button {
     border: none;
@@ -150,7 +189,11 @@ export const calenderGrid = styled.div`
     justify-content: center;
     align-items: center;
   }
+
   @media (min-width: 1000px) {
+    width: 80%;
+  }
+  @media (min-width: 1200px) {
     width: 60%;
     button {
       width: 50px;
