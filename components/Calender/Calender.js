@@ -30,9 +30,13 @@ const Calender = ({ session }) => {
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
   let [sameDate, setSameDate] = useState([]);
+  const [left, setLeft] = useState();
+  const [right, setRight] = useState();
 
   useEffect(
     () => {
+      setLeft("<");
+      setRight(">");
       fetchAvailableDate();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
@@ -125,89 +129,82 @@ const Calender = ({ session }) => {
 
   return (
     <S.calenderDiv>
-      {session ? (
-        <S.calenderSection>
+      <h2>Kalender</h2>
+      <p>Här kan du lägga till och ta bort dina lediga datum.</p>
+      <S.calenderSection>
+        <S.buttonWrapper>
+          <button onClick={previousMonth}>{left}</button>
           <h2>{format(firstDayCurrentMonth, "MMMM yyyy")}</h2>
-          <S.buttonWrapper>
-            <button onClick={previousMonth}>Förra månaden</button>
-            <button onClick={nextMonth}>Nästa månad</button>
-          </S.buttonWrapper>
-          <S.calenderMenu>
-            <S.calenderBox>M</S.calenderBox>
-            <S.calenderBox>T</S.calenderBox>
-            <S.calenderBox>O</S.calenderBox>
-            <S.calenderBox>T</S.calenderBox>
-            <S.calenderBox>F</S.calenderBox>
-            <S.calenderBox>L</S.calenderBox>
-            <S.calenderBox>S</S.calenderBox>
-          </S.calenderMenu>
-          <S.calenderGrid>
-            {days.map((day, dayIdx) => (
-              <div
-                key={day.toString()}
+          <button onClick={nextMonth}>{right}</button>
+        </S.buttonWrapper>
+        <S.calenderMenu>
+          <S.calenderBox>M</S.calenderBox>
+          <S.calenderBox>T</S.calenderBox>
+          <S.calenderBox>O</S.calenderBox>
+          <S.calenderBox>T</S.calenderBox>
+          <S.calenderBox>F</S.calenderBox>
+          <S.calenderBox>L</S.calenderBox>
+          <S.calenderBox>S</S.calenderBox>
+        </S.calenderMenu>
+        <S.calenderGrid>
+          {days.map((day, dayIdx) => (
+            <div
+              key={day.toString()}
+              className={classNames(dayIdx === 0 && `columns${[getDay(day)]}`)}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedDay(day);
+                }}
                 className={classNames(
-                  dayIdx === 0 && `columns${[getDay(day)]}`
+                  isEqual(day, selectedDay) && "pushed",
+                  !isEqual(day, selectedDay) && isToday(day) && "today",
+                  !isEqual(day, selectedDay) &&
+                    !isToday(day) &&
+                    isSameMonth(day, firstDayCurrentMonth) &&
+                    "standard",
+                  !isEqual(day, selectedDay) &&
+                    !isToday(day) &&
+                    !isSameMonth(day, firstDayCurrentMonth) &&
+                    "standard",
+                  isEqual(day, selectedDay) && isToday(day) && "standard",
+                  isEqual(day, selectedDay) && !isToday(day) && "standard",
+                  !isEqual(day, selectedDay) && "standard",
+                  (isEqual(day, selectedDay) || isToday(day)) && "standard",
+                  "standard",
+                  sameDate.some((sameDay) =>
+                    isSameDay(parseISO(sameDay), day)
+                  ) && "newClass"
                 )}
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedDay(day);
-                  }}
-                  className={classNames(
-                    isEqual(day, selectedDay) && "pushed",
-                    !isEqual(day, selectedDay) && isToday(day) && "today",
-                    !isEqual(day, selectedDay) &&
-                      !isToday(day) &&
-                      isSameMonth(day, firstDayCurrentMonth) &&
-                      "standard",
-                    !isEqual(day, selectedDay) &&
-                      !isToday(day) &&
-                      !isSameMonth(day, firstDayCurrentMonth) &&
-                      "standard",
-                    isEqual(day, selectedDay) && isToday(day) && "standard",
-                    isEqual(day, selectedDay) && !isToday(day) && "standard",
-                    !isEqual(day, selectedDay) && "standard",
-                    (isEqual(day, selectedDay) || isToday(day)) && "standard",
-                    "standard",
-                    sameDate.some((sameDay) =>
-                      isSameDay(parseISO(sameDay), day)
-                    ) && "newClass"
-                  )}
-                >
-                  <time dateTime={format(day, "yyyy-MM-dd")}>
-                    {format(day, "d")}
-                  </time>
-                </button>
-              </div>
-            ))}
-          </S.calenderGrid>
-          {
-            <S.calenderButtonWrapper>
-              {sameDate.some((sameDay) =>
-                isSameDay(parseISO(sameDay), selectedDay)
-              ) ? (
-                <S.calenderButton
-                  inputColor="#94716d"
-                  onClick={removeAvailableDate}
-                >
-                  Ta bort datum
-                </S.calenderButton>
-              ) : (
-                <S.calenderButton onClick={addAvailableDate}>
-                  Lägg till datum
-                </S.calenderButton>
-              )}
-            </S.calenderButtonWrapper>
-          }
-          <p>{fetchError}</p>
-        </S.calenderSection>
-      ) : (
-        <S.calenderSection>
-          <p>Du är inte inloggad. </p>
-          <Link href="/">Logga in här</Link>
-        </S.calenderSection>
-      )}
+                <time dateTime={format(day, "yyyy-MM-dd")}>
+                  {format(day, "d")}
+                </time>
+              </button>
+            </div>
+          ))}
+        </S.calenderGrid>
+        {
+          <S.calenderButtonWrapper>
+            {sameDate.some((sameDay) =>
+              isSameDay(parseISO(sameDay), selectedDay)
+            ) ? (
+              <S.calenderButton
+                inputColor="#94716d"
+                onClick={removeAvailableDate}
+              >
+                Ta bort datum
+              </S.calenderButton>
+            ) : (
+              <S.calenderButton onClick={addAvailableDate}>
+                Lägg till datum
+              </S.calenderButton>
+            )}
+          </S.calenderButtonWrapper>
+        }
+        <p>{fetchError}</p>
+      </S.calenderSection>
     </S.calenderDiv>
   );
 };

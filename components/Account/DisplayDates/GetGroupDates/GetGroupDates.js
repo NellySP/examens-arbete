@@ -13,10 +13,8 @@ const GetGroupDates = ({ session, groupId }) => {
 
   useEffect(() => {
     getGroupNames();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
-  // fetch groupnames here
   async function getGroupNames() {
     const { data, error } = await supabase
       .from("groups")
@@ -26,7 +24,6 @@ const GetGroupDates = ({ session, groupId }) => {
     getFriendsInGroup();
   }
 
-  // Get members of group
   async function getFriendsInGroup() {
     const { data, error } = await supabase
       .from("group_relations")
@@ -50,12 +47,11 @@ const GetGroupDates = ({ session, groupId }) => {
       }
     }
     setFriendsInGroup(currentFriends);
-    // getMutualGroupDates();
   }
-
-  // Get mutual group dates
+  // Counting all your groupmembers, since were in a group of friends you have to + 1 to add yourself to the count.
   const allInGroup = friendsInGroup.length + 1;
 
+  // Function to open a closed div.
   function setToTrue() {
     if (openAddUser == false) {
       setOpenAddUser(true);
@@ -79,25 +75,23 @@ const GetGroupDates = ({ session, groupId }) => {
               {friendsInGroup.map((friend) => (
                 <S.friendWrapper key={friend.id}>
                   {friend.avatar_url ? (
-<S.imageWrapper>
-                    <Image
-                      src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
-                      width={50}
-                      height={50}
-                      alt="profilbild"
-                    ></Image>
-                     </S.imageWrapper>
+                    <S.imageWrapper>
+                      <Image
+                        src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                        width={50}
+                        height={50}
+                        alt="profilbild"
+                      ></Image>
+                    </S.imageWrapper>
                   ) : (
-                  <S.imageWrapper>
-                    <Image
-                      src="/profilepicture.png"
-                      width={50}
-                      height={50}
-                      alt="profilbild"
-                    ></Image>
-                      </S.imageWrapper>
-
-                
+                    <S.imageWrapper>
+                      <Image
+                        src="/profilepicture.png"
+                        width={50}
+                        height={50}
+                        alt="profilbild"
+                      ></Image>
+                    </S.imageWrapper>
                   )}
                   <S.textWrapper>
                     <h4> {friend.username} </h4>
