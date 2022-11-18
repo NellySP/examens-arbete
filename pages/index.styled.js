@@ -80,6 +80,7 @@ export const LoginDiv = styled.div`
   color: black;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 20px;
   margin: 10px;
   width: 80%;
@@ -127,6 +128,7 @@ export const infoDiv = styled.div`
   width: 80%;
   border-radius: 10px;
   height: 400px;
+  padding: 30px;
 
   p {
     margin-top: 10px;

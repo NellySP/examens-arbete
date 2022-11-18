@@ -77,7 +77,7 @@ export const registerProfileLabel = styled.label`
 export const registerProfileButton = styled.button`
   background-color: #47594c;
   color: white;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   display: flex;
   justify-content: center;

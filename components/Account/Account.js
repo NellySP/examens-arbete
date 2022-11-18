@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import * as S from "../RegisterProfile/RegisterProfile.styled";
+import * as S from "./RegisterProfile/RegisterProfile.styled";
 import * as Style from "../Account/Account.styled";
-import RegisterProfile from "../RegisterProfile/RegisterProfile";
+import RegisterProfile from "./RegisterProfile/RegisterProfile";
 import DisplayDates from "./DisplayDates/DisplayDates";
 
 export default function Account({ session }) {

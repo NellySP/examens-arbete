@@ -13,16 +13,15 @@ const GetMutualDates = ({
   const supabase = useSupabaseClient();
   const user = useUser();
   const [dates, setDates] = useState([]);
+  const [message, setMessage] = useState();
 
   useEffect(() => {
     fetchAvailableDates(friendId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
-  // Fetch available dates here
-
+  // Fetch available dates you have together with friends.
   const fetchAvailableDates = async (friendId) => {
-    const { data, error } = await supabase.rpc("testing_five", {
+    const { data, error } = await supabase.rpc("fetch_available_dates", {
       user_id_input: user.id,
       friend_id_input: friendId,
     });
@@ -37,6 +36,8 @@ const GetMutualDates = ({
   if (!dates.length) {
     return null;
   }
+
+  console.log(dates);
 
   return (
     <>

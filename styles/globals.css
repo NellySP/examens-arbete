@@ -12,6 +12,22 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+h1 {
+  font-family: var(--railway);
+  font-size: 22px;
+}
+
+@media (min-width: 500px) {
+  h1 {
+    font-size: 26px;
+  }
+}
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 32px;
+  }
+}
+
 h2 {
   font-family: var(--railway);
 }

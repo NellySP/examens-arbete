@@ -17,7 +17,6 @@ const Home = () => {
 
   useEffect(() => {
     setOpen(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   return (
@@ -39,7 +38,7 @@ const Home = () => {
                     alt="backgroundimage"
                   ></Image>
                 </GS.imgDiv>
-                <h1>Här står det något käckt!</h1>
+                <h1>Ta kontroll över din tid!</h1>
                 <p>
                   Svårt att hitta lediga dagar där alla i kompisgänget kan
                   träffas? Lugn, vi löser det åt dig!
@@ -51,7 +50,6 @@ const Home = () => {
                 <Auth
                   supabaseClient={supabase}
                   appearance={{ theme: ThemeSupa }}
-                  // theme="dark"
                 />
               </GS.LoginDiv>
             </GS.header>
@@ -72,43 +70,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// const Home = () => {
-//   const [fetchError, setFetchError] = useState(null);
-//   const [tests, setTest] = useState(null);
-
-//   useEffect(() => {
-//     const fetchTest = async () => {
-//       const { data, error } = await supabase.from("profiles").select();
-
-//       if (error) {
-//         setFetchError("Something went wrong");
-//         setTest(null);
-//         console.log(error);
-//       }
-
-//       if (data) {
-//         setTest(data);
-//         setFetchError(null);
-//       }
-//     };
-//     fetchTest();
-//   }, []);
-//   return (
-//     <S.wrapperDiv>
-//       <Link href="/signup">Sign up, step one</Link>
-//       <Link href="/signupprofile">Sign up, step two</Link>
-//       <Link href="/login">Startsida</Link>
-//       {fetchError && <p>{fetchError}</p>}
-//       {tests && (
-//         <div>
-//           {tests.map((test) => (
-//             <p>{test.name}</p>
-//           ))}
-//         </div>
-//       )}
-//     </S.wrapperDiv>
-//   );
-// };
-
-// export default Home;
