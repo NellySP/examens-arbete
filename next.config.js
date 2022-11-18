@@ -14,14 +14,4 @@ module.exports = {
   images: {
     domains: ["zsmobqgplqouebjzyqmy.supabase.co"],
   },
-
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: "/about",
-  //       destination: "/",
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
 };

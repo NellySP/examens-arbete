@@ -35,8 +35,6 @@ const SearchUser = ({ session }) => {
     }
   };
 
-  // add user and friend to friend table
-
   return (
     <S.SearchFriendWrapper>
       <form onSubmit={fetchUser}>

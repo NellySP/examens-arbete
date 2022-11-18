@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const dateDisplayDiv = styled.div`
+export const wrapper = styled.div`
   padding: 40px;
+  width: 100%;
 `;
 
 export const SearchFriendWrapper = styled.div`
