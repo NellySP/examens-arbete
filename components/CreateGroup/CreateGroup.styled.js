@@ -13,6 +13,10 @@ export const createGroupWrapper = styled.div`
     margin: 0px;
   }
 
+  h3 {
+    margin-top: 20px;
+  }
+
   @media (min-width: 1200px) {
     padding: 40px;
   }

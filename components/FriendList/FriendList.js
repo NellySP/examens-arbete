@@ -7,14 +7,10 @@ const FriendList = ({ session }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [friends, setFriends] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchFriendIds();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
-
-  // Remove friend from friendlist
 
   const RemoveFriend = async (friendId) => {
     const { data, error } = await supabase
@@ -26,7 +22,6 @@ const FriendList = ({ session }) => {
     fetchFriendIds();
   };
 
-  //  Fetch all users friends
   const fetchFriendIds = async () => {
     const { data, error } = await supabase
       .from("friends")
@@ -66,7 +61,7 @@ const FriendList = ({ session }) => {
   };
 
   return (
-    <S.dateDisplayDiv>
+    <S.wrapper>
       <h2>Din vänlista</h2>
       <p>
         Här visas dina nuvarande vänner. Vill du lägga till nya vänner så kan du
@@ -114,7 +109,7 @@ const FriendList = ({ session }) => {
           </div>
         )}
       </div>
-    </S.dateDisplayDiv>
+    </S.wrapper>
   );
 };
 
