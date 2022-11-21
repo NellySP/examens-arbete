@@ -15,14 +15,14 @@ const CommonGroupDates = ({ session, groupId, allInGroup }) => {
       group_id_input: groupId,
       group_members_input: allInGroup,
     });
-
+    console.log(groupId);
+    console.log(allInGroup);
     const emptyArray = [];
     if (data.length) {
       for (let i = 0; i < data.length; i++) {
         const date = data[i].date;
         emptyArray.push(date);
       }
-
       setAllDates(emptyArray);
     }
     if (!data.length) {

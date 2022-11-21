@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./GetGroupDates.styled";
 import Image from "next/image";
-import CommonGroupDates from "./CommonGroupDates/CommonGroupDates";
+// import CommonGroupDates from "./CommonGroupDates/CommonGroupDates";
 
 const GetGroupDates = ({ session, groupId }) => {
   const supabase = useSupabaseClient();
@@ -10,9 +10,12 @@ const GetGroupDates = ({ session, groupId }) => {
   const [groupNames, setGroupNames] = useState([]);
   const [friendsInGroup, setFriendsInGroup] = useState([]);
   const [openAddUser, setOpenAddUser] = useState(false);
+  const [allDates, setAllDates] = useState([]);
+  const [allInGroup, setAllInGroup] = useState();
 
   useEffect(() => {
     getGroupNames();
+    // getMutualGroupDates();
   }, [session]);
 
   async function getGroupNames() {
@@ -22,6 +25,7 @@ const GetGroupDates = ({ session, groupId }) => {
       .eq("id", groupId);
     setGroupNames(data[0].name);
     getFriendsInGroup();
+    // getMutualGroupDates();
   }
 
   async function getFriendsInGroup() {
@@ -47,9 +51,13 @@ const GetGroupDates = ({ session, groupId }) => {
       }
     }
     setFriendsInGroup(currentFriends);
+    console.log(currentFriends);
+    setAllInGroup(currentFriends.length + 1);
+    getMutualGroupDates();
   }
   // Counting all your groupmembers, since were in a group of friends you have to + 1 to add yourself to the count.
-  const allInGroup = friendsInGroup.length + 1;
+  // console.log(allInGroup);
+  // console.log(groupId);
 
   // Function to open a closed div.
   function setToTrue() {
@@ -61,10 +69,48 @@ const GetGroupDates = ({ session, groupId }) => {
     }
   }
 
+  async function getMutualGroupDates() {
+    const { data, error } = await supabase.rpc("get_dates_from_group", {
+      group_id_input: groupId,
+      group_members_input: "3",
+    });
+    console.log(groupId);
+    console.log(allInGroup);
+    console.log("jag körs");
+
+    const emptyArray = [];
+    if (data.length) {
+      console.log("1");
+      for (let i = 0; i < data.length; i++) {
+        console.log("2");
+        const date = data[i].date;
+        console.log("3");
+        emptyArray.push(date);
+      }
+
+      setAllDates(emptyArray);
+      console.log("4");
+    }
+    if (!data.length) {
+      setAllDates(null);
+    }
+  }
+
   return (
     <S.Wrapper>
       <h4>{groupNames}</h4>
-      <CommonGroupDates allInGroup={allInGroup} groupId={groupId} />
+      {/* <CommonGroupDates allInGroup={allInGroup} groupId={groupId} /> */}
+      <S.Wrapper>
+        {allDates && (
+          <>
+            {allDates.map((date) => (
+              <div key={date}>
+                <p> {date} </p>
+              </div>
+            ))}
+          </>
+        )}
+      </S.Wrapper>
       <S.showFriendsInGroup onClick={setToTrue}>
         Se medlemmar i gruppen
       </S.showFriendsInGroup>
