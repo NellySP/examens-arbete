@@ -1,5 +1,6 @@
 import Menu from "../../components/Menu/Menu";
-import * as GS from "../index.styled";
+// import * as GS from "../index.styled";
+import * as GS from "../../styles/index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
 import FriendList from "../../components/FriendList/FriendList";
 import { useRouter } from "next/router";

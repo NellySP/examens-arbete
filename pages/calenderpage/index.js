@@ -1,5 +1,6 @@
 import Menu from "../../components/Menu/Menu";
-import * as GS from "../index.styled";
+// import * as GS from "../index.styled";
+import * as GS from "../../styles/index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
 import Calender from "../../components/Calender/Calender";
 import { useEffect, useState } from "react";
@@ -14,7 +15,6 @@ const Calenderpage = () => {
 
   useEffect(() => {
     reRout();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     setOpen(true);
   }, [session]);
 

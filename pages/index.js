@@ -1,4 +1,5 @@
-import * as GS from "./index.styled";
+// import * as GS from "./index.styled";
+import * as GS from "../styles/index.styled";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Account from "../components/Account/Account";

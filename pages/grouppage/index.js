@@ -1,7 +1,7 @@
 import Menu from "../../components/Menu/Menu";
-import * as GS from "../index.styled";
+// import * as GS from "../index.styled";
+import * as GS from "../../styles/index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
-import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
@@ -16,7 +16,6 @@ const ProfilePage = () => {
   useEffect(() => {
     setOpen(true);
     reRout();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   function reRout() {
