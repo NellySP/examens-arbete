@@ -48,7 +48,6 @@ const GetGroupDates = ({ session, groupId }) => {
     }
     setFriendsInGroup(currentFriends);
     const allInGroup = currentFriends.length + 1;
-    console.log(allInGroup);
     if (allInGroup > 1) {
       const { data, error } = await supabase.rpc("get_dates_from_group", {
         group_id_input: groupId,
