@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import * as S from "./GetGroupDates.styled";
 import Image from "next/image";
-// import CommonGroupDates from "./CommonGroupDates/CommonGroupDates";
 
 const GetGroupDates = ({ session, groupId }) => {
   const supabase = useSupabaseClient();
@@ -11,11 +10,9 @@ const GetGroupDates = ({ session, groupId }) => {
   const [friendsInGroup, setFriendsInGroup] = useState([]);
   const [openAddUser, setOpenAddUser] = useState(false);
   const [allDates, setAllDates] = useState([]);
-  const [allInGroup, setAllInGroup] = useState();
 
   useEffect(() => {
     getGroupNames();
-    // getMutualGroupDates();
   }, [session]);
 
   async function getGroupNames() {
@@ -25,7 +22,6 @@ const GetGroupDates = ({ session, groupId }) => {
       .eq("id", groupId);
     setGroupNames(data[0].name);
     getFriendsInGroup();
-    // getMutualGroupDates();
   }
 
   async function getFriendsInGroup() {
@@ -51,9 +47,30 @@ const GetGroupDates = ({ session, groupId }) => {
       }
     }
     setFriendsInGroup(currentFriends);
-    console.log(currentFriends);
-    setAllInGroup(currentFriends.length + 1);
-    getMutualGroupDates();
+    const allInGroup = currentFriends.length + 1;
+    console.log(allInGroup);
+    if (allInGroup > 1) {
+      const { data, error } = await supabase.rpc("get_dates_from_group", {
+        group_id_input: groupId,
+        group_members_input: allInGroup,
+      });
+
+      const emptyArray = [];
+      if (data.length) {
+        for (let i = 0; i < data.length; i++) {
+          const date = data[i].date;
+          emptyArray.push(date);
+        }
+
+        setAllDates(emptyArray);
+      }
+      if (!data.length) {
+        setAllDates(null);
+      }
+    }
+    if (allInGroup == 1) {
+      setAllDates(false);
+    }
   }
 
   // Function to open a closed div.
@@ -66,78 +83,58 @@ const GetGroupDates = ({ session, groupId }) => {
     }
   }
 
-  async function getMutualGroupDates() {
-    const { data, error } = await supabase.rpc("get_dates_from_group", {
-      group_id_input: groupId,
-      group_members_input: "3",
-    });
-
-    const emptyArray = [];
-    if (data.length) {
-      for (let i = 0; i < data.length; i++) {
-        const date = data[i].date;
-        emptyArray.push(date);
-      }
-
-      setAllDates(emptyArray);
-    }
-    if (!data.length) {
-      setAllDates(null);
-    }
-  }
-
   return (
     <>
-      {/* {allDates && ( */}
-      <S.Wrapper>
-        <h4>{groupNames}</h4>
-        <S.dateContainer>
-          {/* {allDates.map((date) => (
-            <S.dateWrapper key={date}>
-              <p> {date} </p>
-            </S.dateWrapper>
-          ))} */}
-        </S.dateContainer>
-        <S.showFriendsInGroup onClick={setToTrue}>
-          Se medlemmar i gruppen
-        </S.showFriendsInGroup>
-        {openAddUser && (
-          <>
-            {friendsInGroup && (
-              <>
-                {friendsInGroup.map((friend) => (
-                  <S.friendWrapper key={friend.id}>
-                    {friend.avatar_url ? (
-                      <S.imageWrapper>
-                        <Image
-                          src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
-                          width={50}
-                          height={50}
-                          alt="profilbild"
-                        ></Image>
-                      </S.imageWrapper>
-                    ) : (
-                      <S.imageWrapper>
-                        <Image
-                          src="/profilepicture.png"
-                          width={50}
-                          height={50}
-                          alt="profilbild"
-                        ></Image>
-                      </S.imageWrapper>
-                    )}
-                    <S.textWrapper>
-                      <h4> {friend.username} </h4>
-                      <p>{friend.name}</p>
-                    </S.textWrapper>
-                  </S.friendWrapper>
-                ))}
-              </>
-            )}
-          </>
-        )}
-      </S.Wrapper>
-      {/* )} */}
+      {allDates && (
+        <S.Wrapper>
+          <h4>{groupNames}</h4>
+          <S.dateContainer>
+            {allDates.map((date) => (
+              <S.dateWrapper key={date}>
+                <p> {date} </p>
+              </S.dateWrapper>
+            ))}
+          </S.dateContainer>
+          <S.showFriendsInGroup onClick={setToTrue}>
+            Se medlemmar i gruppen
+          </S.showFriendsInGroup>
+          {openAddUser && (
+            <>
+              {friendsInGroup && (
+                <>
+                  {friendsInGroup.map((friend) => (
+                    <S.friendWrapper key={friend.id}>
+                      {friend.avatar_url ? (
+                        <S.imageWrapper>
+                          <Image
+                            src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                            width={50}
+                            height={50}
+                            alt="profilbild"
+                          ></Image>
+                        </S.imageWrapper>
+                      ) : (
+                        <S.imageWrapper>
+                          <Image
+                            src="/profilepicture.png"
+                            width={50}
+                            height={50}
+                            alt="profilbild"
+                          ></Image>
+                        </S.imageWrapper>
+                      )}
+                      <S.textWrapper>
+                        <h4> {friend.username} </h4>
+                        <p>{friend.name}</p>
+                      </S.textWrapper>
+                    </S.friendWrapper>
+                  ))}
+                </>
+              )}
+            </>
+          )}
+        </S.Wrapper>
+      )}
     </>
   );
 };
