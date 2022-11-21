@@ -20,3 +20,11 @@ export const wrapper = styled.div`
 export const friendDiv = styled.div`
   width: 100%;
 `;
+
+export const noDateDiv = styled.div`
+  width: 100%;
+  padding: 20px;
+  background-color: var(--biege);
+  margin-top: 20px;
+  border-radius: 10px;
+`;

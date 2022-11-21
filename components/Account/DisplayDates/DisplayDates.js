@@ -12,9 +12,7 @@ const DisplayDates = ({ session }) => {
 
   useEffect(() => {
     fetchFriendIds();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     getGroupWhereUserIsIn();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   const fetchFriendIds = async () => {
@@ -26,7 +24,10 @@ const DisplayDates = ({ session }) => {
     // placeholder array to save result from loop!
     const currentFriends = [];
 
-    if (!data) {
+    console.log(data + "hej");
+
+    if (!data.length) {
+      setFriends(false);
       return false;
     }
 
@@ -69,6 +70,7 @@ const DisplayDates = ({ session }) => {
     const currentGroupIds = [];
 
     if (!data.length) {
+      setGroupIds(false);
       return null;
     }
 
@@ -86,7 +88,7 @@ const DisplayDates = ({ session }) => {
         Här ser du gemensamma datum du har med dina vänner. Se till att träffas!
       </p>
       <div>
-        {friends && (
+        {friends ? (
           <>
             {friends.map((friend) => (
               <S.friendDiv key={friend.id}>
@@ -99,6 +101,10 @@ const DisplayDates = ({ session }) => {
               </S.friendDiv>
             ))}
           </>
+        ) : (
+          <S.noDateDiv>
+            <p>Du har inga vänner</p>
+          </S.noDateDiv>
         )}
       </div>
       <h3>Gemensamma datum i grupper</h3>
@@ -106,7 +112,7 @@ const DisplayDates = ({ session }) => {
         Här ser du gemensamma datum du har med alla användare i en grupp. Hitta
         på något kul ihop!
       </p>
-      {groupIds && (
+      {groupIds ? (
         <div>
           {groupIds.map((groupId) => (
             <div key={groupId}>
@@ -114,6 +120,8 @@ const DisplayDates = ({ session }) => {
             </div>
           ))}
         </div>
+      ) : (
+        <S.noDateDiv>Du är inte med i några grupper.</S.noDateDiv>
       )}
     </S.wrapper>
   );
