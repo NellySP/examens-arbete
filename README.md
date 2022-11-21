@@ -8,7 +8,7 @@ An application where you can add your friends and find common free days where yo
 
 Built with Next JS and Supabase. 
 
-Visit the site [here]() ... Soon
+Visit the site [here](https://meetmee.vercel.app/).
 
 ## Contributors
 
