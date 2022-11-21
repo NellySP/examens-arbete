@@ -18,7 +18,6 @@ export default function UpdateProfile({ session }) {
 
   useEffect(() => {
     fetchUserData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   // Fetch user data from profiles!
@@ -42,6 +41,13 @@ export default function UpdateProfile({ session }) {
 
     setUserImage();
     setImage();
+
+    if (data) {
+      const { data, error } = await supabase
+        .from("profiles")
+        .upsert({ id: user.id, avatar_url: null });
+      fetchUserData();
+    }
   }
   // Delete user image from database
 
