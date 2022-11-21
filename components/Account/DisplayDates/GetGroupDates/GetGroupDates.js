@@ -55,9 +55,6 @@ const GetGroupDates = ({ session, groupId }) => {
     setAllInGroup(currentFriends.length + 1);
     getMutualGroupDates();
   }
-  // Counting all your groupmembers, since were in a group of friends you have to + 1 to add yourself to the count.
-  // console.log(allInGroup);
-  // console.log(groupId);
 
   // Function to open a closed div.
   function setToTrue() {
@@ -74,22 +71,15 @@ const GetGroupDates = ({ session, groupId }) => {
       group_id_input: groupId,
       group_members_input: "3",
     });
-    console.log(groupId);
-    console.log(allInGroup);
-    console.log("jag körs");
 
     const emptyArray = [];
     if (data.length) {
-      console.log("1");
       for (let i = 0; i < data.length; i++) {
-        console.log("2");
         const date = data[i].date;
-        console.log("3");
         emptyArray.push(date);
       }
 
       setAllDates(emptyArray);
-      console.log("4");
     }
     if (!data.length) {
       setAllDates(null);
@@ -97,59 +87,58 @@ const GetGroupDates = ({ session, groupId }) => {
   }
 
   return (
-    <S.Wrapper>
-      <h4>{groupNames}</h4>
-      {/* <CommonGroupDates allInGroup={allInGroup} groupId={groupId} /> */}
+    <>
+      {/* {allDates && ( */}
       <S.Wrapper>
-        {allDates && (
+        <h4>{groupNames}</h4>
+        <S.dateContainer>
+          {/* {allDates.map((date) => (
+            <S.dateWrapper key={date}>
+              <p> {date} </p>
+            </S.dateWrapper>
+          ))} */}
+        </S.dateContainer>
+        <S.showFriendsInGroup onClick={setToTrue}>
+          Se medlemmar i gruppen
+        </S.showFriendsInGroup>
+        {openAddUser && (
           <>
-            {allDates.map((date) => (
-              <div key={date}>
-                <p> {date} </p>
-              </div>
-            ))}
+            {friendsInGroup && (
+              <>
+                {friendsInGroup.map((friend) => (
+                  <S.friendWrapper key={friend.id}>
+                    {friend.avatar_url ? (
+                      <S.imageWrapper>
+                        <Image
+                          src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
+                          width={50}
+                          height={50}
+                          alt="profilbild"
+                        ></Image>
+                      </S.imageWrapper>
+                    ) : (
+                      <S.imageWrapper>
+                        <Image
+                          src="/profilepicture.png"
+                          width={50}
+                          height={50}
+                          alt="profilbild"
+                        ></Image>
+                      </S.imageWrapper>
+                    )}
+                    <S.textWrapper>
+                      <h4> {friend.username} </h4>
+                      <p>{friend.name}</p>
+                    </S.textWrapper>
+                  </S.friendWrapper>
+                ))}
+              </>
+            )}
           </>
         )}
       </S.Wrapper>
-      <S.showFriendsInGroup onClick={setToTrue}>
-        Se medlemmar i gruppen
-      </S.showFriendsInGroup>
-      {openAddUser && (
-        <>
-          {friendsInGroup && (
-            <>
-              {friendsInGroup.map((friend) => (
-                <S.friendWrapper key={friend.id}>
-                  {friend.avatar_url ? (
-                    <S.imageWrapper>
-                      <Image
-                        src={`https://zsmobqgplqouebjzyqmy.supabase.co/storage/v1/object/public/avatars/${friend.avatar_url}`}
-                        width={50}
-                        height={50}
-                        alt="profilbild"
-                      ></Image>
-                    </S.imageWrapper>
-                  ) : (
-                    <S.imageWrapper>
-                      <Image
-                        src="/profilepicture.png"
-                        width={50}
-                        height={50}
-                        alt="profilbild"
-                      ></Image>
-                    </S.imageWrapper>
-                  )}
-                  <S.textWrapper>
-                    <h4> {friend.username} </h4>
-                    <p>{friend.name}</p>
-                  </S.textWrapper>
-                </S.friendWrapper>
-              ))}
-            </>
-          )}
-        </>
-      )}
-    </S.Wrapper>
+      {/* )} */}
+    </>
   );
 };
 
