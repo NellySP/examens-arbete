@@ -181,6 +181,8 @@ export const calenderGrid = styled.div`
     border-radius: 50%;
     margin-bottom: 10px;
     margin-top: 10px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
   }
 
