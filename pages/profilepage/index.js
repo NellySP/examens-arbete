@@ -1,10 +1,10 @@
 import Menu from "../../components/Menu/Menu";
-import * as GS from "../index.styled";
+// import * as GS from "../index.styled";
+import * as GS from "../../styles/index.styled";
 import { useSession } from "@supabase/auth-helpers-react";
 import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import RegisterProfile from "../../components/Account/RegisterProfile/RegisterProfile";
 import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
 import BurgerMenu from "../../components/BurgerMenu/BurgerMenu";
 
